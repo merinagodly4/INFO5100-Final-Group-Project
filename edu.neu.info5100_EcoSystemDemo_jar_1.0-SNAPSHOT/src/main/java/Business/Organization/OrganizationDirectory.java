@@ -24,11 +24,33 @@ public class OrganizationDirectory {
     }
     
     public Organization createOrganization(Type type){
-        Organization organization = null;
-        if (type.getValue().equals(Type.SupplierPricing.getValue())){
+    Organization organization = null;
+
+    switch(type){
+        case SupplierPricing:
             organization = new SupplierPricingOrganization();
-            organizationList.add(organization);
-        }
-        return organization;
+            break;
+
+        case RetailStore:
+            organization = new RetailStoreOrganization();
+            break;
+
+        case ManufacturingPricing:
+            organization = new ManufacturingPricingOrganization();
+            break;
+
+        case ManufacturingOperations:
+            organization = new ManufacturingOperationsOrganization();
+            break;
+
+        default:
+            break;
     }
+
+    if (organization != null) {
+        organizationList.add(organization);
+    }
+
+    return organization;
+}
 }

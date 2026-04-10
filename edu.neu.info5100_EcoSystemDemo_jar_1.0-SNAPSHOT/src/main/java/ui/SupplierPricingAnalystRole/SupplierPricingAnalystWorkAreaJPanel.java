@@ -13,7 +13,7 @@ import Business.WorkQueue.LabTestWorkRequest;
 import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.table.DefaultTableModel;  
 
 /**
  *

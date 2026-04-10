@@ -6,6 +6,7 @@ import Business.UserAccount.UserAccount;
 import Business.Enterprise.*;
 import Business.Network.*;
 import Business.EcoSystem;
+import Business.Role.RetailBusinessAnalystRole;
 import Business.Role.StoreAssociateRole;
 import Business.Role.StoreManagerRole;
 
@@ -44,6 +45,7 @@ public class ConfigureASystem {
         UserAccount ua = system.getUserAccountDirectory().createUserAccount("sysadmin", "sysadmin", employee, new SystemAdminRole());
         UserAccount sm = system.getUserAccountDirectory().createUserAccount("storemanager", "storemanager", employee, new StoreManagerRole());
         UserAccount sa = system.getUserAccountDirectory().createUserAccount("storeassociate", "storeassociate", employee, new StoreAssociateRole());
+        UserAccount rba = system.getUserAccountDirectory().createUserAccount("retailba", "retailba", employee, new RetailBusinessAnalystRole());
         
         return system;
     }

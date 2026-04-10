@@ -7,6 +7,7 @@ import Business.Enterprise.*;
 import Business.Network.*;
 import Business.EcoSystem;
 import Business.Role.ManufacturingPricingAnalystRole;
+import Business.Role.ProductionPlannerRole;
 import Business.Role.RetailBusinessAnalystRole;
 import Business.Role.StoreAssociateRole;
 import Business.Role.StoreManagerRole;
@@ -48,6 +49,7 @@ public class ConfigureASystem {
         UserAccount sa = system.getUserAccountDirectory().createUserAccount("storeassociate", "storeassociate", employee, new StoreAssociateRole());
         UserAccount rba = system.getUserAccountDirectory().createUserAccount("retailba", "retailba", employee, new RetailBusinessAnalystRole());
         UserAccount mpa = system.getUserAccountDirectory().createUserAccount("manufacturingpa", "manufacturingpa", employee, new ManufacturingPricingAnalystRole());
+        UserAccount pp = system.getUserAccountDirectory().createUserAccount("productionplanner", "productionplanner", employee, new ProductionPlannerRole());
         
         return system;
     }

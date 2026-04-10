@@ -23,7 +23,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author raunak
  */
-public class ManufacaturingPricingAnalystWorkAreaJPanel extends javax.swing.JPanel {
+public class ManufacturingPricingAnalystWorkAreaJPanel extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
     private EcoSystem business;
@@ -33,7 +33,7 @@ public class ManufacaturingPricingAnalystWorkAreaJPanel extends javax.swing.JPan
     /**
      * Creates new form LabAssistantWorkAreaJPanel
      */
-    public ManufacaturingPricingAnalystWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, EcoSystem business) {
+    public ManufacturingPricingAnalystWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, EcoSystem business) {
         initComponents();
         
         this.userProcessContainer = userProcessContainer;

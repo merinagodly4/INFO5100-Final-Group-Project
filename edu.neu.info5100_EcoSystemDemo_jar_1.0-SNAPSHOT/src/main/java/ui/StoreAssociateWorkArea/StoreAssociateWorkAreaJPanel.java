@@ -136,7 +136,7 @@ public class StoreAssociateWorkAreaJPanel extends javax.swing.JPanel {
         });
         add(refreshJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(406, 26, -1, -1));
 
-        jLabel1.setText("Store Manager Work Area");
+        jLabel1.setText("Store Associate Work Area");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 

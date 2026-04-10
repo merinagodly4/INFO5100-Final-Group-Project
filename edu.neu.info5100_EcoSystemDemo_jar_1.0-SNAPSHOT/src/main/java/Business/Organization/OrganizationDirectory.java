@@ -5,6 +5,7 @@
 package Business.Organization;
 
 import Business.Organization.Organization.Type;
+import static Business.Organization.Organization.Type.ManufacturingOperations;
 import java.util.ArrayList;
 
 /**
@@ -41,6 +42,10 @@ public class OrganizationDirectory {
 
         case ManufacturingOperations:
             organization = new ManufacturingOperationsOrganization();
+            break;
+            
+        case ShippingFacility:
+            organization = new ShippingFacilityOrganization();
             break;
 
         default:

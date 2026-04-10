@@ -24,4 +24,5 @@
         <maven.compiler.target>17</maven.compiler.target>
         <exec.mainClass>ui.MainJFrame</exec.mainClass>
     </properties>
+    <name>0Final</name>
 </project>

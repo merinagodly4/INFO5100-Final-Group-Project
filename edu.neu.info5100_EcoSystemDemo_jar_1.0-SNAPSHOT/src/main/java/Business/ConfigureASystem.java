@@ -6,6 +6,7 @@ import Business.UserAccount.UserAccount;
 import Business.Enterprise.*;
 import Business.Network.*;
 import Business.EcoSystem;
+import Business.Role.StoreManagerRole;
 
 /**
  *
@@ -40,6 +41,7 @@ public class ConfigureASystem {
         Employee employee = system.getEmployeeDirectory().createEmployee("sysadmin");
         
         UserAccount ua = system.getUserAccountDirectory().createUserAccount("sysadmin", "sysadmin", employee, new SystemAdminRole());
+        UserAccount sm = system.getUserAccountDirectory().createUserAccount("storemanager", "storemanager", employee, new StoreManagerRole());
         
         return system;
     }

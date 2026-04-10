@@ -78,7 +78,11 @@ public class RetailDataAnalystWorkAreaJPanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         refreshJButton1 = new javax.swing.JButton();
         assignJButton1 = new javax.swing.JButton();
-        assignJButton2 = new javax.swing.JButton();
+        refreshJButton2 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        workRequestJTable2 = new javax.swing.JTable();
+        assignJButton3 = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -121,10 +125,10 @@ public class RetailDataAnalystWorkAreaJPanel extends javax.swing.JPanel {
                 refreshJButtonActionPerformed(evt);
             }
         });
-        add(refreshJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 310, -1, -1));
+        add(refreshJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 500, -1, -1));
 
         jLabel2.setText("Messages from Manufacturer");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 320, -1, -1));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 510, -1, -1));
 
         workRequestJTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -154,7 +158,7 @@ public class RetailDataAnalystWorkAreaJPanel extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(workRequestJTable1);
 
-        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 340, 530, 130));
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 530, 530, 130));
 
         jLabel3.setText("Store Inventory");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, -1, -1));
@@ -173,15 +177,56 @@ public class RetailDataAnalystWorkAreaJPanel extends javax.swing.JPanel {
                 assignJButton1ActionPerformed(evt);
             }
         });
-        add(assignJButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 480, -1, -1));
+        add(assignJButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 670, -1, -1));
 
-        assignJButton2.setText("Request Pricing Change");
-        assignJButton2.addActionListener(new java.awt.event.ActionListener() {
+        refreshJButton2.setText("Refresh");
+        refreshJButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                assignJButton2ActionPerformed(evt);
+                refreshJButton2ActionPerformed(evt);
             }
         });
-        add(assignJButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 250, -1, -1));
+        add(refreshJButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 280, -1, -1));
+
+        jLabel4.setText("Messages from Pricing Analyst");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 290, -1, -1));
+
+        workRequestJTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Message", "Sender", "Receiver", "Status"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, true, true, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(workRequestJTable2);
+
+        add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 310, 530, 130));
+
+        assignJButton3.setText("Request Pricing Change to Pricing Analyst");
+        assignJButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                assignJButton3ActionPerformed(evt);
+            }
+        });
+        add(assignJButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 450, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void refreshJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButtonActionPerformed
@@ -196,21 +241,29 @@ public class RetailDataAnalystWorkAreaJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_assignJButton1ActionPerformed
 
-    private void assignJButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignJButton2ActionPerformed
+    private void refreshJButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButton2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_assignJButton2ActionPerformed
+    }//GEN-LAST:event_refreshJButton2ActionPerformed
+
+    private void assignJButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignJButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_assignJButton3ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton assignJButton1;
-    private javax.swing.JButton assignJButton2;
+    private javax.swing.JButton assignJButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JButton refreshJButton;
     private javax.swing.JButton refreshJButton1;
+    private javax.swing.JButton refreshJButton2;
     private javax.swing.JTable workRequestJTable;
     private javax.swing.JTable workRequestJTable1;
+    private javax.swing.JTable workRequestJTable2;
     // End of variables declaration//GEN-END:variables
 }

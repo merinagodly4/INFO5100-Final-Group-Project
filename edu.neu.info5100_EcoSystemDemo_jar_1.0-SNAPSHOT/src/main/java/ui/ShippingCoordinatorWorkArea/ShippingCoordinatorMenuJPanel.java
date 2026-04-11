@@ -42,8 +42,8 @@ public class ShippingCoordinatorMenuJPanel extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         btnViewShipments = new javax.swing.JButton();
-        btnConfirmRequests = new javax.swing.JButton();
-        btnConfirmRequests1 = new javax.swing.JButton();
+        btnConfirmRequestsSM = new javax.swing.JButton();
+        btnConfirmRequestsPP = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setText("Shipping Coordinator Menu");
@@ -61,29 +61,29 @@ public class ShippingCoordinatorMenuJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnConfirmRequests.setBackground(new java.awt.Color(102, 153, 255));
-        btnConfirmRequests.setForeground(new java.awt.Color(255, 255, 255));
-        btnConfirmRequests.setText("Confirm Requests");
-        btnConfirmRequests.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnConfirmRequests.setMaximumSize(new java.awt.Dimension(200, 40));
-        btnConfirmRequests.setMinimumSize(new java.awt.Dimension(20, 20));
-        btnConfirmRequests.setPreferredSize(new java.awt.Dimension(240, 25));
-        btnConfirmRequests.addActionListener(new java.awt.event.ActionListener() {
+        btnConfirmRequestsSM.setBackground(new java.awt.Color(102, 153, 255));
+        btnConfirmRequestsSM.setForeground(new java.awt.Color(255, 255, 255));
+        btnConfirmRequestsSM.setText("Confirm Requests from Store Manager");
+        btnConfirmRequestsSM.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnConfirmRequestsSM.setMaximumSize(new java.awt.Dimension(200, 40));
+        btnConfirmRequestsSM.setMinimumSize(new java.awt.Dimension(20, 20));
+        btnConfirmRequestsSM.setPreferredSize(new java.awt.Dimension(240, 25));
+        btnConfirmRequestsSM.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConfirmRequestsActionPerformed(evt);
+                btnConfirmRequestsSMActionPerformed(evt);
             }
         });
 
-        btnConfirmRequests1.setBackground(new java.awt.Color(102, 153, 255));
-        btnConfirmRequests1.setForeground(new java.awt.Color(255, 255, 255));
-        btnConfirmRequests1.setText("Confirm Requests");
-        btnConfirmRequests1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnConfirmRequests1.setMaximumSize(new java.awt.Dimension(200, 40));
-        btnConfirmRequests1.setMinimumSize(new java.awt.Dimension(20, 20));
-        btnConfirmRequests1.setPreferredSize(new java.awt.Dimension(240, 25));
-        btnConfirmRequests1.addActionListener(new java.awt.event.ActionListener() {
+        btnConfirmRequestsPP.setBackground(new java.awt.Color(102, 153, 255));
+        btnConfirmRequestsPP.setForeground(new java.awt.Color(255, 255, 255));
+        btnConfirmRequestsPP.setText("Confirm Requests from Production Planner");
+        btnConfirmRequestsPP.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnConfirmRequestsPP.setMaximumSize(new java.awt.Dimension(200, 40));
+        btnConfirmRequestsPP.setMinimumSize(new java.awt.Dimension(20, 20));
+        btnConfirmRequestsPP.setPreferredSize(new java.awt.Dimension(240, 25));
+        btnConfirmRequestsPP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConfirmRequests1ActionPerformed(evt);
+                btnConfirmRequestsPPActionPerformed(evt);
             }
         });
 
@@ -92,17 +92,19 @@ public class ShippingCoordinatorMenuJPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(101, 101, 101)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnViewShipments, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(75, 75, 75)
-                        .addComponent(btnConfirmRequests, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(101, 101, 101)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(239, 239, 239)
-                        .addComponent(btnConfirmRequests1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(218, Short.MAX_VALUE))
+                        .addGap(73, 73, 73)
+                        .addComponent(btnConfirmRequestsPP, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnConfirmRequestsSM, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(254, 254, 254)
+                        .addComponent(btnViewShipments, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(133, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,11 +113,11 @@ public class ShippingCoordinatorMenuJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addGap(76, 76, 76)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnViewShipments, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnConfirmRequests, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addComponent(btnConfirmRequests1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(244, Short.MAX_VALUE))
+                    .addComponent(btnConfirmRequestsSM, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnConfirmRequestsPP, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
+                .addComponent(btnViewShipments, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(238, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -138,7 +140,7 @@ public class ShippingCoordinatorMenuJPanel extends javax.swing.JPanel {
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnViewShipmentsIdentifyResourceAssetsActionPerformed
 
-    private void btnConfirmRequestsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmRequestsActionPerformed
+    private void btnConfirmRequestsSMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmRequestsSMActionPerformed
         // TODO add your handling code here:
         if (userProcessContainer == null) {
             return;
@@ -156,16 +158,32 @@ public class ShippingCoordinatorMenuJPanel extends javax.swing.JPanel {
         userProcessContainer.add("ShippingConfirmRequestsJPanel", shippingConfirmRequestsJPanel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
-    }//GEN-LAST:event_btnConfirmRequestsActionPerformed
+    }//GEN-LAST:event_btnConfirmRequestsSMActionPerformed
 
-    private void btnConfirmRequests1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmRequests1ActionPerformed
+    private void btnConfirmRequestsPPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmRequestsPPActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnConfirmRequests1ActionPerformed
+      if (userProcessContainer == null) {
+            return;
+        }
+
+        ShippingConfirmProductionRequestsJPanel1 shippingConfirmProductionRequestsJPanel1 =
+        new ShippingConfirmProductionRequestsJPanel1(
+            userProcessContainer,
+            userAccount,
+            organization,
+            business
+        );
+     Component shippingConfirmRequestsJPanel = null;
+
+        userProcessContainer.add("ShippingConfirmProductionRequestsJPanel1", shippingConfirmProductionRequestsJPanel1);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);   
+    }//GEN-LAST:event_btnConfirmRequestsPPActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnConfirmRequests;
-    private javax.swing.JButton btnConfirmRequests1;
+    private javax.swing.JButton btnConfirmRequestsPP;
+    private javax.swing.JButton btnConfirmRequestsSM;
     private javax.swing.JButton btnViewShipments;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables

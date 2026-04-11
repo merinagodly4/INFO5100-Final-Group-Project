@@ -10,20 +10,20 @@ import Business.UserAccount.UserAccount;
  *
  * @author raunak
  */
-public class LabTestWorkRequest extends WorkRequest{
+public class ManufacturingQuotesRequest extends WorkRequest{
     
-    private String testResult;
+    private String manufacturingQuote;
     private boolean approval = false;
     private UserAccount approvedBy;
     
     
 
     public String getTestResult() {
-        return testResult;
+        return manufacturingQuote;
     }
 
-    public void setTestResult(String testResult) {
-        this.testResult = testResult;
+    public void setTestResult(String manufacturingQuote) {
+        this.manufacturingQuote = manufacturingQuote;
     }
     
     

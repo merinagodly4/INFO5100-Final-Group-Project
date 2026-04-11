@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Business.OrderModel;
+package Business.SellProductsModel;
 
-import Business.OrderModel.WholesaleOrder;
+import Business.SellProductsModel.WholesaleOrder;
 import java.util.ArrayList;
 
 /**

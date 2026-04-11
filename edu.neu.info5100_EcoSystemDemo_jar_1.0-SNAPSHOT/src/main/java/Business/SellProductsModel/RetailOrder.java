@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Business.OrderModel;
+package Business.SellProductsModel;
 
 import java.util.ArrayList;
 
@@ -10,10 +10,10 @@ import java.util.ArrayList;
  *
  * @author kens2
  */
-public class WholesaleOrder {
+public class RetailOrder {
     ArrayList<OrderItem> orderItemList;
 
-    public WholesaleOrder() {
+    public RetailOrder() {
         this.orderItemList = new ArrayList<OrderItem>();
     }
 
@@ -25,8 +25,8 @@ public class WholesaleOrder {
         this.orderItemList = orderItemList;
     }
     
-    public void addNewOrderItem(Product product, double price, int quantity){
-        OrderItem orderItem = new OrderItem(product,price,quantity);
+    public void addNewOrderItem(Product product, int quantity){
+        OrderItem orderItem = new OrderItem(product,quantity);
         orderItemList.add(orderItem);
     
     }

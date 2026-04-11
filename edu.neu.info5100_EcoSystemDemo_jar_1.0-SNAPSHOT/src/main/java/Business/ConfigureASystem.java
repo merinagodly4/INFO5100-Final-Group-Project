@@ -16,14 +16,14 @@ import Business.Organization.SupplierPricingOrganization;
 import Business.Role.*;
 import Business.UserAccount.UserAccount;
 import com.github.javafaker.Faker;
-import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class ConfigureASystem {
 
-    static Faker faker = new Faker(new Random(12345L));
-
+    static Faker faker = new Faker();
+    
     // set seed
+
     static String[] itemNames = {
         "Running Shoes", "Compression Shorts", "Athletic Tank Top",
         "Yoga Mat", "Sports Bra", "Basketball Jersey", "Swim Goggles",
@@ -39,6 +39,7 @@ public class ConfigureASystem {
     static String[] regions = {
         "Northeast", "Southeast", "Midwest", "Southwest", "West Coast"
     };
+
 
     public static EcoSystem configure() {
 
@@ -65,6 +66,9 @@ public class ConfigureASystem {
         configureOrganizations(supplierEnterprise, manufacturerEnterprise,
                 shippingEnterprise, retailEnterprise);
 
+        // -- Users & Employees ------------------------------------------------
+        configureUsers(system);
+
         // -- Product Catalog (owned by supplier) ------------------------------
         ProductCatalog catalog = configureProductCatalog();
 
@@ -77,180 +81,102 @@ public class ConfigureASystem {
         return system;
     }
 
+
     private static void configureOrganizations(Enterprise supplier,
             Enterprise manufacturer, Enterprise shipping, Enterprise retail) {
 
-        // -----------------------------------------------------------------------
-        // SUPPLIER / RETAIL BRAND (Nike)
-        // -----------------------------------------------------------------------
-        // 1. Supplier Pricing Organization
-        //    -> Brand/Supplier Pricing Analyst
-        //    -> Retail Data Analyst
-        Organization supplierPricingOrg = supplier.getOrganizationDirectory()
+        // Supplier orgs
+        supplier.getOrganizationDirectory()
                 .createOrganization(Organization.Type.SupplierPricing);
-        supplierPricingOrg.setName("Supplier Pricing Organization");
-
-        Employee supplierPricingEmp = supplierPricingOrg.getEmployeeDirectory()
-                .createEmployee(faker.name().fullName());
-        supplierPricingOrg.getUserAccountDirectory().createUserAccount(
-                "supplierpa", "supplierpa", supplierPricingEmp, new SupplierPricingAnalyst());
-
-        Employee retailDataAnalystEmp = supplierPricingOrg.getEmployeeDirectory()
-                .createEmployee(faker.name().fullName());
-        supplierPricingOrg.getUserAccountDirectory().createUserAccount(
-                "retaildataanalyst", "retaildataanalyst", retailDataAnalystEmp, new RetailDataAnalystRole());
-
-        // 2. Supplier Marketing Organization
-        //    -> Retail Marketing Specialist
-        Organization supplierMarketingOrg = supplier.getOrganizationDirectory()
+        supplier.getOrganizationDirectory()
                 .createOrganization(Organization.Type.SupplierMarketing);
-        supplierMarketingOrg.setName("Supplier Marketing Organization");
 
-        Employee marketingSpecialistEmp = supplierMarketingOrg.getEmployeeDirectory()
-                .createEmployee(faker.name().fullName());
-        supplierMarketingOrg.getUserAccountDirectory().createUserAccount(
-                "marketingspecialist", "marketingspecialist", marketingSpecialistEmp, new RetailMarketingSpecialistRole());
+        // Manufacturer orgs
+        manufacturer.getOrganizationDirectory()
+                .createOrganization(Organization.Type.ManufacturingPricing);
+        manufacturer.getOrganizationDirectory()
+                .createOrganization(Organization.Type.ManufacturingOperations);
 
-        // -----------------------------------------------------------------------
-        // RETAILER (Dick's Sporting Goods)
-        // -----------------------------------------------------------------------
-        // 3. Retail Analytics Organization
-        //    -> Retail Business Analyst
-        Organization retailAnalyticsOrg = retail.getOrganizationDirectory()
-                .createOrganization(Organization.Type.RetailStore); // swap type when RetailAnalytics type is added
-        retailAnalyticsOrg.setName("Retail Analytics Organization");
-
-        Employee retailBAEmp = retailAnalyticsOrg.getEmployeeDirectory()
-                .createEmployee(faker.name().fullName());
-        retailAnalyticsOrg.getUserAccountDirectory().createUserAccount(
-                "retailba", "retailba", retailBAEmp, new RetailBusinessAnalystRole());
-
-        // 4. Retail Store Organization - Boston
-        //    -> Store Manager + Store Associate
-        Organization store1 = retail.getOrganizationDirectory()
-                .createOrganization(Organization.Type.RetailStore);
-        store1.setName("Dick's - Boston");
-
-        Employee storeManager1Emp = store1.getEmployeeDirectory()
-                .createEmployee(faker.name().fullName());
-        store1.getUserAccountDirectory().createUserAccount(
-                "storemanager", "storemanager", storeManager1Emp, new StoreManagerRole());
-
-        Employee storeAssociate1Emp = store1.getEmployeeDirectory()
-                .createEmployee(faker.name().fullName());
-        store1.getUserAccountDirectory().createUserAccount(
-                "storeassociate", "storeassociate", storeAssociate1Emp, new StoreAssociateRole());
-
-        // 5. Retail Store Organization - Providence
-        Organization store2 = retail.getOrganizationDirectory()
-                .createOrganization(Organization.Type.RetailStore);
-        store2.setName("Dick's - Providence");
-
-        Employee storeManager2Emp = store2.getEmployeeDirectory()
-                .createEmployee(faker.name().fullName());
-        store2.getUserAccountDirectory().createUserAccount(
-                "storemanager2", "storemanager2", storeManager2Emp, new StoreManagerRole());
-
-        Employee storeAssociate2Emp = store2.getEmployeeDirectory()
-                .createEmployee(faker.name().fullName());
-        store2.getUserAccountDirectory().createUserAccount(
-                "storeassociate2", "storeassociate2", storeAssociate2Emp, new StoreAssociateRole());
-
-        // 6. Retail Store Organization - Worcester
-        Organization store3 = retail.getOrganizationDirectory()
-                .createOrganization(Organization.Type.RetailStore);
-        store3.setName("Dick's - Worcester");
-
-        Employee storeManager3Emp = store3.getEmployeeDirectory()
-                .createEmployee(faker.name().fullName());
-        store3.getUserAccountDirectory().createUserAccount(
-                "storemanager3", "storemanager3", storeManager3Emp, new StoreManagerRole());
-
-        Employee storeAssociate3Emp = store3.getEmployeeDirectory()
-                .createEmployee(faker.name().fullName());
-        store3.getUserAccountDirectory().createUserAccount(
-                "storeassociate3", "storeassociate3", storeAssociate3Emp, new StoreAssociateRole());
-
-        // -----------------------------------------------------------------------
-        // SHIPPING COMPANY (USPS)
-        // -----------------------------------------------------------------------
-        // 7. East Shipping Facility
-        //    -> Shipping Pricing Analyst + Shipping Coordinator
+        // Shipping orgs (East + West facilities)
         Organization eastFacility = shipping.getOrganizationDirectory()
                 .createOrganization(Organization.Type.ShippingFacility);
         eastFacility.setName("East Shipping Facility");
 
-        Employee shippingPricingEmp = eastFacility.getEmployeeDirectory()
-                .createEmployee(faker.name().fullName());
-        eastFacility.getUserAccountDirectory().createUserAccount(
-                "shippingpa", "shippingpa", shippingPricingEmp, new ShippingPricingAnalystRole());
-
-        Employee shippingCoordinatorEmp = eastFacility.getEmployeeDirectory()
-                .createEmployee(faker.name().fullName());
-        eastFacility.getUserAccountDirectory().createUserAccount(
-                "shippingcoordinator", "shippingcoordinator", shippingCoordinatorEmp, new ShippingCoordinatorRole());
-
-        // 8. West Shipping Facility
         Organization westFacility = shipping.getOrganizationDirectory()
                 .createOrganization(Organization.Type.ShippingFacility);
         westFacility.setName("West Shipping Facility");
 
-        Employee shippingPricingEmp2 = westFacility.getEmployeeDirectory()
-                .createEmployee(faker.name().fullName());
-        westFacility.getUserAccountDirectory().createUserAccount(
-                "shippingpa2", "shippingpa2", shippingPricingEmp2, new ShippingPricingAnalystRole());
+        // Retail orgs (3 store locations + analytics)
+        Organization store1 = retail.getOrganizationDirectory()
+                .createOrganization(Organization.Type.RetailStore);
+        store1.setName("Dick's - " + faker.address().city());
 
-        Employee shippingCoordinatorEmp2 = westFacility.getEmployeeDirectory()
-                .createEmployee(faker.name().fullName());
-        westFacility.getUserAccountDirectory().createUserAccount(
-                "shippingcoordinator2", "shippingcoordinator2", shippingCoordinatorEmp2, new ShippingCoordinatorRole());
+        Organization store2 = retail.getOrganizationDirectory()
+                .createOrganization(Organization.Type.RetailStore);
+        store2.setName("Dick's - " + faker.address().city());
 
-        // -----------------------------------------------------------------------
-        // MANUFACTURER (Sports Manufacturing Co.)
-        // -----------------------------------------------------------------------
-        // 9. Manufacturing Pricing Organization (Analytics)
-        //    -> Manufacturing Pricing Analyst
-        Organization mfgPricingOrg = manufacturer.getOrganizationDirectory()
-                .createOrganization(Organization.Type.ManufacturingPricing);
-        mfgPricingOrg.setName("Manufacturing Pricing Organization");
-
-        Employee mfgPricingEmp = mfgPricingOrg.getEmployeeDirectory()
-                .createEmployee(faker.name().fullName());
-        mfgPricingOrg.getUserAccountDirectory().createUserAccount(
-                "manufacturingpa", "manufacturingpa", mfgPricingEmp, new ManufacturingPricingAnalystRole());
-
-        // 10. Manufacturing Operations Organization
-        //     -> Production Planner
-        Organization mfgOperationsOrg = manufacturer.getOrganizationDirectory()
-                .createOrganization(Organization.Type.ManufacturingOperations);
-        mfgOperationsOrg.setName("Manufacturing Operations Organization");
-
-        Employee productionPlannerEmp = mfgOperationsOrg.getEmployeeDirectory()
-                .createEmployee(faker.name().fullName());
-        mfgOperationsOrg.getUserAccountDirectory().createUserAccount(
-                "productionplanner", "productionplanner", productionPlannerEmp, new ProductionPlannerRole());
+        Organization store3 = retail.getOrganizationDirectory()
+                .createOrganization(Organization.Type.RetailStore);
+        store3.setName("Dick's - " + faker.address().city());
     }
 
-    // System admin only — lives at EcoSystem level
+    // tie into a specific organization
     private static void configureUsers(EcoSystem system) {
+
+        // System admin
         Employee sysAdminEmp = system.getEmployeeDirectory().createEmployee("sysadmin");
         system.getUserAccountDirectory().createUserAccount(
                 "sysadmin", "sysadmin", sysAdminEmp, new SystemAdminRole());
+
+        // Supplier roles
+        Employee supplierEmp1 = system.getEmployeeDirectory()
+                .createEmployee(faker.name().fullName());
+        system.getUserAccountDirectory().createUserAccount(
+                "storemanager", "storemanager", supplierEmp1, new StoreManagerRole());
+
+        Employee supplierEmp2 = system.getEmployeeDirectory()
+                .createEmployee(faker.name().fullName());
+        system.getUserAccountDirectory().createUserAccount(
+                "storeassociate", "storeassociate", supplierEmp2, new StoreAssociateRole());
+
+        Employee supplierEmp3 = system.getEmployeeDirectory()
+                .createEmployee(faker.name().fullName());
+        system.getUserAccountDirectory().createUserAccount(
+                "retailba", "retailba", supplierEmp3, new RetailBusinessAnalystRole());
+
+        // Manufacturer roles
+        Employee mfgEmp1 = system.getEmployeeDirectory()
+                .createEmployee(faker.name().fullName());
+        system.getUserAccountDirectory().createUserAccount(
+                "manufacturingpa", "manufacturingpa", mfgEmp1, new ManufacturingPricingAnalystRole());
+
+        Employee mfgEmp2 = system.getEmployeeDirectory()
+                .createEmployee(faker.name().fullName());
+        system.getUserAccountDirectory().createUserAccount(
+                "productionplanner", "productionplanner", mfgEmp2, new ProductionPlannerRole());
+
+        // Supplier pricing analyst
+        Employee supplierPricingEmp = system.getEmployeeDirectory()
+                .createEmployee(faker.name().fullName());
+        system.getUserAccountDirectory().createUserAccount(
+                "supplierpa", "supplierpa", supplierPricingEmp, new SupplierPricingAnalyst());
     }
 
+  
     private static ProductCatalog configureProductCatalog() {
 
         ProductCatalog catalog = new ProductCatalog();
 
         String[][] items = {
-            {"Running Shoes", "Footwear", "129.99", "200"},
-            {"Compression Shorts", "Apparel", "34.99", "350"},
-            {"Athletic Tank Top", "Apparel", "24.99", "500"},
-            {"Yoga Mat", "Equipment", "49.99", "150"},
-            {"Sports Bra", "Apparel", "39.99", "300"},
-            {"Basketball Jersey", "Apparel", "59.99", "180"},
-            {"Cycling Helmet", "Accessories", "89.99", "75"},
-            {"Weightlifting Gloves", "Accessories", "19.99", "220"},};
+            {"Running Shoes",       "Footwear",    "129.99", "200"},
+            {"Compression Shorts",  "Apparel",     "34.99",  "350"},
+            {"Athletic Tank Top",   "Apparel",     "24.99",  "500"},
+            {"Yoga Mat",            "Equipment",   "49.99",  "150"},
+            {"Sports Bra",          "Apparel",     "39.99",  "300"},
+            {"Basketball Jersey",   "Apparel",     "59.99",  "180"},
+            {"Cycling Helmet",      "Accessories", "89.99",  "75"},
+            {"Weightlifting Gloves","Accessories", "19.99",  "220"},
+        };
 
         for (String[] item : items) {
             Product p = catalog.addProduct();
@@ -261,9 +187,10 @@ public class ConfigureASystem {
 
         return catalog;
     }
-
+    
     // Create a supplier catalog and retailer catalog (documents their current inventory) 
     // (products same; quantity different) 
+
     // Create shipments class (CHANGE TO configureShipments)
     private static void configureWholesaleOrders(ProductCatalog catalog) {
 
@@ -276,14 +203,14 @@ public class ConfigureASystem {
                 int randomIndex = faker.number()
                         .numberBetween(0, catalog.getProductcatalog().size());
                 Product p = catalog.getProductcatalog().get(randomIndex);
-                int qty = faker.number().numberBetween(10, 100);
+                int qty   = faker.number().numberBetween(10, 100);
                 order.addNewOrderItem(p, p.getPrice(), qty);
             }
 
-            String origin = faker.address().city() + ", "
-                    + faker.address().stateAbbr();
+            String origin      = faker.address().city() + ", "
+                               + faker.address().stateAbbr();
             String destination = faker.address().city() + ", "
-                    + faker.address().stateAbbr();
+                               + faker.address().stateAbbr();
 
             System.out.println("=== Wholesale Shipment #" + (i + 1) + " ===");
             System.out.println("From:      " + origin);
@@ -322,7 +249,7 @@ public class ConfigureASystem {
                 int randomIndex = faker.number()
                         .numberBetween(0, catalog.getProductcatalog().size());
                 Product p = catalog.getProductcatalog().get(randomIndex);
-                int qty = faker.number().numberBetween(5, 50);
+                int qty   = faker.number().numberBetween(5, 50);
                 order.addNewOrderItem(p, p.getPrice(), qty);
             }
 

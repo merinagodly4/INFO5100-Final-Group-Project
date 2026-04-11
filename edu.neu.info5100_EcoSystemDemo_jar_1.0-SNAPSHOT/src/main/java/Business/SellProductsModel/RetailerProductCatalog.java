@@ -12,11 +12,11 @@ import java.util.List;
  *
  * @author archil
  */
-public class ProductCatalog {
+public class RetailerProductCatalog {
 
     private List<Product> productCatalog;
 
-    public ProductCatalog() {
+    public RetailerProductCatalog() {
         productCatalog = new ArrayList<Product>();
     }
 

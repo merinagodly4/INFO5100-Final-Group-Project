@@ -6,7 +6,7 @@
 package Business;
 
 import Business.Network.Network;
-import Business.SellProductsModel.ProductCatalog;
+import Business.SellProductsModel.RetailerProductCatalog;
 import Business.SellProductsModel.RetailMasterOrderList;
 import Business.SellProductsModel.WholesaleMasterOrderList;
 import Business.Organization.Organization;
@@ -24,7 +24,7 @@ public class EcoSystem extends Organization{
     private ArrayList<Network> networkList;
     WholesaleMasterOrderList wholesaleMasterOrderList;
     RetailMasterOrderList retailMasterOrderList;
-    ProductCatalog productCatalog;
+    RetailerProductCatalog productCatalog;
     
     public static EcoSystem getInstance(){
         if(business==null){
@@ -49,7 +49,7 @@ public class EcoSystem extends Organization{
         networkList=new ArrayList<Network>();
         wholesaleMasterOrderList = new WholesaleMasterOrderList();
         retailMasterOrderList = new RetailMasterOrderList();
-        productCatalog = new ProductCatalog();
+        productCatalog = new RetailerProductCatalog();
     }
 
     public ArrayList<Network> getNetworkList() {
@@ -82,7 +82,7 @@ public class EcoSystem extends Organization{
         return retailMasterOrderList;
     }
 
-    public ProductCatalog getProductCatalog() {
+    public RetailerProductCatalog getProductCatalog() {
         return productCatalog;
     }
     

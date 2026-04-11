@@ -8,7 +8,7 @@ package ui.StoreAssociateWorkArea;
 import Business.EcoSystem;
 import Business.SellProductsModel.OrderItem;
 import Business.SellProductsModel.Product;
-import Business.SellProductsModel.ProductCatalog;
+import Business.SellProductsModel.RetailerProductCatalog;
 import Business.SellProductsModel.RetailMasterOrderList;
 import Business.SellProductsModel.RetailOrder;
 import java.awt.CardLayout;
@@ -25,7 +25,7 @@ public class SellRetailProductsJPanel extends javax.swing.JPanel {
     JPanel userProcessContainer;
     RetailMasterOrderList masterOrderList;
     RetailOrder currentOrder;
-    ProductCatalog productCatalog;
+    RetailerProductCatalog productCatalog;
     
     public SellRetailProductsJPanel(JPanel userProcessContainer, EcoSystem business) {
         initComponents();

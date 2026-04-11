@@ -3,6 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package ui.StoreAssociateWorkArea;
+import Business.EcoSystem;
+import Business.Organization.Organization;
+import Business.UserAccount.UserAccount;
 import ui.RetailDataAnalystWorkArea.*;
 import javax.swing.JPanel;
 import java.awt.CardLayout;
@@ -17,9 +20,13 @@ public class StoreAssociateInventoryJPanel extends javax.swing.JPanel {
     /**
      * Creates new form RequestDataAnalystInventoryJPanel
      */
-    public StoreAssociateInventoryJPanel(JPanel userProcessContainer) {
+    public StoreAssociateInventoryJPanel(JPanel userProcessContainer,
+                                          UserAccount account,
+                                          Organization organization,
+                                          EcoSystem business) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
+        
     }
 
     /**

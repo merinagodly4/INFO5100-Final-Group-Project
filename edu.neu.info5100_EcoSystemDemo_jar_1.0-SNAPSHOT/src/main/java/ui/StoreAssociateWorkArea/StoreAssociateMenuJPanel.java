@@ -137,15 +137,15 @@ if (userProcessContainer == null) {
     }
 
     // Same work area also shows inventory; you can reuse it
-    StoreAssociateWorkAreaJPanel workAreaPanel =
-        new StoreAssociateWorkAreaJPanel(
+    StoreAssociateInventoryJPanel storeAssociateInventoryJPanel =
+        new StoreAssociateInventoryJPanel(
             userProcessContainer,
             userAccount,
             organization,
             business
         );
 
-    userProcessContainer.add("StoreAssociateWorkAreaJPanel", workAreaPanel);
+    userProcessContainer.add("StoreAssociateInventoryJPanel", storeAssociateInventoryJPanel);
     CardLayout layout = (CardLayout) userProcessContainer.getLayout();
     layout.next(userProcessContainer);
    

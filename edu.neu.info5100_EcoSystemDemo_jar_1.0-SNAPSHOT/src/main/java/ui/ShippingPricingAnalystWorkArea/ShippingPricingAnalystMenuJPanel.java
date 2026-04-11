@@ -106,21 +106,7 @@ public class ShippingPricingAnalystMenuJPanel extends javax.swing.JPanel {
 
     private void btnCreateViewApprovedQuotesIdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateViewApprovedQuotesIdentifyResourceAssetsActionPerformed
         // TODO add your handling code here:
-        if (userProcessContainer == null) {
-            return;
-        }
-
-        ShippingPricingAnalystWorkAreaJPanel shippingPricingAnalystWorkAreaJPanel  =
-        new ShippingPricingAnalystWorkAreaJPanel(
-            userProcessContainer,
-            userAccount,
-            organization,
-            business
-        );
-
-        userProcessContainer.add("ShippingPricingAnalystWorkAreaJPanel", shippingPricingAnalystWorkAreaJPanel);
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
+       
     }//GEN-LAST:event_btnCreateViewApprovedQuotesIdentifyResourceAssetsActionPerformed
 
     private void btnTotalShippingCostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTotalShippingCostActionPerformed

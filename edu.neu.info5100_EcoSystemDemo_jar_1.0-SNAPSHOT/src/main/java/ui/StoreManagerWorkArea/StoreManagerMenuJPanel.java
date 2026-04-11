@@ -137,21 +137,7 @@ public class StoreManagerMenuJPanel extends javax.swing.JPanel {
     private void btnStoreViewInventoryIdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStoreViewInventoryIdentifyResourceAssetsActionPerformed
        
         // TODO add your handling code here:
-     if (userProcessContainer == null) {
-            return;
-        }
-
-        StoreManagerWorkAreaJPanel workAreaPanel =
-            new StoreManagerWorkAreaJPanel(
-                userProcessContainer,
-                userAccount,
-                organization,
-                business
-            );
-
-        userProcessContainer.add("StoreManagerWorkAreaJPanel", workAreaPanel);
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
+   
     }//GEN-LAST:event_btnStoreViewInventoryIdentifyResourceAssetsActionPerformed
 
     private void btnStoreViewInventory1IdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStoreViewInventory1IdentifyResourceAssetsActionPerformed

@@ -6,6 +6,7 @@ package ui.ShippingCoordinatorWorkArea;
 import Business.EcoSystem;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import java.awt.CardLayout;
 import javax.swing.JPanel;
 
 /**
@@ -144,15 +145,7 @@ public ShippingConfirmProductionRequestsJPanel1(JPanel userProcessContainer, Use
 
     private void assignJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignJButtonActionPerformed
 
-        int selectedRow = workRequestJTable.getSelectedRow();
-
-        if (selectedRow < 0){
-            return;
-        }
-
-        WorkRequest request = (WorkRequest)workRequestJTable.getValueAt(selectedRow, 0);
-        request.setReceiver(userAccount);
-        request.setStatus("Pending");
+        
     }//GEN-LAST:event_assignJButtonActionPerformed
 
     private void refreshJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButtonActionPerformed

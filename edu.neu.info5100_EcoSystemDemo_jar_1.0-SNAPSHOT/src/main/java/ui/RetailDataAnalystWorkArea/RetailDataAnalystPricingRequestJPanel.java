@@ -40,24 +40,10 @@ public class RetailDataAnalystPricingRequestJPanel extends javax.swing.JPanel {
         this.business = business;
         this.supplierPricingOrganization = (SupplierPricingOrganization) organization;
         
-        populateTable();
+       
     }
     
-    public void populateTable(){
-        DefaultTableModel model = (DefaultTableModel)workRequestJTable.getModel();
-        
-        model.setRowCount(0);
-        
-        for(WorkRequest request : supplierPricingOrganization.getWorkQueue().getWorkRequestList()){
-            Object[] row = new Object[4];
-            row[0] = request;
-            row[1] = request.getSender().getEmployee().getName();
-            row[2] = request.getReceiver() == null ? null : request.getReceiver().getEmployee().getName();
-            row[3] = request.getStatus();
-            
-            model.addRow(row);
-        }
-    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

@@ -9,7 +9,7 @@ import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
-import ui.StoreManagerWorkArea.StoreManagerWorkAreaJPanel;
+import ui.StoreManagerWorkArea.StoreManagerMenuJPanel;
 
 
 /**
@@ -20,7 +20,7 @@ public class StoreManagerRole extends Role {
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business) {
-        return new StoreManagerWorkAreaJPanel(userProcessContainer, account, organization, business);
+        return new StoreManagerMenuJPanel(userProcessContainer, account, organization, business);
     }
     
 }

@@ -132,21 +132,7 @@ public class SupplierPricingAnalystMenuJPanel extends javax.swing.JPanel {
 
     private void btnRequestMarketingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestMarketingActionPerformed
         // TODO add your handling code here:
-          if (userProcessContainer == null) {
-            return;
-        }
-
-        SupplierPricingAnalystWorkAreaJPanel workAreaPanel =
-            new SupplierPricingAnalystWorkAreaJPanel(
-                userProcessContainer,
-                userAccount,
-                organization,
-                business
-            );
-
-        userProcessContainer.add("SupplierPricingAnalystWorkArea", workAreaPanel);
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
+      
     }//GEN-LAST:event_btnRequestMarketingActionPerformed
 
 

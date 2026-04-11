@@ -93,25 +93,7 @@ public class RetailMarketingSpecialistMenuJPanel extends javax.swing.JPanel {
 
     private void btnMarketingViewInventoryIdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMarketingViewInventoryIdentifyResourceAssetsActionPerformed
         // TODO add your handling code here:
-      if (userProcessContainer == null) {
-            return; 
-        }
 
-       
-        RetailMarketingSpecialistWorkAreaJPanel workAreaPanel =
-            new RetailMarketingSpecialistWorkAreaJPanel(
-                userProcessContainer,
-                userAccount,
-                organization,
-                business
-            );
-
-        userProcessContainer.add("RetailMarketingSpecialistWorkAreaJPanel", workAreaPanel);
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
-  
-
-  
     }//GEN-LAST:event_btnMarketingViewInventoryIdentifyResourceAssetsActionPerformed
 
 

@@ -54,7 +54,7 @@ public class RetailDataAnalystMenuJPanel extends javax.swing.JPanel {
 
         btnDataRequestManufacturer.setBackground(new java.awt.Color(102, 153, 255));
         btnDataRequestManufacturer.setForeground(new java.awt.Color(255, 255, 255));
-        btnDataRequestManufacturer.setText("Request Manufacturer");
+        btnDataRequestManufacturer.setText("Make Request to Manufacturer");
         btnDataRequestManufacturer.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnDataRequestManufacturer.setMaximumSize(new java.awt.Dimension(145, 40));
         btnDataRequestManufacturer.setMinimumSize(new java.awt.Dimension(20, 20));
@@ -83,7 +83,7 @@ public class RetailDataAnalystMenuJPanel extends javax.swing.JPanel {
 
         btnDataRequestPricing.setBackground(new java.awt.Color(102, 153, 255));
         btnDataRequestPricing.setForeground(new java.awt.Color(255, 255, 255));
-        btnDataRequestPricing.setText("Request  Pricing ");
+        btnDataRequestPricing.setText("Request Pricing Change");
         btnDataRequestPricing.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnDataRequestPricing.setMaximumSize(new java.awt.Dimension(200, 40));
         btnDataRequestPricing.setMinimumSize(new java.awt.Dimension(20, 20));
@@ -99,16 +99,18 @@ public class RetailDataAnalystMenuJPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(101, 101, 101)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnDataViewInventory, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(75, 75, 75)
-                        .addComponent(btnDataRequestPricing, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(101, 101, 101)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnDataViewInventory, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(75, 75, 75)
+                                .addComponent(btnDataRequestPricing, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(140, 140, 140)
-                        .addComponent(btnDataRequestManufacturer, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(200, 200, 200)
+                        .addComponent(btnDataRequestManufacturer, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(218, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -120,9 +122,9 @@ public class RetailDataAnalystMenuJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDataViewInventory, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDataRequestPricing, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
-                .addComponent(btnDataRequestManufacturer, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(236, Short.MAX_VALUE))
+                .addGap(40, 40, 40)
+                .addComponent(btnDataRequestManufacturer, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(233, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -148,21 +150,21 @@ public class RetailDataAnalystMenuJPanel extends javax.swing.JPanel {
 
     private void btnDataViewInventoryIdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDataViewInventoryIdentifyResourceAssetsActionPerformed
         // TODO add your handling code here:
-       if (userProcessContainer == null) {
-        return;
-    }
+       RetailDataAnalystInventoryJPanel retailDataAnalystInventoryJPanel
+                = new RetailDataAnalystInventoryJPanel(
+                        userProcessContainer          
+                       // ,userAccount,
+                        //organization,
+                        //business
+                );
 
-    RetailDataAnalystWorkAreaJPanel retailDataAnalystWorkAreaJPanel =
-        new RetailDataAnalystWorkAreaJPanel(
-            userProcessContainer,
-            userAccount,
-            organization,
-            business
+        userProcessContainer.add(
+                "RetailDataAnalystInventoryJPanel",
+                retailDataAnalystInventoryJPanel
         );
 
-    userProcessContainer.add("RetailDataAnalystWorkAreaJPanel",retailDataAnalystWorkAreaJPanel );
-    CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-    layout.next(userProcessContainer);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
 
  
     }//GEN-LAST:event_btnDataViewInventoryIdentifyResourceAssetsActionPerformed

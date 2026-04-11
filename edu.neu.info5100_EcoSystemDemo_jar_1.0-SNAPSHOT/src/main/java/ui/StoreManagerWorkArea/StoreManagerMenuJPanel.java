@@ -55,6 +55,8 @@ public class StoreManagerMenuJPanel extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         btnStoreViewInventory = new javax.swing.JButton();
+        btnStoreViewInventory1 = new javax.swing.JButton();
+        btnStoreViewInventory2 = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setText("Store Manager  Menu");
@@ -72,27 +74,63 @@ public class StoreManagerMenuJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnStoreViewInventory1.setBackground(new java.awt.Color(102, 153, 255));
+        btnStoreViewInventory1.setForeground(new java.awt.Color(255, 255, 255));
+        btnStoreViewInventory1.setText("Contact Shipping Company");
+        btnStoreViewInventory1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnStoreViewInventory1.setMaximumSize(new java.awt.Dimension(200, 40));
+        btnStoreViewInventory1.setMinimumSize(new java.awt.Dimension(20, 23));
+        btnStoreViewInventory1.setPreferredSize(new java.awt.Dimension(240, 30));
+        btnStoreViewInventory1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStoreViewInventory1IdentifyResourceAssetsActionPerformed(evt);
+            }
+        });
+
+        btnStoreViewInventory2.setBackground(new java.awt.Color(102, 153, 255));
+        btnStoreViewInventory2.setForeground(new java.awt.Color(255, 255, 255));
+        btnStoreViewInventory2.setText("Confirm Requests from Associates");
+        btnStoreViewInventory2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnStoreViewInventory2.setMaximumSize(new java.awt.Dimension(200, 40));
+        btnStoreViewInventory2.setMinimumSize(new java.awt.Dimension(20, 23));
+        btnStoreViewInventory2.setPreferredSize(new java.awt.Dimension(240, 30));
+        btnStoreViewInventory2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStoreViewInventory2IdentifyResourceAssetsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(101, 101, 101)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(96, 96, 96)
+                        .addGap(101, 101, 101)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnStoreViewInventory1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(27, 27, 27)
+                                .addComponent(btnStoreViewInventory2, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(277, 277, 277)
                         .addComponent(btnStoreViewInventory, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(244, Short.MAX_VALUE))
+                .addContainerGap(85, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jLabel1)
-                .addGap(50, 50, 50)
+                .addGap(39, 39, 39)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnStoreViewInventory1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnStoreViewInventory2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(38, 38, 38)
                 .addComponent(btnStoreViewInventory, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(329, Short.MAX_VALUE))
+                .addContainerGap(262, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -116,9 +154,19 @@ public class StoreManagerMenuJPanel extends javax.swing.JPanel {
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnStoreViewInventoryIdentifyResourceAssetsActionPerformed
 
+    private void btnStoreViewInventory1IdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStoreViewInventory1IdentifyResourceAssetsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnStoreViewInventory1IdentifyResourceAssetsActionPerformed
+
+    private void btnStoreViewInventory2IdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStoreViewInventory2IdentifyResourceAssetsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnStoreViewInventory2IdentifyResourceAssetsActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnStoreViewInventory;
+    private javax.swing.JButton btnStoreViewInventory1;
+    private javax.swing.JButton btnStoreViewInventory2;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

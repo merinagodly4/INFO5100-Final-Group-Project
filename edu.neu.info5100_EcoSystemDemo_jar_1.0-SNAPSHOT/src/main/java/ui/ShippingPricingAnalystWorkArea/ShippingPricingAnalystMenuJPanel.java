@@ -129,8 +129,8 @@ public class ShippingPricingAnalystMenuJPanel extends javax.swing.JPanel {
             return;
         }
 
-        ShippingTotalCostJPanel shippingTotalCostJPanel =
-        new ShippingTotalCostJPanel(
+        ShippingApprovedQuotesJPanel shippingTotalCostJPanel =
+        new ShippingApprovedQuotesJPanel(
             userProcessContainer,
             userAccount,
             organization,

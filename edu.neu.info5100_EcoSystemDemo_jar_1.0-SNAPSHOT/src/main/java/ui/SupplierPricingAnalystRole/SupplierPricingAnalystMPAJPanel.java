@@ -2,63 +2,50 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package ui.RetailDataAnalystWorkArea;
+package ui.SupplierPricingAnalystRole;
 
-import ui.StoreAssociateWorkArea.*;
-import ui.StoreManagerWorkArea.*;
-import ui.SupplierPricingAnalystRole.*;
-import ui.SupplierPricingAnalystRole.*;
+
 import Business.EcoSystem;
-import Business.Organization.SupplierPricingOrganization;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
-import Business.WorkQueue.LabTestWorkRequest;
 import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
+import java.awt.Component;
 import javax.swing.JPanel;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author raunak
  */
-public class RetailDataAnalystWorkAreaJPanel extends javax.swing.JPanel {
-
+public class SupplierPricingAnalystMPAJPanel extends javax.swing.JPanel {
+  
     private JPanel userProcessContainer;
-    private EcoSystem business;
     private UserAccount userAccount;
-    private SupplierPricingOrganization supplierPricingOrganization;
+    private Organization organization;
+    private EcoSystem business;
+    private WorkRequest request;
     
     /**
-     * Creates new form LabAssistantWorkAreaJPanel
+     * Creates new form ProcessWorkRequestJPanel
      */
-    public RetailDataAnalystWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, EcoSystem business) {
+ 
+    public SupplierPricingAnalystMPAJPanel(JPanel userProcessContainer,
+                                                 UserAccount account,
+                                                 Organization organization,
+                                                 EcoSystem business) {
         initComponents();
-        
         this.userProcessContainer = userProcessContainer;
         this.userAccount = account;
+        this.organization = organization;
         this.business = business;
-        this.supplierPricingOrganization = (SupplierPricingOrganization) organization;
-        
-        populateTable();
+    }
+     public SupplierPricingAnalystMPAJPanel(JPanel userProcessContainer,
+                                                 WorkRequest request) {
+        initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.request = request;
     }
     
-    public void populateTable(){
-        DefaultTableModel model = (DefaultTableModel)workRequestJTable.getModel();
-        
-        model.setRowCount(0);
-        
-        for(WorkRequest request : supplierPricingOrganization.getWorkQueue().getWorkRequestList()){
-            Object[] row = new Object[4];
-            row[0] = request;
-            row[1] = request.getSender().getEmployee().getName();
-            row[2] = request.getReceiver() == null ? null : request.getReceiver().getEmployee().getName();
-            row[3] = request.getStatus();
-            
-            model.addRow(row);
-        }
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -69,13 +56,11 @@ public class RetailDataAnalystWorkAreaJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         refreshJButton = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         workRequestJTable1 = new javax.swing.JTable();
-        assignJButton1 = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
-
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        assignJButton1 = new javax.swing.JButton();
 
         refreshJButton.setText("Refresh");
         refreshJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -83,11 +68,9 @@ public class RetailDataAnalystWorkAreaJPanel extends javax.swing.JPanel {
                 refreshJButtonActionPerformed(evt);
             }
         });
-        add(refreshJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 60, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        jLabel2.setText("Messages from Manufacturer");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, -1, -1));
+        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jLabel1.setText("Messages from Manufacturing Pricing Analyst");
 
         workRequestJTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -137,32 +120,60 @@ public class RetailDataAnalystWorkAreaJPanel extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(workRequestJTable1);
 
-        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, 540, 340));
-
-        assignJButton1.setText("Make Request");
-        assignJButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                assignJButton1ActionPerformed(evt);
-            }
-        });
-        add(assignJButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 450, -1, -1));
-
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackActionPerformed(evt);
             }
         });
-        add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+
+        assignJButton1.setText("New Message");
+        assignJButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                assignJButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnBack)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(6, 6, 6)
+                            .addComponent(assignJButton1))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 682, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel1)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(refreshJButton)
+                            .addGap(8, 8, 8))))
+                .addContainerGap(23, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(23, Short.MAX_VALUE)
+                .addComponent(btnBack)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(refreshJButton))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(assignJButton1)
+                .addGap(42, 42, 42))
+        );
     }// </editor-fold>//GEN-END:initComponents
 
     private void refreshJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButtonActionPerformed
 
     }//GEN-LAST:event_refreshJButtonActionPerformed
-
-    private void assignJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignJButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_assignJButton1ActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
 
@@ -172,10 +183,14 @@ public class RetailDataAnalystWorkAreaJPanel extends javax.swing.JPanel {
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void assignJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignJButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_assignJButton1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton assignJButton1;
     private javax.swing.JButton btnBack;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton refreshJButton;
     private javax.swing.JTable workRequestJTable1;

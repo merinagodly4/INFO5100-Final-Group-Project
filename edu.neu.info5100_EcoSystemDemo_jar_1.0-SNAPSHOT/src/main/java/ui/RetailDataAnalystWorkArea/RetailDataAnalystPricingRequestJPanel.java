@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package ui.ShippingCoordinatorWorkArea;
+package ui.RetailDataAnalystWorkArea;
 
 import ui.StoreAssociateWorkArea.*;
 import ui.StoreManagerWorkArea.*;
@@ -22,7 +22,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author raunak
  */
-public class ShippingCoordinatorWorkAreaJPanel extends javax.swing.JPanel {
+public class RetailDataAnalystPricingRequestJPanel extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
     private EcoSystem business;
@@ -32,7 +32,7 @@ public class ShippingCoordinatorWorkAreaJPanel extends javax.swing.JPanel {
     /**
      * Creates new form LabAssistantWorkAreaJPanel
      */
-    public ShippingCoordinatorWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, EcoSystem business) {
+    public RetailDataAnalystPricingRequestJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, EcoSystem business) {
         initComponents();
         
         this.userProcessContainer = userProcessContainer;
@@ -68,52 +68,64 @@ public class ShippingCoordinatorWorkAreaJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        workRequestJTable = new javax.swing.JTable();
-        jLabel3 = new javax.swing.JLabel();
-        refreshJButton1 = new javax.swing.JButton();
+        refreshJButton2 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        workRequestJTable2 = new javax.swing.JTable();
+        assignJButton3 = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        workRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
+        refreshJButton2.setText("Refresh");
+        refreshJButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshJButton2ActionPerformed(evt);
+            }
+        });
+        add(refreshJButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 50, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jLabel4.setText("Messages from Pricing Analyst");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, -1, -1));
+
+        workRequestJTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Order Number", "Shipped From", "Destination", "Shipping Date", "Arrival Date"
+                "Message", "Sender", "Receiver", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, true, true, true
+                false, true, true, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -124,21 +136,17 @@ public class ShippingCoordinatorWorkAreaJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(workRequestJTable);
+        jScrollPane3.setViewportView(workRequestJTable2);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 510, 320));
+        add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 530, 260));
 
-        jLabel3.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        jLabel3.setText("Shipments");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, -1, -1));
-
-        refreshJButton1.setText("Refresh");
-        refreshJButton1.addActionListener(new java.awt.event.ActionListener() {
+        assignJButton3.setText("Request Pricing Change ");
+        assignJButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                refreshJButton1ActionPerformed(evt);
+                assignJButton3ActionPerformed(evt);
             }
         });
-        add(refreshJButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 60, -1, -1));
+        add(assignJButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 370, -1, -1));
 
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -149,9 +157,13 @@ public class ShippingCoordinatorWorkAreaJPanel extends javax.swing.JPanel {
         add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void refreshJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButton1ActionPerformed
+    private void refreshJButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButton2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_refreshJButton1ActionPerformed
+    }//GEN-LAST:event_refreshJButton2ActionPerformed
+
+    private void assignJButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignJButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_assignJButton3ActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
 
@@ -162,10 +174,11 @@ public class ShippingCoordinatorWorkAreaJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnBackActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton assignJButton3;
     private javax.swing.JButton btnBack;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton refreshJButton1;
-    private javax.swing.JTable workRequestJTable;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JButton refreshJButton2;
+    private javax.swing.JTable workRequestJTable2;
     // End of variables declaration//GEN-END:variables
 }

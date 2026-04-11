@@ -1,48 +1,44 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package ui.StoreAssociateWorkArea;
-
-import ui.StoreAssociateWorkArea.*;
-import ui.SupplierPricingAnalystRole.*;
+package ui.ShippingPricingAnalystWorkArea;
 import Business.EcoSystem;
 import Business.Organization.Organization;
-import Business.Organization.RetailStoreOrganization;
 import Business.UserAccount.UserAccount;
-import Business.WorkQueue.LabTestWorkRequest;
 import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
+import java.util.List;
 import javax.swing.JPanel;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author raunak
+ * @author lajon
  */
-public class StoreAssociateWorkAreaJPanel extends javax.swing.JPanel {
+public class ShippingContactSupplierJPanel extends javax.swing.JPanel {
+ private static final long serialVersionUID = 1L;
 
-    private JPanel userProcessContainer;
-    private EcoSystem business;
-    private UserAccount userAccount;
-   private RetailStoreOrganization retailStoreOrganization;
-    
+ private JPanel userProcessContainer;
+ private UserAccount userAccount;
+ private Organization organization;
+ private EcoSystem business;
     /**
-     * Creates new form LabAssistantWorkAreaJPanel
+     * Creates new form ShippingTotalCostJPanel
      */
-    public StoreAssociateWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, EcoSystem business) {
-        initComponents();
-        
-        this.userProcessContainer = userProcessContainer;
-        this.userAccount = account;
-        this.business = business;
-        this.retailStoreOrganization = (RetailStoreOrganization) organization;
-        
-      
-    }
-    
    
-    
+  public ShippingContactSupplierJPanel() {
+ initComponents();
+ }
+  
+ public ShippingContactSupplierJPanel(JPanel userProcessContainer, UserAccount userAccount, Organization organization, EcoSystem business) {
+ this.userProcessContainer = userProcessContainer;
+ this.userAccount = userAccount;
+ this.organization = organization;
+ this.business = business;
+ initComponents();
+ // existing populate or setup methods can be called elsewhere as needed
+ }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -57,8 +53,7 @@ public class StoreAssociateWorkAreaJPanel extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         workRequestJTable1 = new javax.swing.JTable();
         btnBack = new javax.swing.JButton();
-
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        assignJButton1 = new javax.swing.JButton();
 
         refreshJButton.setText("Refresh");
         refreshJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -66,11 +61,9 @@ public class StoreAssociateWorkAreaJPanel extends javax.swing.JPanel {
                 refreshJButtonActionPerformed(evt);
             }
         });
-        add(refreshJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 60, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        jLabel1.setText("Messages from Store Manager");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
+        jLabel1.setText("Messages from Supplier Pricing Analyst");
 
         workRequestJTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -120,15 +113,55 @@ public class StoreAssociateWorkAreaJPanel extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(workRequestJTable1);
 
-        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 630, 370));
-
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackActionPerformed(evt);
             }
         });
-        add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+
+        assignJButton1.setText("New Message");
+        assignJButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                assignJButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnBack)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(assignJButton1)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jLabel1)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(refreshJButton))
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 801, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(45, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnBack)
+                .addGap(17, 17, 17)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(refreshJButton))
+                .addGap(5, 5, 5)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(assignJButton1)
+                .addGap(47, 47, 47))
+        );
     }// </editor-fold>//GEN-END:initComponents
 
     private void refreshJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButtonActionPerformed
@@ -143,11 +176,19 @@ public class StoreAssociateWorkAreaJPanel extends javax.swing.JPanel {
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void assignJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignJButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_assignJButton1ActionPerformed
+
+   
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton assignJButton1;
     private javax.swing.JButton btnBack;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton refreshJButton;
     private javax.swing.JTable workRequestJTable1;
     // End of variables declaration//GEN-END:variables
+
 }

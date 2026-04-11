@@ -2,7 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package ui.RetailDataAnalystWorkArea;
+package ui.StoreManagerWorkArea;
+import ui.StoreAssociateWorkArea.*;
+import ui.RetailDataAnalystWorkArea.*;
 import javax.swing.JPanel;
 import java.awt.CardLayout;
 
@@ -10,13 +12,13 @@ import java.awt.CardLayout;
  *
  * @author lajon
  */
-public class RetailDataAnalystInventoryJPanel extends javax.swing.JPanel {
+public class StoreManagerInventoryJPanel extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
     /**
      * Creates new form RequestDataAnalystInventoryJPanel
      */
-    public RetailDataAnalystInventoryJPanel(JPanel userProcessContainer) {
+    public StoreManagerInventoryJPanel(JPanel userProcessContainer) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
     }
@@ -35,6 +37,7 @@ public class RetailDataAnalystInventoryJPanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         refreshJButton1 = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
+        assignJButton1 = new javax.swing.JButton();
 
         workRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -81,6 +84,13 @@ public class RetailDataAnalystInventoryJPanel extends javax.swing.JPanel {
             }
         });
 
+        assignJButton1.setText("Request Restock");
+        assignJButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                assignJButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -92,14 +102,15 @@ public class RetailDataAnalystInventoryJPanel extends javax.swing.JPanel {
                         .addComponent(btnBack))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(45, 45, 45)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(refreshJButton1)
-                                .addGap(10, 10, 10))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 607, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(46, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(assignJButton1)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel3)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(refreshJButton1))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 610, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,12 +118,14 @@ public class RetailDataAnalystInventoryJPanel extends javax.swing.JPanel {
                 .addGap(20, 20, 20)
                 .addComponent(btnBack)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(refreshJButton1)
-                    .addComponent(jLabel3))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(refreshJButton1))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(assignJButton1)
+                .addContainerGap(43, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -128,8 +141,13 @@ public class RetailDataAnalystInventoryJPanel extends javax.swing.JPanel {
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void assignJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignJButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_assignJButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton assignJButton1;
     private javax.swing.JButton btnBack;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;

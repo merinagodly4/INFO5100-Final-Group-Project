@@ -12,7 +12,7 @@ import javax.swing.JPanel;
  *
  * @author lajon
  */
-public class ShippingConfirmRequestsJPanel extends javax.swing.JPanel {
+public class ShippingConfirmProductionRequestsJPanel1 extends javax.swing.JPanel {
  private JPanel userProcessContainer;
  private UserAccount userAccount;
  private Organization organization;
@@ -21,11 +21,11 @@ public class ShippingConfirmRequestsJPanel extends javax.swing.JPanel {
      * Creates new form ShippingConfirmRequestsJPanel
      */
     
-public ShippingConfirmRequestsJPanel() {
+public ShippingConfirmProductionRequestsJPanel1() {
     initComponents();
 }
 
-public ShippingConfirmRequestsJPanel(JPanel userProcessContainer, UserAccount userAccount, Organization organization, EcoSystem business) {
+public ShippingConfirmProductionRequestsJPanel1(JPanel userProcessContainer, UserAccount userAccount, Organization organization, EcoSystem business) {
     this.userProcessContainer = userProcessContainer;
     this.userAccount = userAccount;
     this.organization = organization;
@@ -50,7 +50,7 @@ public ShippingConfirmRequestsJPanel(JPanel userProcessContainer, UserAccount us
         workRequestJTable1 = new javax.swing.JTable();
         btnBack = new javax.swing.JButton();
 
-        assignJButton.setText("Confirm Store Manager Requests");
+        assignJButton.setText("Confirm Production Planner Requests");
         assignJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 assignJButtonActionPerformed(evt);
@@ -65,7 +65,7 @@ public ShippingConfirmRequestsJPanel(JPanel userProcessContainer, UserAccount us
         });
 
         jLabel2.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        jLabel2.setText("Messages from Store Manager");
+        jLabel2.setText("Messages from Production Planner ");
 
         workRequestJTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -107,27 +107,25 @@ public ShippingConfirmRequestsJPanel(JPanel userProcessContainer, UserAccount us
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(54, 54, 54)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2)
+                    .addComponent(assignJButton)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane2)
-                            .addComponent(assignJButton)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(282, 282, 282)
-                                .addComponent(refreshJButton))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(btnBack)))
-                .addContainerGap(58, Short.MAX_VALUE))
+                        .addComponent(jLabel2)
+                        .addGap(282, 282, 282)
+                        .addComponent(refreshJButton)))
+                .addContainerGap(18, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(26, 26, 26)
+                    .addComponent(btnBack)
+                    .addContainerGap(613, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(btnBack)
-                .addGap(18, 18, 18)
+                .addGap(52, 52, 52)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(refreshJButton))
@@ -135,7 +133,12 @@ public ShippingConfirmRequestsJPanel(JPanel userProcessContainer, UserAccount us
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(assignJButton)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(20, 20, 20)
+                    .addComponent(btnBack)
+                    .addContainerGap(434, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 

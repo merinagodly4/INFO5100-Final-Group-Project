@@ -3,35 +3,41 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package ui.ProductionPlannerWorkArea;
+
 import Business.EcoSystem;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import java.awt.CardLayout;
 import javax.swing.JPanel;
+
 /**
  *
  * @author lajon
  */
 public class ProductionPlannerRequestsJPanel extends javax.swing.JPanel {
- private static final long serialVersionUID = 1L;
 
- private JPanel userProcessContainer;
- private UserAccount userAccount;
- private Organization organization;
- private EcoSystem business;
+    private static final long serialVersionUID = 1L;
+
+    private JPanel userProcessContainer;
+    private UserAccount userAccount;
+    private Organization organization;
+    private EcoSystem business;
+
     /**
      * Creates new form ProductionPlannerRequests
      */
     public ProductionPlannerRequestsJPanel() {
-       initComponents();
-   }
-   
+        initComponents();
+    }
+
     public ProductionPlannerRequestsJPanel(JPanel userProcessContainer, UserAccount userAccount, Organization organization, EcoSystem business) {
-        this.userProcessContainer = userProcessContainer; 
+        this.userProcessContainer = userProcessContainer;
         this.userAccount = userAccount;
         this.organization = organization;
         this.business = business;
         initComponents();
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -41,19 +47,173 @@ public class ProductionPlannerRequestsJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        refreshJButton4 = new javax.swing.JButton();
+        refreshJButton = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        workRequestJTable2 = new javax.swing.JTable();
+        refreshJButton2 = new javax.swing.JButton();
+        refreshJButton5 = new javax.swing.JButton();
+
+        refreshJButton4.setText("Request Change in Production");
+        refreshJButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshJButton4ActionPerformed(evt);
+            }
+        });
+
+        refreshJButton.setText("Refresh");
+        refreshJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshJButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jLabel2.setText("Messages from Shipping Coordinator");
+
+        workRequestJTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Message", "Sender", "Receiver", "Status"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, true, true, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(workRequestJTable2);
+
+        refreshJButton2.setText("<<< Back");
+        refreshJButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshJButton2ActionPerformed(evt);
+            }
+        });
+
+        refreshJButton5.setText("Make Request");
+        refreshJButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshJButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 704, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(refreshJButton2)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(72, 72, 72)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(refreshJButton5)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(refreshJButton)))
+                        .addGap(82, 82, 82))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 475, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(refreshJButton2)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(refreshJButton)
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(refreshJButton5)
+                .addContainerGap(16, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void refreshJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButtonActionPerformed
+
+    }//GEN-LAST:event_refreshJButtonActionPerformed
+
+    private void refreshJButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButton2ActionPerformed
+
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_refreshJButton2ActionPerformed
+
+    private void refreshJButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_refreshJButton4ActionPerformed
+
+    private void refreshJButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButton5ActionPerformed
+        // TODO add your handling code here:
+        ShippingCoordinatorRequestJPanel panel
+                = new ShippingCoordinatorRequestJPanel(
+                        userProcessContainer,
+                        organization,
+                        userAccount,
+                        business
+                );
+
+        userProcessContainer.add("ShippingCoordinatorRequestJPanel", panel);
+
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.show(userProcessContainer, "ShippingCoordinatorRequestJPanel");
+    }//GEN-LAST:event_refreshJButton5ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JButton refreshJButton;
+    private javax.swing.JButton refreshJButton2;
+    private javax.swing.JButton refreshJButton4;
+    private javax.swing.JButton refreshJButton5;
+    private javax.swing.JTable workRequestJTable2;
     // End of variables declaration//GEN-END:variables
 }

@@ -9,7 +9,8 @@ import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
-import ui.ProductionPlannerWorkArea.ProductionPlannerWorkAreaJPanel;
+import ui.ProductionPlannerWorkArea.ProductionPlannerMenuJPanel;
+
 
 
 
@@ -21,7 +22,7 @@ public class ProductionPlannerRole extends Role {
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business) {
-        return new ProductionPlannerWorkAreaJPanel(userProcessContainer, account, organization, business);
+        return new ProductionPlannerMenuJPanel(userProcessContainer, account, organization, business);
     }
     
 }

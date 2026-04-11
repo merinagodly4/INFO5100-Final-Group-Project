@@ -3,32 +3,37 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package ui.ProductionPlannerWorkArea;
+
 import Business.EcoSystem;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+
 /**
  *
  * @author lajon
  */
 public class ProductionPlannerMenuJPanel extends javax.swing.JPanel {
-private static final long serialVersionUID = 1L;
 
- private JPanel userProcessContainer;
- private UserAccount userAccount;
- private Organization organization;
- private EcoSystem business;
+    private static final long serialVersionUID = 1L;
+
+    private JPanel userProcessContainer;
+    private UserAccount userAccount;
+    private Organization organization;
+    private EcoSystem business;
+
     /**
      * Creates new form ProductionPlannerMenuJPanel
      */
- public ProductionPlannerMenuJPanel(JPanel userProcessContainer, UserAccount userAccount, Organization organization, EcoSystem business) {
- initComponents();
- this.userProcessContainer = userProcessContainer;
- this.userAccount = userAccount;
- this.organization = organization;
- this.business = business;
- }
+    public ProductionPlannerMenuJPanel(JPanel userProcessContainer, UserAccount userAccount, Organization organization, EcoSystem business) {
+        initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.userAccount = userAccount;
+        this.organization = organization;
+        this.business = business;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -41,13 +46,14 @@ private static final long serialVersionUID = 1L;
         jLabel1 = new javax.swing.JLabel();
         btnViewProductionQuotes = new javax.swing.JButton();
         btnRequests = new javax.swing.JButton();
+        btnRequests1 = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setText("Production Planner Menu");
 
         btnViewProductionQuotes.setBackground(new java.awt.Color(102, 153, 255));
         btnViewProductionQuotes.setForeground(new java.awt.Color(255, 255, 255));
-        btnViewProductionQuotes.setText("View Quotes");
+        btnViewProductionQuotes.setText("View Approved Quotes");
         btnViewProductionQuotes.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnViewProductionQuotes.setMaximumSize(new java.awt.Dimension(200, 40));
         btnViewProductionQuotes.setMinimumSize(new java.awt.Dimension(20, 23));
@@ -60,7 +66,7 @@ private static final long serialVersionUID = 1L;
 
         btnRequests.setBackground(new java.awt.Color(102, 153, 255));
         btnRequests.setForeground(new java.awt.Color(255, 255, 255));
-        btnRequests.setText("Requests");
+        btnRequests.setText("Make Request to Shipping Coordinator");
         btnRequests.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnRequests.setMaximumSize(new java.awt.Dimension(200, 40));
         btnRequests.setMinimumSize(new java.awt.Dimension(20, 20));
@@ -71,6 +77,19 @@ private static final long serialVersionUID = 1L;
             }
         });
 
+        btnRequests1.setBackground(new java.awt.Color(102, 153, 255));
+        btnRequests1.setForeground(new java.awt.Color(255, 255, 255));
+        btnRequests1.setText("Make Request to Change Production");
+        btnRequests1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnRequests1.setMaximumSize(new java.awt.Dimension(200, 40));
+        btnRequests1.setMinimumSize(new java.awt.Dimension(20, 20));
+        btnRequests1.setPreferredSize(new java.awt.Dimension(240, 25));
+        btnRequests1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRequests1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -78,67 +97,91 @@ private static final long serialVersionUID = 1L;
             .addGroup(layout.createSequentialGroup()
                 .addGap(101, 101, 101)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnViewProductionQuotes, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnViewProductionQuotes, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(75, 75, 75)
-                        .addComponent(btnRequests, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnRequests1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(41, 41, 41)
+                        .addComponent(btnRequests, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(214, Short.MAX_VALUE))
+                .addContainerGap(96, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jLabel1)
-                .addGap(76, 76, 76)
+                .addGap(64, 64, 64)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnViewProductionQuotes, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRequests1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnRequests, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(307, Short.MAX_VALUE))
+                .addGap(31, 31, 31)
+                .addComponent(btnViewProductionQuotes, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(249, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnViewProductionQuotesIdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewProductionQuotesIdentifyResourceAssetsActionPerformed
         // TODO add your handling code here:
-        if (userProcessContainer == null) {
-            return;
-        }
+        ViewApprovedQuotesJPanel viewApprovedQuotesJPanel
+                = new ViewApprovedQuotesJPanel(
+                        userProcessContainer,
+                        userAccount,
+                        organization,
+                        business
+                );
 
-        ProductionPlannerMenuJPanel productionPlannerMenuJPanel  =
-        new ProductionPlannerMenuJPanel(
-            userProcessContainer,
-            userAccount,
-            organization,
-            business
+        userProcessContainer.add(
+                "ViewApprovedQuotesJPanel",
+                viewApprovedQuotesJPanel
         );
 
-        userProcessContainer.add("ProductionPlannerMenuJPanel", productionPlannerMenuJPanel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnViewProductionQuotesIdentifyResourceAssetsActionPerformed
 
     private void btnRequestsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestsActionPerformed
         // TODO add your handling code here:
-        if (userProcessContainer == null) {
-            return;
-        }
+        ProductionPlannerRequestsJPanel productionPlannerRequestsJPanel
+                = new ProductionPlannerRequestsJPanel(
+                        userProcessContainer,
+                        userAccount,
+                        organization,
+                        business
+                );
 
-        ProductionPlannerRequestsJPanel productionPlannerRequestsJPanel=
-        new ProductionPlannerRequestsJPanel(
-            userProcessContainer,
-            userAccount,
-            organization,
-            business
+        userProcessContainer.add(
+                "ProductionPlannerRequestsJPanel",
+                productionPlannerRequestsJPanel
         );
 
-        userProcessContainer.add("ProductionPlannerRequestsJPanel", productionPlannerRequestsJPanel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnRequestsActionPerformed
 
+    private void btnRequests1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequests1ActionPerformed
+        // TODO add your handling code here:
+
+        ProductionPlannerWorkAreaJPanel productionPlannerWorkAreaJPanel
+                = new ProductionPlannerWorkAreaJPanel(
+                        userProcessContainer,
+                        userAccount,
+                        organization,
+                        business
+                );
+
+        userProcessContainer.add(
+                "ProductionPlannerWorkAreaJPanel",
+                productionPlannerWorkAreaJPanel
+        );
+
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnRequests1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRequests;
+    private javax.swing.JButton btnRequests1;
     private javax.swing.JButton btnViewProductionQuotes;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables

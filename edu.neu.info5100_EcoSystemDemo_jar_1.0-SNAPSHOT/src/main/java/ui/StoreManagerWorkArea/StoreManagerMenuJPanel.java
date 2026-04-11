@@ -55,8 +55,8 @@ public class StoreManagerMenuJPanel extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         btnStoreViewInventory = new javax.swing.JButton();
-        btnStoreViewInventory1 = new javax.swing.JButton();
-        btnStoreViewInventory2 = new javax.swing.JButton();
+        btnContactShippingCompany = new javax.swing.JButton();
+        btnConfirmRequestsAssociates = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setText("Store Manager  Menu");
@@ -74,29 +74,29 @@ public class StoreManagerMenuJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnStoreViewInventory1.setBackground(new java.awt.Color(102, 153, 255));
-        btnStoreViewInventory1.setForeground(new java.awt.Color(255, 255, 255));
-        btnStoreViewInventory1.setText("Contact Shipping Company");
-        btnStoreViewInventory1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnStoreViewInventory1.setMaximumSize(new java.awt.Dimension(200, 40));
-        btnStoreViewInventory1.setMinimumSize(new java.awt.Dimension(20, 23));
-        btnStoreViewInventory1.setPreferredSize(new java.awt.Dimension(240, 30));
-        btnStoreViewInventory1.addActionListener(new java.awt.event.ActionListener() {
+        btnContactShippingCompany.setBackground(new java.awt.Color(102, 153, 255));
+        btnContactShippingCompany.setForeground(new java.awt.Color(255, 255, 255));
+        btnContactShippingCompany.setText("Contact Shipping Company");
+        btnContactShippingCompany.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnContactShippingCompany.setMaximumSize(new java.awt.Dimension(200, 40));
+        btnContactShippingCompany.setMinimumSize(new java.awt.Dimension(20, 23));
+        btnContactShippingCompany.setPreferredSize(new java.awt.Dimension(240, 30));
+        btnContactShippingCompany.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnStoreViewInventory1IdentifyResourceAssetsActionPerformed(evt);
+                btnContactShippingCompanyIdentifyResourceAssetsActionPerformed(evt);
             }
         });
 
-        btnStoreViewInventory2.setBackground(new java.awt.Color(102, 153, 255));
-        btnStoreViewInventory2.setForeground(new java.awt.Color(255, 255, 255));
-        btnStoreViewInventory2.setText("Confirm Requests from Associates");
-        btnStoreViewInventory2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnStoreViewInventory2.setMaximumSize(new java.awt.Dimension(200, 40));
-        btnStoreViewInventory2.setMinimumSize(new java.awt.Dimension(20, 23));
-        btnStoreViewInventory2.setPreferredSize(new java.awt.Dimension(240, 30));
-        btnStoreViewInventory2.addActionListener(new java.awt.event.ActionListener() {
+        btnConfirmRequestsAssociates.setBackground(new java.awt.Color(102, 153, 255));
+        btnConfirmRequestsAssociates.setForeground(new java.awt.Color(255, 255, 255));
+        btnConfirmRequestsAssociates.setText("Confirm Requests from Associates");
+        btnConfirmRequestsAssociates.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnConfirmRequestsAssociates.setMaximumSize(new java.awt.Dimension(200, 40));
+        btnConfirmRequestsAssociates.setMinimumSize(new java.awt.Dimension(20, 23));
+        btnConfirmRequestsAssociates.setPreferredSize(new java.awt.Dimension(240, 30));
+        btnConfirmRequestsAssociates.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnStoreViewInventory2IdentifyResourceAssetsActionPerformed(evt);
+                btnConfirmRequestsAssociatesIdentifyResourceAssetsActionPerformed(evt);
             }
         });
 
@@ -110,9 +110,9 @@ public class StoreManagerMenuJPanel extends javax.swing.JPanel {
                         .addGap(101, 101, 101)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnStoreViewInventory1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnContactShippingCompany, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(27, 27, 27)
-                                .addComponent(btnStoreViewInventory2, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnConfirmRequestsAssociates, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(277, 277, 277)
@@ -126,8 +126,8 @@ public class StoreManagerMenuJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnStoreViewInventory1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnStoreViewInventory2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnContactShippingCompany, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnConfirmRequestsAssociates, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(38, 38, 38)
                 .addComponent(btnStoreViewInventory, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(262, Short.MAX_VALUE))
@@ -137,22 +137,68 @@ public class StoreManagerMenuJPanel extends javax.swing.JPanel {
     private void btnStoreViewInventoryIdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStoreViewInventoryIdentifyResourceAssetsActionPerformed
        
         // TODO add your handling code here:
+         if (userProcessContainer == null) {
+            return;
+        }
+
+        StoreManagerInventoryJPanel storeManagerInventoryJPanel =
+            new StoreManagerInventoryJPanel(
+                userProcessContainer,
+                userAccount,
+                organization,
+                business
+            );
+
+        userProcessContainer.add("StoreManagerInventoryJPanel", storeManagerInventoryJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
    
     }//GEN-LAST:event_btnStoreViewInventoryIdentifyResourceAssetsActionPerformed
 
-    private void btnStoreViewInventory1IdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStoreViewInventory1IdentifyResourceAssetsActionPerformed
+    private void btnContactShippingCompanyIdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContactShippingCompanyIdentifyResourceAssetsActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnStoreViewInventory1IdentifyResourceAssetsActionPerformed
+         if (userProcessContainer == null) {
+            return;
+        }
 
-    private void btnStoreViewInventory2IdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStoreViewInventory2IdentifyResourceAssetsActionPerformed
+        ContactShippingWorkAreaJPanel1 contactShippingWorkAreaJPanel1 =
+            new ContactShippingWorkAreaJPanel1(
+                userProcessContainer,
+                userAccount,
+                organization,
+                business
+            );
+
+        userProcessContainer.add("ContactShippingWorkAreaJPanel1", contactShippingWorkAreaJPanel1);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnContactShippingCompanyIdentifyResourceAssetsActionPerformed
+
+    private void btnConfirmRequestsAssociatesIdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmRequestsAssociatesIdentifyResourceAssetsActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnStoreViewInventory2IdentifyResourceAssetsActionPerformed
+          if (userProcessContainer == null) {
+            return;
+        }
+
+        ContactStoreAssociateWorkAreaJPanel contactStoreAssociateWorkAreaJPanel =
+            new ContactStoreAssociateWorkAreaJPanel(
+                userProcessContainer,
+                userAccount,
+                organization,
+                business
+            );
+
+        userProcessContainer.add("ContactStoreAssociateWorkAreaJPanel", contactStoreAssociateWorkAreaJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+        
+    }//GEN-LAST:event_btnConfirmRequestsAssociatesIdentifyResourceAssetsActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnConfirmRequestsAssociates;
+    private javax.swing.JButton btnContactShippingCompany;
     private javax.swing.JButton btnStoreViewInventory;
-    private javax.swing.JButton btnStoreViewInventory1;
-    private javax.swing.JButton btnStoreViewInventory2;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

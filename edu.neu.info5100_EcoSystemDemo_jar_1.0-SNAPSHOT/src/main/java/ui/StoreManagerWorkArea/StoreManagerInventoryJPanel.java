@@ -7,6 +7,10 @@ import ui.StoreAssociateWorkArea.*;
 import ui.RetailDataAnalystWorkArea.*;
 import javax.swing.JPanel;
 import java.awt.CardLayout;
+import Business.EcoSystem;
+import Business.Organization.Organization;
+import Business.UserAccount.UserAccount;
+
 
 /**
  *
@@ -14,15 +18,24 @@ import java.awt.CardLayout;
  */
 public class StoreManagerInventoryJPanel extends javax.swing.JPanel {
 
-    private JPanel userProcessContainer;
+   private JPanel userProcessContainer;
+    private UserAccount userAccount;
+    private Organization organization;
+    private EcoSystem business;
     /**
      * Creates new form RequestDataAnalystInventoryJPanel
      */
-    public StoreManagerInventoryJPanel(JPanel userProcessContainer) {
+    public StoreManagerInventoryJPanel(JPanel userProcessContainer,
+                                       UserAccount account,
+                                       Organization organization,
+                                       EcoSystem business) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
+        this.userAccount = account;
+        this.organization = organization;
+        this.business = business;
     }
-
+      
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

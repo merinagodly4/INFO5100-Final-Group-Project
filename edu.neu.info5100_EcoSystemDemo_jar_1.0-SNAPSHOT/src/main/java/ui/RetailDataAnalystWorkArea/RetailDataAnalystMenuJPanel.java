@@ -70,7 +70,7 @@ public class RetailDataAnalystMenuJPanel extends javax.swing.JPanel {
 
         btnDataViewInventory.setBackground(new java.awt.Color(102, 153, 255));
         btnDataViewInventory.setForeground(new java.awt.Color(255, 255, 255));
-        btnDataViewInventory.setText("View Inventory ");
+        btnDataViewInventory.setText("View Sales Data ");
         btnDataViewInventory.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnDataViewInventory.setMaximumSize(new java.awt.Dimension(200, 40));
         btnDataViewInventory.setMinimumSize(new java.awt.Dimension(20, 23));

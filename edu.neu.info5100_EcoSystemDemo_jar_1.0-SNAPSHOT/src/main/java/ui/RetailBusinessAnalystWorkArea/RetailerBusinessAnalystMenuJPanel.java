@@ -69,7 +69,7 @@ public class RetailerBusinessAnalystMenuJPanel extends javax.swing.JPanel {
 
         btnRetailerBusinessViewInventory1.setBackground(new java.awt.Color(102, 153, 255));
         btnRetailerBusinessViewInventory1.setForeground(new java.awt.Color(255, 255, 255));
-        btnRetailerBusinessViewInventory1.setText("View Stores");
+        btnRetailerBusinessViewInventory1.setText("View Sales Data");
         btnRetailerBusinessViewInventory1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnRetailerBusinessViewInventory1.setMaximumSize(new java.awt.Dimension(200, 40));
         btnRetailerBusinessViewInventory1.setMinimumSize(new java.awt.Dimension(20, 23));

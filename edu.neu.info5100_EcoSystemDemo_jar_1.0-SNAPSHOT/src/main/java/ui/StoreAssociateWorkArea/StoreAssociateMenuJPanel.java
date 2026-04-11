@@ -50,9 +50,10 @@ public class StoreAssociateMenuJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         btnStoreAssociateRequestManager = new javax.swing.JButton();
         btnStoreAssociateViewInventory = new javax.swing.JButton();
+        btnStoreAssociateViewInventory1 = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel1.setText("Retail Marketing Specialist Menu");
+        jLabel1.setText("Store Associate Menu");
 
         btnStoreAssociateRequestManager.setBackground(new java.awt.Color(102, 153, 255));
         btnStoreAssociateRequestManager.setForeground(new java.awt.Color(255, 255, 255));
@@ -80,32 +81,47 @@ public class StoreAssociateMenuJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnStoreAssociateViewInventory1.setBackground(new java.awt.Color(102, 153, 255));
+        btnStoreAssociateViewInventory1.setForeground(new java.awt.Color(255, 255, 255));
+        btnStoreAssociateViewInventory1.setText("Sell Products");
+        btnStoreAssociateViewInventory1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnStoreAssociateViewInventory1.setMaximumSize(new java.awt.Dimension(200, 40));
+        btnStoreAssociateViewInventory1.setMinimumSize(new java.awt.Dimension(20, 23));
+        btnStoreAssociateViewInventory1.setPreferredSize(new java.awt.Dimension(240, 30));
+        btnStoreAssociateViewInventory1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStoreAssociateViewInventory1IdentifyResourceAssetsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(101, 101, 101)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(101, 101, 101)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(86, 86, 86)
-                        .addComponent(btnStoreAssociateViewInventory, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(103, 103, 103)
-                        .addComponent(btnStoreAssociateRequestManager, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(157, Short.MAX_VALUE))
+                    .addComponent(btnStoreAssociateViewInventory1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(btnStoreAssociateViewInventory, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnStoreAssociateRequestManager, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(178, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jLabel1)
-                .addGap(82, 82, 82)
+                .addGap(62, 62, 62)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnStoreAssociateRequestManager, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnStoreAssociateViewInventory, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(296, Short.MAX_VALUE))
+                    .addComponent(btnStoreAssociateViewInventory, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnStoreAssociateRequestManager, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40)
+                .addComponent(btnStoreAssociateViewInventory1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(236, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -152,10 +168,15 @@ if (userProcessContainer == null) {
 
     }//GEN-LAST:event_btnStoreAssociateViewInventoryIdentifyResourceAssetsActionPerformed
 
+    private void btnStoreAssociateViewInventory1IdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStoreAssociateViewInventory1IdentifyResourceAssetsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnStoreAssociateViewInventory1IdentifyResourceAssetsActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnStoreAssociateRequestManager;
     private javax.swing.JButton btnStoreAssociateViewInventory;
+    private javax.swing.JButton btnStoreAssociateViewInventory1;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

@@ -44,7 +44,7 @@ public class RetailDataAnalystInventoryJPanel extends javax.swing.JPanel {
                 {null, null, null}
             },
             new String [] {
-                "Product Name", "Price", "Quantity"
+                "Product Name", "Price", "Quantity Sold"
             }
         ) {
             Class[] types = new Class [] {
@@ -65,7 +65,7 @@ public class RetailDataAnalystInventoryJPanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(workRequestJTable);
 
         jLabel3.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        jLabel3.setText("Store Inventory");
+        jLabel3.setText("Sales Data");
 
         refreshJButton1.setText("Refresh");
         refreshJButton1.addActionListener(new java.awt.event.ActionListener() {

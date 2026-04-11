@@ -52,8 +52,6 @@
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="txtNewQuantity" min="-2" pref="70" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="btnViewOrderItem" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="btnRemoveOrderItem" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -97,14 +95,13 @@
               <Component id="jScrollPane2" linkSize="2" min="-2" pref="110" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnViewOrderItem" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnRemoveOrderItem" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnModifyQuantity" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtNewQuantity" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="btnCheckOut" min="-2" pref="40" max="-2" attributes="0"/>
-              <EmptySpace pref="76" max="32767" attributes="0"/>
+              <EmptySpace pref="75" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -291,14 +288,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnModifyQuantityActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnViewOrderItem">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="View Item"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnViewOrderItemActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnRemoveOrderItem">

@@ -60,7 +60,6 @@ public class SellRetailProductsJPanel extends javax.swing.JPanel {
         tblCart = new javax.swing.JTable();
         txtNewQuantity = new javax.swing.JTextField();
         btnModifyQuantity = new javax.swing.JButton();
-        btnViewOrderItem = new javax.swing.JButton();
         btnRemoveOrderItem = new javax.swing.JButton();
         btnCheckOut = new javax.swing.JButton();
 
@@ -162,13 +161,6 @@ public class SellRetailProductsJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnViewOrderItem.setText("View Item");
-        btnViewOrderItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnViewOrderItemActionPerformed(evt);
-            }
-        });
-
         btnRemoveOrderItem.setText("Remove");
         btnRemoveOrderItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -214,8 +206,6 @@ public class SellRetailProductsJPanel extends javax.swing.JPanel {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(txtNewQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnViewOrderItem)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(btnRemoveOrderItem)))
                     .addComponent(btnCheckOut, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -250,13 +240,12 @@ public class SellRetailProductsJPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnViewOrderItem)
                     .addComponent(btnRemoveOrderItem)
                     .addComponent(btnModifyQuantity)
                     .addComponent(txtNewQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnCheckOut, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jScrollPane1, jScrollPane2});
@@ -333,10 +322,6 @@ public class SellRetailProductsJPanel extends javax.swing.JPanel {
         populateProductTable();
     }//GEN-LAST:event_btnRemoveOrderItemActionPerformed
 
-    private void btnViewOrderItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewOrderItemActionPerformed
-        
-    }//GEN-LAST:event_btnViewOrderItemActionPerformed
-
     private void txtNewQuantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNewQuantityActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNewQuantityActionPerformed
@@ -384,7 +369,6 @@ public class SellRetailProductsJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnModifyQuantity;
     private javax.swing.JButton btnRemoveOrderItem;
     private javax.swing.JButton btnSearchProduct;
-    private javax.swing.JButton btnViewOrderItem;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblItemsInCart;

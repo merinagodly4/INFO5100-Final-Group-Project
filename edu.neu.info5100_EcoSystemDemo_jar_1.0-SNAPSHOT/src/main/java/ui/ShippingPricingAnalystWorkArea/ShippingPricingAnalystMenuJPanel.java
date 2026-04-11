@@ -45,35 +45,35 @@ public class ShippingPricingAnalystMenuJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        btnCreateViewApprovedQuotes = new javax.swing.JButton();
-        btnTotalShippingCost = new javax.swing.JButton();
+        btnApprovedQuotes = new javax.swing.JButton();
+        btnMessagesfromSupplierPA = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setText("Shipping Pricing Analyst Menu");
 
-        btnCreateViewApprovedQuotes.setBackground(new java.awt.Color(102, 153, 255));
-        btnCreateViewApprovedQuotes.setForeground(new java.awt.Color(255, 255, 255));
-        btnCreateViewApprovedQuotes.setText("Create and View Quotes");
-        btnCreateViewApprovedQuotes.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnCreateViewApprovedQuotes.setMaximumSize(new java.awt.Dimension(200, 40));
-        btnCreateViewApprovedQuotes.setMinimumSize(new java.awt.Dimension(20, 23));
-        btnCreateViewApprovedQuotes.setPreferredSize(new java.awt.Dimension(240, 30));
-        btnCreateViewApprovedQuotes.addActionListener(new java.awt.event.ActionListener() {
+        btnApprovedQuotes.setBackground(new java.awt.Color(102, 153, 255));
+        btnApprovedQuotes.setForeground(new java.awt.Color(255, 255, 255));
+        btnApprovedQuotes.setText("Approved Quotes");
+        btnApprovedQuotes.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnApprovedQuotes.setMaximumSize(new java.awt.Dimension(200, 40));
+        btnApprovedQuotes.setMinimumSize(new java.awt.Dimension(20, 23));
+        btnApprovedQuotes.setPreferredSize(new java.awt.Dimension(240, 30));
+        btnApprovedQuotes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCreateViewApprovedQuotesIdentifyResourceAssetsActionPerformed(evt);
+                btnApprovedQuotesIdentifyResourceAssetsActionPerformed(evt);
             }
         });
 
-        btnTotalShippingCost.setBackground(new java.awt.Color(102, 153, 255));
-        btnTotalShippingCost.setForeground(new java.awt.Color(255, 255, 255));
-        btnTotalShippingCost.setText("Total Shipping Cost");
-        btnTotalShippingCost.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnTotalShippingCost.setMaximumSize(new java.awt.Dimension(200, 40));
-        btnTotalShippingCost.setMinimumSize(new java.awt.Dimension(20, 20));
-        btnTotalShippingCost.setPreferredSize(new java.awt.Dimension(240, 25));
-        btnTotalShippingCost.addActionListener(new java.awt.event.ActionListener() {
+        btnMessagesfromSupplierPA.setBackground(new java.awt.Color(102, 153, 255));
+        btnMessagesfromSupplierPA.setForeground(new java.awt.Color(255, 255, 255));
+        btnMessagesfromSupplierPA.setText("Messages from Supplier Pricing Analyst");
+        btnMessagesfromSupplierPA.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnMessagesfromSupplierPA.setMaximumSize(new java.awt.Dimension(200, 40));
+        btnMessagesfromSupplierPA.setMinimumSize(new java.awt.Dimension(20, 20));
+        btnMessagesfromSupplierPA.setPreferredSize(new java.awt.Dimension(240, 25));
+        btnMessagesfromSupplierPA.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTotalShippingCostActionPerformed(evt);
+                btnMessagesfromSupplierPAActionPerformed(evt);
             }
         });
 
@@ -82,14 +82,16 @@ public class ShippingPricingAnalystMenuJPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(101, 101, 101)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnCreateViewApprovedQuotes, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(101, 101, 101)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(56, 56, 56)
+                        .addComponent(btnApprovedQuotes, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(75, 75, 75)
-                        .addComponent(btnTotalShippingCost, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(218, Short.MAX_VALUE))
+                        .addComponent(btnMessagesfromSupplierPA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(142, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -98,20 +100,15 @@ public class ShippingPricingAnalystMenuJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addGap(78, 78, 78)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCreateViewApprovedQuotes, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTotalShippingCost, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnApprovedQuotes, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnMessagesfromSupplierPA, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(313, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCreateViewApprovedQuotesIdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateViewApprovedQuotesIdentifyResourceAssetsActionPerformed
+    private void btnApprovedQuotesIdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApprovedQuotesIdentifyResourceAssetsActionPerformed
         // TODO add your handling code here:
-       
-    }//GEN-LAST:event_btnCreateViewApprovedQuotesIdentifyResourceAssetsActionPerformed
-
-    private void btnTotalShippingCostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTotalShippingCostActionPerformed
-        // TODO add your handling code here:
-        if (userProcessContainer == null) {
+      if (userProcessContainer == null) {
             return;
         }
 
@@ -125,13 +122,32 @@ public class ShippingPricingAnalystMenuJPanel extends javax.swing.JPanel {
 
         userProcessContainer.add("ShippingTotalCostJPanel", shippingTotalCostJPanel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);  
+    }//GEN-LAST:event_btnApprovedQuotesIdentifyResourceAssetsActionPerformed
+
+    private void btnMessagesfromSupplierPAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMessagesfromSupplierPAActionPerformed
+        // TODO add your handling code here:
+        if (userProcessContainer == null) {
+            return;
+        }
+
+        ShippingContactSupplierJPanel shippingContactSupplierJPanel =
+        new ShippingContactSupplierJPanel(
+            userProcessContainer,
+            userAccount,
+            organization,
+            business
+        );
+
+        userProcessContainer.add("ShippingContactSupplierJPanel", shippingContactSupplierJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
-    }//GEN-LAST:event_btnTotalShippingCostActionPerformed
+    }//GEN-LAST:event_btnMessagesfromSupplierPAActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCreateViewApprovedQuotes;
-    private javax.swing.JButton btnTotalShippingCost;
+    private javax.swing.JButton btnApprovedQuotes;
+    private javax.swing.JButton btnMessagesfromSupplierPA;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

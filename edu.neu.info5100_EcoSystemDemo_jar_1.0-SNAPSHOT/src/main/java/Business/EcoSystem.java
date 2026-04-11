@@ -6,9 +6,9 @@
 package Business;
 
 import Business.Network.Network;
-import Business.SellProductsModel.RetailerProductCatalog;
-import Business.SellProductsModel.RetailMasterOrderList;
-import Business.SellProductsModel.WholesaleMasterOrderList;
+import Business.OrderModel.RetailerProductCatalog;
+import Business.OrderModel.RetailMasterOrderList;
+import Business.OrderModel.WholesaleMasterOrderList;
 import Business.Organization.Organization;
 import Business.Role.Role;
 import Business.Role.SystemAdminRole;

@@ -4,11 +4,13 @@ import Business.Employee.Employee;
 import Business.Enterprise.*;
 import Business.Network.Network;
 import Business.OrderModel.Product;
-import Business.OrderModel.ProductCatalog;
+
 import Business.OrderModel.WholesaleOrder;
 import Business.OrderModel.RetailOrder;
+import Business.OrderModel.RetailerProductCatalog;
 import Business.OrderModel.Shipment;
 import Business.OrderModel.ShipmentDirectory;
+import Business.OrderModel.SupplierProductCatalog;
 import Business.Organization.Organization;
 import Business.Organization.ManufacturingOperationsOrganization;
 import Business.Organization.ManufacturingPricingOrganization;
@@ -29,11 +31,11 @@ public class ConfigureASystem {
     public static EcoSystem configure() {
 
         EcoSystem system = EcoSystem.getInstance();
-
+        configureUsers(system);
         // -- Network ----------------------------------------------------------
         Network network = system.createAndAddNetwork();
         network.setName("Boston Network");
-
+        configureUsers(system);
         // -- Enterprises ------------------------------------------------------
         Enterprise supplierEnterprise = network.getEnterpriseDirectory()
                 .createAndAddEnterprise("Nike", Enterprise.EnterpriseType.SUPPLIER);
@@ -52,8 +54,8 @@ public class ConfigureASystem {
                 shippingEnterprise, retailEnterprise);
 
         // -- Product Catalog (owned by supplier) ------------------------------
-        ProductCatalog retailCatalog = configureRetailCatalog();
-        ProductCatalog supplierCatalog = configureSupplierCatalog();
+        RetailerProductCatalog retailCatalog = configureRetailCatalog();
+        SupplierProductCatalog supplierCatalog = configureSupplierCatalog();
 
         // -- Shipments (shipment -> supplier) --------------
         ShipmentDirectory shipmentDirectory = configureShipments(supplierCatalog);
@@ -216,13 +218,14 @@ public class ConfigureASystem {
                 .createEmployee(faker.name().fullName());
         mfgOperationsOrg.getUserAccountDirectory().createUserAccount(
                 "productionplanner", "productionplanner", productionPlannerEmp, new ProductionPlannerRole());
+        
     }
 
     // System admin only — lives at EcoSystem level
     private static void configureUsers(EcoSystem system) {
-        Employee sysAdminEmp = system.getEmployeeDirectory().createEmployee("sysadmin");
+       Employee sysAdminEmp = system.getEmployeeDirectory().createEmployee("sysadmin");
         system.getUserAccountDirectory().createUserAccount(
-                "sysadmin", "sysadmin", sysAdminEmp, new SystemAdminRole());
+                "sysadmin", "sysadmin", sysAdminEmp, new SystemAdminRole()); 
     }
 
     // Shared item data: name, price, supplier qty, retail qty
@@ -237,22 +240,20 @@ public class ConfigureASystem {
         {"Weightlifting Gloves", "19.99", "220", "90"},};
 
     // Supplier catalog — higher quantities (warehouse stock)
-    private static ProductCatalog configureSupplierCatalog() {
-        ProductCatalog catalog = new ProductCatalog();
+    private static SupplierProductCatalog configureSupplierCatalog() {
+        SupplierProductCatalog catalog = new SupplierProductCatalog();
         for (String[] item : PRODUCT_DATA) {
             Product p = catalog.addProduct();
             p.setProdName(item[0]);
             p.setPrice(Double.parseDouble(item[1]));
             p.setAvail(Integer.parseInt(item[2])); // supplier qty (column 2)
         }
-
-
-
+        return catalog;
     }
 
     // Retail catalog — lower quantities (store shelf stock)
-    private static ProductCatalog configureRetailCatalog() {
-        ProductCatalog catalog = new ProductCatalog();
+    private static RetailerProductCatalog configureRetailCatalog() {
+        RetailerProductCatalog catalog = new RetailerProductCatalog();
         for (String[] item : PRODUCT_DATA) {
             Product p = catalog.addProduct();
             p.setProdName(item[0]);
@@ -276,7 +277,7 @@ public class ConfigureASystem {
     }
 
     // Create shipments class (CHANGE TO configureShipments)
-    private static ShipmentDirectory configureShipments(ProductCatalog catalog) {
+    private static ShipmentDirectory configureShipments(SupplierProductCatalog catalog) {
 
         ShipmentDirectory shipmentDirectory = new ShipmentDirectory();
 
@@ -303,7 +304,7 @@ public class ConfigureASystem {
     }
 
     // Documents sales from supplier (Nike) to retailer (Dick's)
-    private static void configureWholesaleOrders(ProductCatalog supplierCatalog) {
+    private static void configureWholesaleOrders(SupplierProductCatalog supplierCatalog) {
 
         String[][] stores = {
             {"1", "Dick's - Boston"},

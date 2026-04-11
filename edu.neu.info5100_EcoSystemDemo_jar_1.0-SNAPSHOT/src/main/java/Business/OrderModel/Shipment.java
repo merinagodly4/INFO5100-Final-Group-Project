@@ -4,7 +4,6 @@
  */
 package Business.OrderModel;
 
-import Business.SellProductsModel.WholesaleOrder;
 import java.util.Date;
 
 /**

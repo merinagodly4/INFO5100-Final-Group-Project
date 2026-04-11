@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Business.SellProductsModel;
+package Business.OrderModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,11 +12,11 @@ import java.util.List;
  *
  * @author archil
  */
-public class RetailerProductCatalog {
+public class SupplierProductCatalog {
 
     private List<Product> productCatalog;
 
-    public RetailerProductCatalog() {
+    public SupplierProductCatalog() {
         productCatalog = new ArrayList<Product>();
     }
 

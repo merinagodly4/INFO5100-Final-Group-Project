@@ -10,13 +10,13 @@ import java.awt.CardLayout;
  *
  * @author lajon
  */
-public class RetailDataAnalystInventoryJPanel extends javax.swing.JPanel {
+public class RetailDataAnalystOrdersJPanel extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
     /**
      * Creates new form RequestDataAnalystInventoryJPanel
      */
-    public RetailDataAnalystInventoryJPanel(JPanel userProcessContainer) {
+    public RetailDataAnalystOrdersJPanel(JPanel userProcessContainer) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
     }

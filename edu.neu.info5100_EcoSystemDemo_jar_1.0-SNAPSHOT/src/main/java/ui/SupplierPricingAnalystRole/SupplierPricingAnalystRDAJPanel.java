@@ -6,12 +6,18 @@ package ui.SupplierPricingAnalystRole;
 
 
 import Business.EcoSystem;
+import Business.OrderModel.Product;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.PriceChangeRequest;
+import Business.WorkQueue.StoreManagerToRetailBARestockRequest;
+import Business.WorkQueue.StoreManagerToStoreARestockRequest;
 import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
 import java.awt.Component;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -38,12 +44,14 @@ public class SupplierPricingAnalystRDAJPanel extends javax.swing.JPanel {
         this.userAccount = account;
         this.organization = organization;
         this.business = business;
+        populateTable();
     }
      public SupplierPricingAnalystRDAJPanel(JPanel userProcessContainer,
                                                  WorkRequest request) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.request = request;
+        populateTable();
     }
     
     /**
@@ -127,7 +135,7 @@ public class SupplierPricingAnalystRDAJPanel extends javax.swing.JPanel {
             }
         });
 
-        assignJButton1.setText("New Message");
+        assignJButton1.setText("Confirm");
         assignJButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 assignJButton1ActionPerformed(evt);
@@ -185,9 +193,43 @@ public class SupplierPricingAnalystRDAJPanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
-
+    
     private void assignJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignJButton1ActionPerformed
-        // TODO add your handling code here:
+    int selectedRow = workRequestJTable1.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a request.");
+            return;
+        }
+
+        DefaultTableModel model = (DefaultTableModel) workRequestJTable1.getModel();
+        PriceChangeRequest request
+                = (PriceChangeRequest) model.getValueAt(selectedRow, 0);
+
+        String verdict = JOptionPane.showInputDialog(
+                this,
+                "Enter Verdict (Approve / Deny):",
+                "Price Decision",
+                JOptionPane.PLAIN_MESSAGE
+        );
+
+        if (verdict == null || verdict.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Verdict cannot be empty.");
+            return;
+        }
+
+        verdict = verdict.trim();
+
+// Set ONLY status
+        request.setStatus(
+                verdict.equalsIgnoreCase("Approve") ? "Approved" : "Denied"
+        );
+
+// do NOT touch message
+        JOptionPane.showMessageDialog(this,
+                "Decision recorded: " + request.getStatus()
+        );
+
+        populateTable();
     }//GEN-LAST:event_assignJButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -198,4 +240,19 @@ public class SupplierPricingAnalystRDAJPanel extends javax.swing.JPanel {
     private javax.swing.JButton refreshJButton;
     private javax.swing.JTable workRequestJTable1;
     // End of variables declaration//GEN-END:variables
+    private void populateTable() {
+        DefaultTableModel model = (DefaultTableModel) workRequestJTable1.getModel();
+        model.setRowCount(0);
+
+        for (WorkRequest wr : organization.getWorkQueue().getWorkRequestList()) {
+            if (wr instanceof PriceChangeRequest) {
+                Object[] row = new Object[4];
+                row[0] = wr;                                 // will call toString() on PriceChangeRequest
+                row[1] = wr.getSender() == null ? null : wr.getSender().getEmployee().getName();
+                row[2] = wr.getReceiver() == null ? null : wr.getReceiver().getEmployee().getName();
+                row[3] = wr.getStatus();
+                model.addRow(row);
+            }
+        }
+    }
 }

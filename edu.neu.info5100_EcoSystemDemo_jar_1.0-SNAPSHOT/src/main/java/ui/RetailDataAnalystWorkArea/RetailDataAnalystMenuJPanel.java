@@ -5,6 +5,7 @@
 package ui.RetailDataAnalystWorkArea;
 
 import Business.EcoSystem;
+import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
@@ -133,10 +134,10 @@ public class RetailDataAnalystMenuJPanel extends javax.swing.JPanel {
           if (userProcessContainer == null) {
         return;
     }
-
+    
     // Go to the panel that lets analyst make manufacturer & pricing requests
-    RetailDataAnalystWorkAreaJPanel panel =
-        new RetailDataAnalystWorkAreaJPanel(
+    RetailDataAnalystFromManufacturer panel =
+        new RetailDataAnalystFromManufacturer(
             userProcessContainer,
             userAccount,
             organization,
@@ -150,8 +151,8 @@ public class RetailDataAnalystMenuJPanel extends javax.swing.JPanel {
 
     private void btnDataViewInventoryIdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDataViewInventoryIdentifyResourceAssetsActionPerformed
         // TODO add your handling code here:
-       RetailDataAnalystInventoryJPanel retailDataAnalystInventoryJPanel
-                = new RetailDataAnalystInventoryJPanel(
+       RetailDataAnalystOrdersJPanel retailDataAnalystInventoryJPanel
+                = new RetailDataAnalystOrdersJPanel(
                         userProcessContainer          
                        // ,userAccount,
                         //organization,
@@ -174,20 +175,26 @@ public class RetailDataAnalystMenuJPanel extends javax.swing.JPanel {
  if (userProcessContainer == null) {
         return;
     }
+    Enterprise targetEnterprise = business.getNetworkList().get(0).getEnterpriseDirectory().getEnterpriseList().stream().filter(e -> e.getName().equals("Nike")).findFirst().orElse(null);
+    for (Organization org : targetEnterprise.getOrganizationDirectory().getOrganizationList()) {
+        System.out.println("Checking org: " + org.getName()); // DEBUG
 
-    RetailDataAnalystWorkAreaJPanel retailDataAnalystWorkAreaJPanel =
-        new RetailDataAnalystWorkAreaJPanel(
+        if (org.getName().equalsIgnoreCase("Supplier Pricing Organization")) {
+            Organization targetOrg = org;
+            RetailDataAnalystPricingRequestJPanel retailDataAnalystPricingRequestJPanel =
+            new RetailDataAnalystPricingRequestJPanel(
             userProcessContainer,
             userAccount,
-            organization,
+            targetOrg,
             business
-        );
+            );
 
-    userProcessContainer.add("RetailDataAnalystWorkAreaJPanel",retailDataAnalystWorkAreaJPanel );
-    CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-    layout.next(userProcessContainer);
+            userProcessContainer.add("RetailDataAnalystPricingRequestJPanel",retailDataAnalystPricingRequestJPanel );
+            CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+            layout.next(userProcessContainer);
 
-        
+            }
+        }
     }//GEN-LAST:event_btnDataRequestPricingActionPerformed
 
 

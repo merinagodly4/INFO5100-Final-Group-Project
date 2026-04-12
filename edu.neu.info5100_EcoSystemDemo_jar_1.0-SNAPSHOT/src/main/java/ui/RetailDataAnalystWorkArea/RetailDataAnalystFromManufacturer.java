@@ -24,7 +24,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author raunak
  */
-public class RetailDataAnalystWorkAreaJPanel extends javax.swing.JPanel {
+public class RetailDataAnalystFromManufacturer extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
     private EcoSystem business;
@@ -33,7 +33,7 @@ public class RetailDataAnalystWorkAreaJPanel extends javax.swing.JPanel {
     /**
      * Creates new form LabAssistantWorkAreaJPanel
      */
-    public RetailDataAnalystWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, EcoSystem business) {
+    public RetailDataAnalystFromManufacturer(JPanel userProcessContainer, UserAccount account, Organization organization, EcoSystem business) {
         initComponents();
         
         this.userProcessContainer = userProcessContainer;

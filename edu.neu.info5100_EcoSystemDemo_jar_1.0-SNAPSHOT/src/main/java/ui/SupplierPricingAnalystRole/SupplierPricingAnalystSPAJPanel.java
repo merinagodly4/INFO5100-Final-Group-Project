@@ -12,7 +12,9 @@ import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JPanel;
-
+import javax.swing.table.DefaultTableModel;
+import Business.WorkQueue.ShippingQuotesRequest;
+import Business.Organization.SupplierPricingOrganization;
 /**
  *
  * @author raunak
@@ -25,20 +27,37 @@ public class SupplierPricingAnalystSPAJPanel extends javax.swing.JPanel {
     private EcoSystem business;
     private WorkRequest request;
     
+ public SupplierPricingAnalystSPAJPanel(JPanel userProcessContainer,
+                                       UserAccount account,
+                                       Organization organization,
+                                       EcoSystem business) {
+    initComponents();
+    this.userProcessContainer = userProcessContainer;
+    this.userAccount = account;
+    this.organization = organization;
+    this.business = business;
+    if (!(organization instanceof SupplierPricingOrganization)) {
+    javax.swing.JOptionPane.showMessageDialog(this,
+        "Error: Panel opened with non-SupplierPricingOrganization: " + organization.getName());
+    return;
+}
+
+  populateTable();
+ }
     /**
      * Creates new form ProcessWorkRequestJPanel
      */
- 
-    public SupplierPricingAnalystSPAJPanel(JPanel userProcessContainer,
-                                                 UserAccount account,
-                                                 Organization organization,
-                                                 EcoSystem business) {
-        initComponents();
-        this.userProcessContainer = userProcessContainer;
-        this.userAccount = account;
-        this.organization = organization;
-        this.business = business;
+    private void populateTable(){
+        DefaultTableModel m = (DefaultTableModel) workRequestJTable1.getModel();
+        m.setRowCount(0);
+        for (WorkRequest wr : organization.getWorkQueue().getWorkRequestList())
+        { if (wr instanceof ShippingQuotesRequest) {
+            m.addRow(new Object[]{ wr, wr.getSender() == null ? null : wr.getSender().getEmployee().getName(), wr.getReceiver() == null ? null : wr.getReceiver().getEmployee().getName(), wr.getStatus() }); 
+        } 
+        }
     }
+
+    
      public SupplierPricingAnalystSPAJPanel(JPanel userProcessContainer,
                                                  WorkRequest request) {
         initComponents();
@@ -175,7 +194,7 @@ public class SupplierPricingAnalystSPAJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void refreshJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButtonActionPerformed
-
+    populateTable();
     }//GEN-LAST:event_refreshJButtonActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -188,6 +207,13 @@ public class SupplierPricingAnalystSPAJPanel extends javax.swing.JPanel {
 
     private void assignJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignJButton1ActionPerformed
         // TODO add your handling code here:
+        int row = workRequestJTable1.getSelectedRow();
+if (row < 0) return;
+WorkRequest wr = (WorkRequest) workRequestJTable1.getValueAt(row, 0);
+if (!(wr instanceof ShippingQuotesRequest)) return;
+wr.setReceiver(userAccount);
+wr.setStatus("Completed"); // or "Processing" then later "Completed"
+populateTable();
     }//GEN-LAST:event_assignJButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

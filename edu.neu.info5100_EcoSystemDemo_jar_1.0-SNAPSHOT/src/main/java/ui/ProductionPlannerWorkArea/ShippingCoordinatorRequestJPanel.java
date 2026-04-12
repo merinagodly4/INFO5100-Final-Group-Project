@@ -5,9 +5,13 @@
 package ui.ProductionPlannerWorkArea;
 
 import Business.EcoSystem;
+import Business.Enterprise.Enterprise;
+import Business.Network.Network;
 import Business.Organization.ManufacturingOperationsOrganization;
 import Business.Organization.Organization;
+import Business.Organization.ShippingFacilityOrganization;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.FinishedGoodsDispatchRequest;
 import Business.WorkQueue.WorkRequest;
 
 import java.awt.CardLayout;
@@ -36,6 +40,20 @@ public class ShippingCoordinatorRequestJPanel extends javax.swing.JPanel {
         this.business = business;
         this.organization = organization;
         this.userAccount = account;
+    }
+ private Organization findShippingOrg() {
+        for (Network net : business.getNetworkList()) {
+            for (Enterprise ent : net.getEnterpriseDirectory().getEnterpriseList()) {
+                if (ent.getEnterpriseType() == Enterprise.EnterpriseType.SHIPPING) {
+                    for (Organization org : ent.getOrganizationDirectory().getOrganizationList()) {
+                        if (org instanceof ShippingFacilityOrganization) {
+                            return org;
+                        }
+                    }
+                }
+            }
+        }
+        return null;
     }
 
     /**
@@ -109,7 +127,31 @@ public class ShippingCoordinatorRequestJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRequestTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestTestActionPerformed
+String message = txtMessage.getText().trim();
+        if(message.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Please enter shipment details.");
+            return;
+        }
 
+        Organization shippingOrg = findShippingOrg();
+        if(shippingOrg == null){
+            JOptionPane.showMessageDialog(this, "No Shipping Organization found in the system.");
+            return;
+        }
+
+        FinishedGoodsDispatchRequest request = new FinishedGoodsDispatchRequest();
+        request.setMessage(message);
+        request.setTestResult(message); 
+        request.setSender(userAccount);
+        request.setStatus("Sent");
+
+        // Add to Shipping Org Queue
+        shippingOrg.getWorkQueue().getWorkRequestList().add(request);
+        // Add to Production Planner's own Queue (optional, keeps a local record)
+        userAccount.getWorkQueue().getWorkRequestList().add(request);
+
+        JOptionPane.showMessageDialog(this, "Shipment request sent to Shipping Coordinator.");
+        txtMessage.setText(""); // clear the text box
 
         
     }//GEN-LAST:event_btnRequestTestActionPerformed

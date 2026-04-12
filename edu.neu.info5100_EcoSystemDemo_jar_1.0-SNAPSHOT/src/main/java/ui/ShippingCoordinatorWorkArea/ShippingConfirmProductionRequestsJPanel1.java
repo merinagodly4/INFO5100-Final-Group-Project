@@ -6,7 +6,10 @@ package ui.ShippingCoordinatorWorkArea;
 import Business.EcoSystem;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.FinishedGoodsDispatchRequest;
+import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -32,7 +35,27 @@ public ShippingConfirmProductionRequestsJPanel1(JPanel userProcessContainer, Use
     this.organization = organization;
     this.business = business;
     initComponents();
+    populateTable();
 }
+
+  private void populateTable() {
+        DefaultTableModel model = (DefaultTableModel) workRequestJTable1.getModel();
+        model.setRowCount(0);
+
+        // Loop through the shipping organization's work queue
+        for (WorkRequest wr : organization.getWorkQueue().getWorkRequestList()) {
+            // Filter only the requests coming from the Production Planner
+            if (wr instanceof FinishedGoodsDispatchRequest) {
+                FinishedGoodsDispatchRequest req = (FinishedGoodsDispatchRequest) wr;
+                Object[] row = new Object[4];
+                row[0] = req; // toString() shows the message
+                row[1] = req.getSender() == null ? null : req.getSender().getEmployee().getName();
+                row[2] = req.getReceiver() == null ? null : req.getReceiver().getEmployee().getName();
+                row[3] = req.getStatus();
+                model.addRow(row);
+            }
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -144,12 +167,31 @@ public ShippingConfirmProductionRequestsJPanel1(JPanel userProcessContainer, Use
     }// </editor-fold>//GEN-END:initComponents
 
     private void assignJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignJButtonActionPerformed
+     int selectedRow = workRequestJTable1.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a request from the table.");
+            return;
+        }
+
+        WorkRequest wr = (WorkRequest) workRequestJTable1.getValueAt(selectedRow, 0);
+        if (!(wr instanceof FinishedGoodsDispatchRequest)) {
+            JOptionPane.showMessageDialog(this, "Invalid request type.");
+            return;
+        }
+
+        // Set receiver to the current user and update status
+        FinishedGoodsDispatchRequest req = (FinishedGoodsDispatchRequest) wr;
+        req.setReceiver(userAccount);
+        req.setStatus("Completed");
+
+        JOptionPane.showMessageDialog(this, "Request confirmed and marked as Completed.");
+        populateTable(); // refresh table to show new status
 
         
     }//GEN-LAST:event_assignJButtonActionPerformed
 
     private void refreshJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButtonActionPerformed
-
+      populateTable();
     }//GEN-LAST:event_refreshJButtonActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed

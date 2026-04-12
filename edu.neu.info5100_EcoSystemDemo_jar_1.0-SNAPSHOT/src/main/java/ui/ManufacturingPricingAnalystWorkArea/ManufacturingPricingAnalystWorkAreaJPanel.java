@@ -10,40 +10,87 @@ import ui.StoreManagerWorkArea.*;
 import ui.SupplierPricingAnalystRole.*;
 import ui.SupplierPricingAnalystRole.*;
 import Business.EcoSystem;
+import Business.Enterprise.Enterprise;
+import Business.Network.Network;
 import Business.Organization.SupplierPricingOrganization;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.ManufacturingQuotesRequest;
 import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
+import Business.EcoSystem;
+import Business.Enterprise.Enterprise;
+import Business.Network.Network;
+import Business.Organization.Organization;
+import Business.Organization.SupplierPricingOrganization;
+import Business.UserAccount.UserAccount;
+import Business.WorkQueue.ManufacturingQuotesRequest;
+import Business.WorkQueue.WorkRequest;
+import java.awt.CardLayout;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author raunak
  */
 public class ManufacturingPricingAnalystWorkAreaJPanel extends javax.swing.JPanel {
 
-    private JPanel userProcessContainer;
-    private EcoSystem business;
-    private UserAccount userAccount;
-    private SupplierPricingOrganization supplierPricingOrganization;
-    
+private JPanel userProcessContainer;
+private EcoSystem business;
+private UserAccount userAccount;
+private Organization organization;
     /**
      * Creates new form LabAssistantWorkAreaJPanel
      */
-    public ManufacturingPricingAnalystWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, EcoSystem business) {
-        initComponents();
-        
-        this.userProcessContainer = userProcessContainer;
-        this.userAccount = account;
-        this.business = business;
-        this.supplierPricingOrganization = (SupplierPricingOrganization) organization;
-        
+public ManufacturingPricingAnalystWorkAreaJPanel(JPanel userProcessContainer,
+                                          UserAccount account,
+                                          Organization organization,
+                                          EcoSystem business) {
+ initComponents();
+ this.userProcessContainer = userProcessContainer;
+ this.userAccount = account;
+ this.organization = organization;   // Manufacturer Analytics
+ this.business = business;
+ populateTable();
+}  
+
+private void populateTable() {
+        // ensure model matches Message, Sender, Status
+        DefaultTableModel m = new DefaultTableModel(new Object[][]{}, new String[]{"Message", "Sender", "Status"}) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        workRequestJTable.setModel(m);
+
+        for (WorkRequest wr : organization.getWorkQueue().getWorkRequestList()) {
+            if (wr instanceof ManufacturingQuotesRequest) {
+                m.addRow(new Object[]{
+                    wr, // toString() (items + total)
+                    wr.getSender() == null ? null : wr.getSender().getEmployee().getName(),
+                    wr.getStatus()
+                });
+            }
+        }
     }
-    
-   
+
+private Organization findSupplierPricingOrg() {
+    for (Network net : business.getNetworkList()) { 
+        for (Enterprise ent : net.getEnterpriseDirectory().getEnterpriseList()) {
+            for (Organization org : ent.getOrganizationDirectory().getOrganizationList()) {
+                if (org instanceof SupplierPricingOrganization) 
+                    return org; 
+            }
+        } 
+    }
+    return null; 
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -57,8 +104,9 @@ public class ManufacturingPricingAnalystWorkAreaJPanel extends javax.swing.JPane
         jScrollPane1 = new javax.swing.JScrollPane();
         workRequestJTable = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
-        refreshJButton1 = new javax.swing.JButton();
         refreshJButton2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        refreshJButton1 = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -118,14 +166,6 @@ public class ManufacturingPricingAnalystWorkAreaJPanel extends javax.swing.JPane
         jLabel3.setText("Items in Production");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, -1, -1));
 
-        refreshJButton1.setText("Refresh");
-        refreshJButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                refreshJButton1ActionPerformed(evt);
-            }
-        });
-        add(refreshJButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 70, -1, -1));
-
         refreshJButton2.setText("<<< Back");
         refreshJButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -133,20 +173,69 @@ public class ManufacturingPricingAnalystWorkAreaJPanel extends javax.swing.JPane
             }
         });
         add(refreshJButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        jButton1.setText("Send Quotes");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 510, -1, -1));
+
+        refreshJButton1.setText("Refresh");
+        refreshJButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshJButton1ActionPerformed(evt);
+            }
+        });
+        add(refreshJButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 70, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void refreshJButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButton2ActionPerformed
+
+    
+    }//GEN-LAST:event_refreshJButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    
+        String msg = JOptionPane.showInputDialog(this,
+     "Enter quote details (multiple items + total price):",
+     "New Manufacturing Quote",
+     JOptionPane.PLAIN_MESSAGE);
+ if (msg == null) return;
+ msg = msg.trim();
+ if (msg.isEmpty()) {
+ JOptionPane.showMessageDialog(this, "Please enter a message.");
+ return;
+ }
+
+ Organization supplierPricingOrg = findSupplierPricingOrg();
+ if (supplierPricingOrg == null) {
+ JOptionPane.showMessageDialog(this, "No Supplier Pricing Organization found.");
+ return;
+ }
+
+ ManufacturingQuotesRequest req = new ManufacturingQuotesRequest();
+ req.setMessage(msg);
+ req.setTestResult(msg);
+ req.setSender(userAccount);
+ req.setStatus("Sent");
+
+ // Send to Supplier Pricing org
+ supplierPricingOrg.getWorkQueue().getWorkRequestList().add(req);
+
+
+  
+ 
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void refreshJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButton1ActionPerformed
         // TODO add your handling code here:
+        populateTable();
     }//GEN-LAST:event_refreshJButton1ActionPerformed
 
-    private void refreshJButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButton2ActionPerformed
-    userProcessContainer.remove(this);
-    CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-    layout.previous(userProcessContainer);
-
-    }//GEN-LAST:event_refreshJButton2ActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton refreshJButton1;

@@ -10,13 +10,20 @@ import ui.StoreManagerWorkArea.*;
 import ui.SupplierPricingAnalystRole.*;
 import ui.SupplierPricingAnalystRole.*;
 import Business.EcoSystem;
+import Business.Enterprise.Enterprise;
+import Business.Network.Network;
 import Business.Organization.ManufacturingOperationsOrganization;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.ManufacturingQuotesRequest;
+import Business.WorkQueue.ProductionMaterialsRequest;
 import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -29,6 +36,7 @@ public class ProductionPlannerWorkAreaJPanel extends javax.swing.JPanel {
     private EcoSystem business;
     private UserAccount userAccount;
     private ManufacturingOperationsOrganization manufacturingOperationsOrganization;
+    private  Organization organization;
 
     /**
      * Creates new form LabAssistantWorkAreaJPanel
@@ -40,9 +48,38 @@ public class ProductionPlannerWorkAreaJPanel extends javax.swing.JPanel {
         this.userAccount = account;
         this.business = business;
         this.manufacturingOperationsOrganization = (ManufacturingOperationsOrganization) organization;
+        this.organization = organization;
 
+        populateTable();
     }
 
+    private void populateTable() {
+    DefaultTableModel m = new DefaultTableModel(new Object[][]{}, new String[] {"Message","Sender","Status"}) {
+        public boolean isCellEditable(int r,int c){ return false; }
+    };
+    workRequestJTable1.setModel(m);
+    for (WorkRequest wr : organization.getWorkQueue().getWorkRequestList()) {
+        if (wr instanceof ProductionMaterialsRequest) {
+            m.addRow(new Object[]{
+                wr,
+                wr.getSender() == null ? null : wr.getSender().getEmployee().getName(),
+                wr.getStatus()
+            });
+        }
+    }
+}
+    
+    private Organization findTargetOrg(Class<?> cls) {
+    if (business == null) return null;
+    for (Network net : business.getNetworkList()) {
+        for (Enterprise ent : net.getEnterpriseDirectory().getEnterpriseList()) {
+            for (Organization org : ent.getOrganizationDirectory().getOrganizationList()) {
+                if (cls.isInstance(org)) return org;
+            }
+        }
+    }
+    return null;
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -145,10 +182,45 @@ public class ProductionPlannerWorkAreaJPanel extends javax.swing.JPanel {
 
     private void refreshJButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButton3ActionPerformed
         // TODO add your handling code here:
+         populateTable();
     }//GEN-LAST:event_refreshJButton3ActionPerformed
 
     private void refreshJButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButton4ActionPerformed
         // TODO add your handling code here:
+        JPanel panel = new JPanel(new java.awt.GridLayout(0,2));
+    panel.add(new JLabel("Action:"));
+    JComboBox cb = new JComboBox<>(new String[] {"RAMP_UP","SLOW_DOWN"});
+    panel.add(cb);
+    panel.add(new JLabel("Material / Item:"));
+    JTextField txtItem = new JTextField();
+    panel.add(txtItem);
+    panel.add(new JLabel("Quantity/Rate:"));
+    JTextField txtQty = new JTextField();
+    panel.add(txtQty);
+
+int res = JOptionPane.showConfirmDialog(this, panel, "Request Production Change", JOptionPane.OK_CANCEL_OPTION);
+if (res != JOptionPane.OK_OPTION) return;
+String action = (String) cb.getSelectedItem();
+String item = txtItem.getText().trim();
+String qty = txtQty.getText().trim();
+if (item.isEmpty() || qty.isEmpty()) {
+    JOptionPane.showMessageDialog(this, "Please enter item and quantity/rate.");
+    return;
+}
+String msg = action + ": " + item + " x " + qty;
+
+ProductionMaterialsRequest req = new ProductionMaterialsRequest();
+req.setMessage(msg);
+req.setTestResult(msg);
+req.setSender(userAccount);
+req.setStatus("Sent");
+
+// send to organization (operations) or to target org:
+organization.getWorkQueue().getWorkRequestList().add(req);
+userAccount.getWorkQueue().getWorkRequestList().add(req);
+
+JOptionPane.showMessageDialog(this, "Request sent.");
+populateTable();
     }//GEN-LAST:event_refreshJButton4ActionPerformed
 
     private void refreshJButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButton2ActionPerformed

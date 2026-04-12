@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import Business.Network.Network;
 import Business.Enterprise.Enterprise.EnterpriseType;
 import Business.OrderModel.RetailerProductCatalog;
+import Business.Organization.RetailAnalyticsOrganization;
 import Business.Organization.ShippingFacilityOrganization;
 
 
@@ -64,6 +65,7 @@ public class StoreManagerMenuJPanel extends javax.swing.JPanel {
         btnStoreViewInventory = new javax.swing.JButton();
         btnContactShippingCompany = new javax.swing.JButton();
         btnConfirmRequestsAssociates = new javax.swing.JButton();
+        btnContactShippingCompany1 = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setText("Store Manager  Menu");
@@ -107,23 +109,35 @@ public class StoreManagerMenuJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnContactShippingCompany1.setBackground(new java.awt.Color(102, 153, 255));
+        btnContactShippingCompany1.setForeground(new java.awt.Color(255, 255, 255));
+        btnContactShippingCompany1.setText("Retail Business Analyst Verdicts");
+        btnContactShippingCompany1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnContactShippingCompany1.setMaximumSize(new java.awt.Dimension(200, 40));
+        btnContactShippingCompany1.setMinimumSize(new java.awt.Dimension(20, 23));
+        btnContactShippingCompany1.setPreferredSize(new java.awt.Dimension(240, 30));
+        btnContactShippingCompany1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnContactShippingCompany1IdentifyResourceAssetsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(101, 101, 101)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(101, 101, 101)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnContactShippingCompany, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
+                            .addComponent(btnStoreViewInventory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnContactShippingCompany, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(27, 27, 27)
-                                .addComponent(btnConfirmRequestsAssociates, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(277, 277, 277)
-                        .addComponent(btnStoreViewInventory, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnContactShippingCompany1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnConfirmRequestsAssociates, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(85, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -135,9 +149,11 @@ public class StoreManagerMenuJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnContactShippingCompany, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnConfirmRequestsAssociates, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
-                .addComponent(btnStoreViewInventory, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(262, Short.MAX_VALUE))
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnContactShippingCompany1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnStoreViewInventory, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(270, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -204,10 +220,41 @@ public class StoreManagerMenuJPanel extends javax.swing.JPanel {
         
     }//GEN-LAST:event_btnConfirmRequestsAssociatesIdentifyResourceAssetsActionPerformed
 
+    private void btnContactShippingCompany1IdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContactShippingCompany1IdentifyResourceAssetsActionPerformed
+        // TODO add your handling code here:
+        RetailAnalyticsOrganization raOrg = null;
+
+    for (Organization org : enterprise.getOrganizationDirectory().getOrganizationList()) {
+        if (org instanceof RetailAnalyticsOrganization) {
+            raOrg = (RetailAnalyticsOrganization) org;
+            break;
+        }
+    }
+
+    if (raOrg == null) {
+        JOptionPane.showMessageDialog(this, "Retail Analytics Organization not found.");
+        return;
+    }
+
+    RetailBAVerdictsJPanel1 panel =
+        new RetailBAVerdictsJPanel1(
+            userProcessContainer,
+            userAccount,
+            raOrg,
+            business,
+            enterprise
+        );
+
+    userProcessContainer.add("RetailBAVerdictsJPanel1", panel);
+    CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+    layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnContactShippingCompany1IdentifyResourceAssetsActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConfirmRequestsAssociates;
     private javax.swing.JButton btnContactShippingCompany;
+    private javax.swing.JButton btnContactShippingCompany1;
     private javax.swing.JButton btnStoreViewInventory;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables

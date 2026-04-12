@@ -169,7 +169,23 @@ if (userProcessContainer == null) {
     }//GEN-LAST:event_btnStoreAssociateViewInventoryIdentifyResourceAssetsActionPerformed
 
     private void btnStoreAssociateViewInventory1IdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStoreAssociateViewInventory1IdentifyResourceAssetsActionPerformed
-        // TODO add your handling code here:
+        System.out.println("=== BUTTON CLICKED ===");
+        if (userProcessContainer == null) {
+        return;
+    }
+
+    // Same work area also shows inventory; you can reuse it
+    SellRetailProductsJPanel sellRetailProductsJPanel =
+        new SellRetailProductsJPanel(
+            userProcessContainer,
+            business
+        );
+
+    userProcessContainer.add("SellRetailProductsJPanel", sellRetailProductsJPanel);
+    CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+    layout.show(userProcessContainer,"SellRetailProductsJPanel");
+   
+
     }//GEN-LAST:event_btnStoreAssociateViewInventory1IdentifyResourceAssetsActionPerformed
 
 

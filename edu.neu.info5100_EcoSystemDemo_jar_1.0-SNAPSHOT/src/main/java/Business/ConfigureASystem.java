@@ -54,10 +54,11 @@ public class ConfigureASystem {
                 shippingEnterprise, retailEnterprise);
 
         // -- Product Catalog (owned by supplier) ------------------------------
-        RetailerProductCatalog retailCatalog = configureRetailCatalog();
-        SupplierProductCatalog supplierCatalog = configureSupplierCatalog();
+        configureRetailCatalog(system.getRetailerProductCatalog());
+        configureSupplierCatalog(system.getSupplierProductCatalog());
 
         // -- Shipments (shipment -> supplier) --------------
+        SupplierProductCatalog supplierCatalog = system.getSupplierProductCatalog();
         ShipmentDirectory shipmentDirectory = configureShipments(supplierCatalog);
 
         // -- Wholesale orders (supplier -> retailer)
@@ -240,20 +241,19 @@ public class ConfigureASystem {
         {"Weightlifting Gloves", "19.99", "220", "90"},};
 
     // Supplier catalog — higher quantities (warehouse stock)
-    private static SupplierProductCatalog configureSupplierCatalog() {
-        SupplierProductCatalog catalog = new SupplierProductCatalog();
+    private static void configureSupplierCatalog(SupplierProductCatalog catalog) {
+        
         for (String[] item : PRODUCT_DATA) {
             Product p = catalog.addProduct();
             p.setProdName(item[0]);
             p.setPrice(Double.parseDouble(item[1]));
             p.setAvail(Integer.parseInt(item[2])); // supplier qty (column 2)
         }
-        return catalog;
     }
 
     // Retail catalog — lower quantities (store shelf stock)
-    private static RetailerProductCatalog configureRetailCatalog() {
-        RetailerProductCatalog catalog = new RetailerProductCatalog();
+    private static void configureRetailCatalog(RetailerProductCatalog catalog) {
+       
         for (String[] item : PRODUCT_DATA) {
             Product p = catalog.addProduct();
             p.setProdName(item[0]);
@@ -272,8 +272,6 @@ public class ConfigureASystem {
                     p.getPrice(),
                     p.getAvail());
         }
-        System.out.println();
-        return catalog;
     }
 
     // Create shipments class (CHANGE TO configureShipments)

@@ -8,6 +8,7 @@ package Business;
 import Business.Network.Network;
 import Business.OrderModel.RetailerProductCatalog;
 import Business.OrderModel.RetailMasterOrderList;
+import Business.OrderModel.SupplierProductCatalog;
 import Business.OrderModel.WholesaleMasterOrderList;
 import Business.Organization.Organization;
 import Business.Role.Role;
@@ -24,7 +25,8 @@ public class EcoSystem extends Organization{
     private ArrayList<Network> networkList;
     WholesaleMasterOrderList wholesaleMasterOrderList;
     RetailMasterOrderList retailMasterOrderList;
-    RetailerProductCatalog productCatalog;
+    RetailerProductCatalog retailerProductCatalog;
+    SupplierProductCatalog supplierProductCatalog;
     
     public static EcoSystem getInstance(){
         if(business==null){
@@ -49,7 +51,8 @@ public class EcoSystem extends Organization{
         networkList=new ArrayList<Network>();
         wholesaleMasterOrderList = new WholesaleMasterOrderList();
         retailMasterOrderList = new RetailMasterOrderList();
-        productCatalog = new RetailerProductCatalog();
+        retailerProductCatalog = new RetailerProductCatalog();
+        supplierProductCatalog = new SupplierProductCatalog();
     }
 
     public ArrayList<Network> getNetworkList() {
@@ -82,8 +85,28 @@ public class EcoSystem extends Organization{
         return retailMasterOrderList;
     }
 
-    public RetailerProductCatalog getProductCatalog() {
-        return productCatalog;
+    public RetailerProductCatalog getRetailerProductCatalog() {
+        return retailerProductCatalog;
+    }
+
+    public SupplierProductCatalog getSupplierProductCatalog() {
+        return supplierProductCatalog;
+    }
+
+    public void setWholesaleMasterOrderList(WholesaleMasterOrderList wholesaleMasterOrderList) {
+        this.wholesaleMasterOrderList = wholesaleMasterOrderList;
+    }
+
+    public void setRetailMasterOrderList(RetailMasterOrderList retailMasterOrderList) {
+        this.retailMasterOrderList = retailMasterOrderList;
+    }
+
+    public void setRetailerProductCatalog(RetailerProductCatalog retailerProductCatalog) {
+        this.retailerProductCatalog = retailerProductCatalog;
+    }
+
+    public void setSupplierProductCatalog(SupplierProductCatalog supplierProductCatalog) {
+        this.supplierProductCatalog = supplierProductCatalog;
     }
     
 }

@@ -150,8 +150,8 @@ public class RetailDataAnalystMenuJPanel extends javax.swing.JPanel {
 
     private void btnDataViewInventoryIdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDataViewInventoryIdentifyResourceAssetsActionPerformed
         // TODO add your handling code here:
-       RetailDataAnalystInventoryJPanel retailDataAnalystInventoryJPanel
-                = new RetailDataAnalystInventoryJPanel(
+       RetailDataAnalystOrdersJPanel retailDataAnalystInventoryJPanel
+                = new RetailDataAnalystOrdersJPanel(
                         userProcessContainer          
                        // ,userAccount,
                         //organization,

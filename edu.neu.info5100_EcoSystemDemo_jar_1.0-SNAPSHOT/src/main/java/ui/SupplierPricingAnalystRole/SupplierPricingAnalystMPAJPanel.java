@@ -148,7 +148,7 @@ public class SupplierPricingAnalystMPAJPanel extends javax.swing.JPanel {
             }
         });
 
-        assignJButton1.setText("New Message");
+        assignJButton1.setText("Confirm/Deny");
         assignJButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 assignJButton1ActionPerformed(evt);

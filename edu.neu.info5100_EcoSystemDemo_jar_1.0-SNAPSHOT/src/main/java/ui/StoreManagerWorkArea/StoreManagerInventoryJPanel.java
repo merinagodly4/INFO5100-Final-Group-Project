@@ -49,8 +49,8 @@ public class StoreManagerInventoryJPanel extends javax.swing.JPanel {
     this.userAccount = account;
     this.organization = organization;   
     this.business = business;
-     this.productCatalog = business.getRetailerProductCatalog();
-     this.enterprise = enterprise; 
+    this.productCatalog = business.getRetailerProductCatalog();
+    this.enterprise = enterprise; 
         
      
         populateProductTable();

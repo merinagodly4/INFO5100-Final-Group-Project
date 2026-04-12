@@ -13,8 +13,10 @@ import Business.Organization.SupplierPricingOrganization;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.ManufacturingQuotesRequest;
+import Business.WorkQueue.PriceChangeRequest;
 import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -39,11 +41,26 @@ public class RetailDataAnalystPricingRequestJPanel extends javax.swing.JPanel {
         this.userAccount = account;
         this.business = business;
         this.supplierPricingOrganization = (SupplierPricingOrganization) organization;
-        
+        populateTable();
        
     }
     
-    
+     private void populateTable() {
+        DefaultTableModel model = (DefaultTableModel) workRequestJTable2.getModel();
+        model.setRowCount(0);
+
+        for (WorkRequest wr : supplierPricingOrganization.getWorkQueue().getWorkRequestList()) {
+            if (wr instanceof PriceChangeRequest) {
+                Object[] row = new Object[4];
+                row[0] = wr;                                 // will call toString() on PriceChangeRequest
+                row[1] = wr.getSender() == null ? null : wr.getSender().getEmployee().getName();
+                row[2] = wr.getReceiver() == null ? null : wr.getReceiver().getEmployee().getName();
+                row[3] = wr.getStatus();
+                model.addRow(row);
+            }
+        }
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -58,7 +75,7 @@ public class RetailDataAnalystPricingRequestJPanel extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         workRequestJTable2 = new javax.swing.JTable();
-        assignJButton3 = new javax.swing.JButton();
+        btnRequestPricingChange = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -126,13 +143,13 @@ public class RetailDataAnalystPricingRequestJPanel extends javax.swing.JPanel {
 
         add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 530, 260));
 
-        assignJButton3.setText("Request Pricing Change ");
-        assignJButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnRequestPricingChange.setText("Request Pricing Change ");
+        btnRequestPricingChange.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                assignJButton3ActionPerformed(evt);
+                btnRequestPricingChangeActionPerformed(evt);
             }
         });
-        add(assignJButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 370, -1, -1));
+        add(btnRequestPricingChange, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 370, -1, -1));
 
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -145,11 +162,44 @@ public class RetailDataAnalystPricingRequestJPanel extends javax.swing.JPanel {
 
     private void refreshJButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButton2ActionPerformed
         // TODO add your handling code here:
+        populateTable();
     }//GEN-LAST:event_refreshJButton2ActionPerformed
 
-    private void assignJButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignJButton3ActionPerformed
+    private void btnRequestPricingChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestPricingChangeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_assignJButton3ActionPerformed
+         // Prompt the analyst for a description of the price change
+        String msg = JOptionPane.showInputDialog(
+                this,
+                "Enter price change request details (e.g., Item + old/new price):",
+                "Price Change Request",
+                JOptionPane.PLAIN_MESSAGE
+        );
+
+        if (msg == null) {
+            // user cancelled
+            return;
+        }
+        msg = msg.trim();
+        if (msg.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter a message.");
+            return;
+        }
+
+        // Create and send the request
+        PriceChangeRequest request = new PriceChangeRequest();
+        request.setMessage(msg);        // base WorkRequest message
+        request.setTestResult(msg);     // reuse your existing field if needed
+        request.setSender(userAccount);
+        request.setStatus("Sent");
+
+        // Add to Supplier Pricing org queue and (optionally) to sender's queue
+        supplierPricingOrganization.getWorkQueue().getWorkRequestList().add(request);
+        userAccount.getWorkQueue().getWorkRequestList().add(request);
+
+        JOptionPane.showMessageDialog(this, "Price change request sent to Supplier Pricing Analyst.");
+        populateTable();
+
+    }//GEN-LAST:event_btnRequestPricingChangeActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
 
@@ -160,8 +210,8 @@ public class RetailDataAnalystPricingRequestJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnBackActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton assignJButton3;
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnRequestPricingChange;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JButton refreshJButton2;

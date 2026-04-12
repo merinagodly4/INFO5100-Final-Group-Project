@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import Business.Network.Network;
 import Business.Enterprise.Enterprise.EnterpriseType;
+import Business.OrderModel.RetailerProductCatalog;
 import Business.Organization.ShippingFacilityOrganization;
 
 
@@ -27,6 +28,7 @@ public class StoreManagerMenuJPanel extends javax.swing.JPanel {
     private UserAccount userAccount;
     private Organization organization;
     private Enterprise enterprise;
+    RetailerProductCatalog productCatalog;
     /**
      * Creates new form StoreManagerMenuJPanel
      */

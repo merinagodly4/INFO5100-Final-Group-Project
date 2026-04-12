@@ -42,19 +42,8 @@ public class ShippingCoordinatorWorkAreaJPanel extends javax.swing.JPanel {
     }
     
     public void populateTable(){
-        DefaultTableModel model = (DefaultTableModel)workRequestJTable.getModel();
         
-        model.setRowCount(0);
         
-        for(WorkRequest request : shippingFacilityOrganization.getWorkQueue().getWorkRequestList()){
-            Object[] row = new Object[4];
-            row[0] = request;
-            row[1] = request.getSender().getEmployee().getName();
-            row[2] = request.getReceiver() == null ? null : request.getReceiver().getEmployee().getName();
-            row[3] = request.getStatus();
-            
-            model.addRow(row);
-        }
     }
 
     /**

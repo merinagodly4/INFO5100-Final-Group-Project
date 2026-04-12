@@ -22,7 +22,7 @@ public class ShippingCoordinatorRole extends /*
 Role {
       @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business) {
-        return new ShippingCoordinatorMenuJPanel(userProcessContainer, account, organization, business);
+        return new ShippingCoordinatorMenuJPanel(userProcessContainer, account, organization, business, enterprise);
     }
 }
  

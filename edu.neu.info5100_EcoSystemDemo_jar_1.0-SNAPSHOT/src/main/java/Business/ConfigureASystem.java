@@ -85,10 +85,14 @@ public class ConfigureASystem {
                 .createEmployee(faker.name().fullName());
         supplierPricingOrg.getUserAccountDirectory().createUserAccount(
                 "supplierpa", "supplierpa", supplierPricingEmp, new SupplierPricingAnalyst());
+        
+         Organization retailDataAnalyticsOrg = supplier.getOrganizationDirectory()
+                .createOrganization(Organization.Type.RetailDataAnalytics);
+        retailDataAnalyticsOrg.setName("Retail Data Analytics Organization");
 
-        Employee supplierDataAnalystEmp = supplierPricingOrg.getEmployeeDirectory()
+        Employee supplierDataAnalystEmp = retailDataAnalyticsOrg.getEmployeeDirectory()
                 .createEmployee(faker.name().fullName());
-        supplierPricingOrg.getUserAccountDirectory().createUserAccount(
+        retailDataAnalyticsOrg.getUserAccountDirectory().createUserAccount(
                 "supplierda", "supplierda", supplierDataAnalystEmp, new SupplierDataAnalystRole());
 
         // 2. Supplier Marketing Organization

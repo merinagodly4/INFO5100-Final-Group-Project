@@ -11,8 +11,10 @@ import Business.Organization.Organization;
 import Business.Organization.RetailStoreOrganization;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.ManufacturingQuotesRequest;
+import Business.WorkQueue.StoreManagerToStoreARestockRequest;
 import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -37,11 +39,28 @@ public class StoreAssociateWorkAreaJPanel extends javax.swing.JPanel {
         this.userAccount = account;
         this.business = business;
         this.retailStoreOrganization = (RetailStoreOrganization) organization;
-        
+        populateTasksTable();
       
     }
     
-   
+    private void populateTasksTable() {
+        DefaultTableModel model = (DefaultTableModel) workRequestJTable1.getModel(); // table that will show tasks
+        model.setRowCount(0);
+
+        for (WorkRequest wr : retailStoreOrganization.getWorkQueue().getWorkRequestList()) {
+            if (wr instanceof StoreManagerToStoreARestockRequest) {
+                StoreManagerToStoreARestockRequest req = (StoreManagerToStoreARestockRequest) wr;
+
+                // Optionally filter: only show tasks not completed, or assigned to this associate, etc.
+                Object[] row = new Object[4];
+                row[0] = req; // toString() = task description
+                row[1] = req.getSender() == null ? null : req.getSender().getEmployee().getName();
+                row[2] = req.getReceiver() == null ? null : req.getReceiver().getEmployee().getName();
+                row[3] = req.getStatus();
+                model.addRow(row);
+            }
+        }
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -57,6 +76,7 @@ public class StoreAssociateWorkAreaJPanel extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         workRequestJTable1 = new javax.swing.JTable();
         btnBack = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -129,6 +149,14 @@ public class StoreAssociateWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
         add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+
+        jButton1.setText("Mark Complete");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 470, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void refreshJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButtonActionPerformed
@@ -143,8 +171,32 @@ public class StoreAssociateWorkAreaJPanel extends javax.swing.JPanel {
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+         int selectedRow = workRequestJTable1.getSelectedRow();
+    if (selectedRow < 0) {
+        JOptionPane.showMessageDialog(this, "Please select a task.");
+        return;
+    }
+
+    WorkRequest wr = (WorkRequest) workRequestJTable1.getValueAt(selectedRow, 0);
+    if (!(wr instanceof StoreManagerToStoreARestockRequest)) {
+        JOptionPane.showMessageDialog(this, "Invalid task type.");
+        return;
+    }
+
+    StoreManagerToStoreARestockRequest req = (StoreManagerToStoreARestockRequest) wr;
+    req.setReceiver(userAccount);      // this associate
+    req.setStatus("Completed");
+
+    JOptionPane.showMessageDialog(this, "Task marked as completed.");
+    populateTasksTable();
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton refreshJButton;

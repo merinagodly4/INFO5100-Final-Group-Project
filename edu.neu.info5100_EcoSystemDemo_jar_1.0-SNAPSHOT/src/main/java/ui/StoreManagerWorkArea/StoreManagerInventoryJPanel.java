@@ -11,6 +11,7 @@ import Business.EcoSystem;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.StoreManagerToRetailBARestockRequest;
+import Business.WorkQueue.WorkRequest;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -35,15 +36,14 @@ public class StoreManagerInventoryJPanel extends javax.swing.JPanel {
      * Creates new form RequestDataAnalystInventoryJPanel
      */
     public StoreManagerInventoryJPanel(JPanel userProcessContainer,
-                                       UserAccount account,
-                                       Organization organization,
-                                       EcoSystem business) {
-        initComponents();
-        this.userProcessContainer = userProcessContainer;
-        this.userAccount = account;
-        this.organization = organization;
-        this.business = business;
-        
+                                   UserAccount account,
+                                   Organization organization,
+                                   EcoSystem business) {
+    initComponents();
+    this.userProcessContainer = userProcessContainer;
+    this.userAccount = account;
+    this.organization = organization;   
+    this.business = business;
         
         // TEMP sample inventory data
         inventoryData.add(new Object[]{"Nike Shoes", 2000.0, 10});
@@ -53,15 +53,13 @@ public class StoreManagerInventoryJPanel extends javax.swing.JPanel {
         populateTable();
     }
     
-      private void populateTable() {
-        DefaultTableModel model = (DefaultTableModel) workRequestJTable.getModel();
-        model.setRowCount(0);
-
-        for (Object[] row : inventoryData) {
-            model.addRow(row);
-        }
+     private void populateTable() {
+    DefaultTableModel model = (DefaultTableModel) workRequestJTable1.getModel();
+    model.setRowCount(0);
+    for (Object[] row : inventoryData) {
+        model.addRow(row); // [productName, price, quantity]
     }
-
+}
       
     /**
      * This method is called from within the constructor to initialize the form.
@@ -73,13 +71,13 @@ public class StoreManagerInventoryJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        workRequestJTable = new javax.swing.JTable();
+        workRequestJTable1 = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         refreshJButton1 = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         btnStoreRequestRestock = new javax.swing.JButton();
 
-        workRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
+        workRequestJTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -105,7 +103,7 @@ public class StoreManagerInventoryJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(workRequestJTable);
+        jScrollPane1.setViewportView(workRequestJTable1);
 
         jLabel3.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jLabel3.setText("Store Inventory");
@@ -143,11 +141,13 @@ public class StoreManagerInventoryJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(45, 45, 45)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnStoreRequestRestock)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addGap(415, 415, 415)
-                                .addComponent(refreshJButton1))))
+                                .addComponent(refreshJButton1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnStoreRequestRestock)
+                                .addGap(24, 24, 24))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 610, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -187,13 +187,13 @@ public class StoreManagerInventoryJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     // Store Manager → Retail Business Analyst: Restock Request
 
-        int selectedRow = workRequestJTable.getSelectedRow();
+        int selectedRow = workRequestJTable1.getSelectedRow();
         if (selectedRow < 0) {
             JOptionPane.showMessageDialog(this, "Please select an item in the inventory table.");
             return;
         }
 
-        DefaultTableModel model = (DefaultTableModel) workRequestJTable.getModel();
+        DefaultTableModel model = (DefaultTableModel) workRequestJTable1.getModel();
         String itemName = (String) model.getValueAt(selectedRow, 0);
 
         String qtyStr = JOptionPane.showInputDialog(
@@ -246,6 +246,6 @@ public class StoreManagerInventoryJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton refreshJButton1;
-    private javax.swing.JTable workRequestJTable;
+    private javax.swing.JTable workRequestJTable1;
     // End of variables declaration//GEN-END:variables
 }

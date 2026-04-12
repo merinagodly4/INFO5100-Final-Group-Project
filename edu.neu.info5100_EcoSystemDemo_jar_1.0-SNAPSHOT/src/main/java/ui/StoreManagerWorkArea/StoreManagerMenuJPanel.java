@@ -6,8 +6,6 @@ package ui.StoreManagerWorkArea;
 
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
-import Business.Enterprise.Enterprise.EnterpriseType;
-import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.Organization.ShippingFacilityOrganization;
 import Business.UserAccount.UserAccount;
@@ -31,6 +29,7 @@ public class StoreManagerMenuJPanel extends javax.swing.JPanel {
      * Creates new form StoreManagerMenuJPanel
      */
     
+   
 
     // Real constructor used from Role.createWorkArea(...)
     public StoreManagerMenuJPanel(JPanel userProcessContainer,
@@ -161,28 +160,14 @@ public class StoreManagerMenuJPanel extends javax.swing.JPanel {
 
     private void btnContactShippingCompanyIdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContactShippingCompanyIdentifyResourceAssetsActionPerformed
         // TODO add your handling code here:
-  if (userProcessContainer == null) {
-        return;
-    }
-
+    // find the ShippingFacilityOrganization
     Organization shippingOrg = null;
-
-    // Find ShippingFacilityOrganization in the SHIPPING enterprise anywhere in the system
-    for (Network net : business.getNetworkList()) {
-        for (Enterprise ent : net.getEnterpriseDirectory().getEnterpriseList()) {
-            if (ent.getEnterpriseType() == EnterpriseType.SHIPPING) {
-                for (Organization org : ent.getOrganizationDirectory().getOrganizationList()) {
-                    if (org instanceof ShippingFacilityOrganization) {
-                        shippingOrg = org;
-                        break;
-                    }
-                }
-            }
-            if (shippingOrg != null) break;
+    for (Organization org : /* shippingEnterprise */ enterprise.getOrganizationDirectory().getOrganizationList()) {
+        if (org instanceof ShippingFacilityOrganization) {
+            shippingOrg = org;
+            break;
         }
-        if (shippingOrg != null) break;
     }
-
     if (shippingOrg == null) {
         JOptionPane.showMessageDialog(this, "No shipping organization found.");
         return;
@@ -193,7 +178,6 @@ public class StoreManagerMenuJPanel extends javax.swing.JPanel {
     userProcessContainer.add("ContactShippingWorkAreaJPanel1", panel);
     CardLayout layout = (CardLayout) userProcessContainer.getLayout();
     layout.next(userProcessContainer);
-
     }//GEN-LAST:event_btnContactShippingCompanyIdentifyResourceAssetsActionPerformed
 
     private void btnConfirmRequestsAssociatesIdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmRequestsAssociatesIdentifyResourceAssetsActionPerformed

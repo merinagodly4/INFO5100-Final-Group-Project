@@ -85,10 +85,10 @@ public class ConfigureASystem {
         supplierPricingOrg.getUserAccountDirectory().createUserAccount(
                 "supplierpa", "supplierpa", supplierPricingEmp, new SupplierPricingAnalyst());
 
-        Employee retailDataAnalystEmp = supplierPricingOrg.getEmployeeDirectory()
+        Employee supplierDataAnalystEmp = supplierPricingOrg.getEmployeeDirectory()
                 .createEmployee(faker.name().fullName());
         supplierPricingOrg.getUserAccountDirectory().createUserAccount(
-                "retaildataanalyst", "retaildataanalyst", retailDataAnalystEmp, new RetailDataAnalystRole());
+                "supplierda", "supplierda", supplierDataAnalystEmp, new SupplierDataAnalystRole());
 
         // 2. Supplier Marketing Organization
         //    -> Retail Marketing Specialist

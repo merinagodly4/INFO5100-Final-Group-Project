@@ -14,7 +14,7 @@ import ui.RetailDataAnalystWorkArea.RetailDataAnalystWorkAreaJPanel;
  *
  * @author hannahchiou
  */
-public class RetailDataAnalystRole extends Role {
+public class SupplierDataAnalystRole extends Role {
      @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business) {
         return new RetailDataAnalystWorkAreaJPanel(userProcessContainer, account, organization, business);

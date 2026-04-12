@@ -8,6 +8,7 @@ import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+import ui.StoreAssociateWorkArea.SellRetailProductsJPanel;
 
 
 /**
@@ -55,6 +56,7 @@ public class SupplierPricingAnalystMenuJPanel extends javax.swing.JPanel {
         btnMessageRetailDA = new javax.swing.JButton();
         btnMessageManufacturingPA = new javax.swing.JButton();
         btnMessageShippingPA = new javax.swing.JButton();
+        btnSellProducts = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setText("Supplier Pricing Analyst Menu");
@@ -111,6 +113,19 @@ public class SupplierPricingAnalystMenuJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnSellProducts.setBackground(new java.awt.Color(102, 153, 255));
+        btnSellProducts.setForeground(new java.awt.Color(255, 255, 255));
+        btnSellProducts.setText("Order Processing");
+        btnSellProducts.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnSellProducts.setMaximumSize(new java.awt.Dimension(200, 40));
+        btnSellProducts.setMinimumSize(new java.awt.Dimension(20, 23));
+        btnSellProducts.setPreferredSize(new java.awt.Dimension(240, 30));
+        btnSellProducts.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSellProductsIdentifyResourceAssetsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -124,7 +139,8 @@ public class SupplierPricingAnalystMenuJPanel extends javax.swing.JPanel {
                         .addGap(31, 31, 31)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnMessageManufacturingPA, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnViewInventory, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnViewInventory, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSellProducts, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnMessageRetailDA, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -144,7 +160,9 @@ public class SupplierPricingAnalystMenuJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnMessageManufacturingPA, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnMessageShippingPA, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(271, Short.MAX_VALUE))
+                .addGap(40, 40, 40)
+                .addComponent(btnSellProducts, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(191, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -226,11 +244,31 @@ public class SupplierPricingAnalystMenuJPanel extends javax.swing.JPanel {
         layout.next(userProcessContainer);     
     }//GEN-LAST:event_btnMessageShippingPAActionPerformed
 
+    private void btnSellProductsIdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSellProductsIdentifyResourceAssetsActionPerformed
+        if (userProcessContainer == null) {
+        return;
+        }
+
+    // Same work area also shows inventory; you can reuse it
+        SellSupplierProductsJPanel sellSupplierProductsJPanel =
+        new SellSupplierProductsJPanel(
+            userProcessContainer,
+            business
+        );
+
+    userProcessContainer.add("SellSupplierProductsJPanel", sellSupplierProductsJPanel);
+    CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+    layout.show(userProcessContainer,"SellSupplierProductsJPanel");
+   
+
+    }//GEN-LAST:event_btnSellProductsIdentifyResourceAssetsActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMessageManufacturingPA;
     private javax.swing.JButton btnMessageRetailDA;
     private javax.swing.JButton btnMessageShippingPA;
+    private javax.swing.JButton btnSellProducts;
     private javax.swing.JButton btnViewInventory;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables

@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package ui.RetailBusinessAnalystWorkArea;
+import ui.SupplierPricingAnalystRole.SellSupplierProductsJPanel;
 import Business.EcoSystem;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
@@ -49,7 +50,7 @@ public class RetailerBusinessAnalystMenuJPanel extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         btnRetailerBusinessViewInventory = new javax.swing.JButton();
-        btnRetailerBusinessViewInventory1 = new javax.swing.JButton();
+        btnRetailerBusinessViewInventory2 = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setText("Retailer Business Analyst Menu");
@@ -67,16 +68,16 @@ public class RetailerBusinessAnalystMenuJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnRetailerBusinessViewInventory1.setBackground(new java.awt.Color(102, 153, 255));
-        btnRetailerBusinessViewInventory1.setForeground(new java.awt.Color(255, 255, 255));
-        btnRetailerBusinessViewInventory1.setText("View Sales Data");
-        btnRetailerBusinessViewInventory1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnRetailerBusinessViewInventory1.setMaximumSize(new java.awt.Dimension(200, 40));
-        btnRetailerBusinessViewInventory1.setMinimumSize(new java.awt.Dimension(20, 23));
-        btnRetailerBusinessViewInventory1.setPreferredSize(new java.awt.Dimension(240, 30));
-        btnRetailerBusinessViewInventory1.addActionListener(new java.awt.event.ActionListener() {
+        btnRetailerBusinessViewInventory2.setBackground(new java.awt.Color(102, 153, 255));
+        btnRetailerBusinessViewInventory2.setForeground(new java.awt.Color(255, 255, 255));
+        btnRetailerBusinessViewInventory2.setText("View Sales Data");
+        btnRetailerBusinessViewInventory2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnRetailerBusinessViewInventory2.setMaximumSize(new java.awt.Dimension(200, 40));
+        btnRetailerBusinessViewInventory2.setMinimumSize(new java.awt.Dimension(20, 23));
+        btnRetailerBusinessViewInventory2.setPreferredSize(new java.awt.Dimension(240, 30));
+        btnRetailerBusinessViewInventory2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRetailerBusinessViewInventory1IdentifyResourceAssetsActionPerformed(evt);
+                btnRetailerBusinessViewInventory2IdentifyResourceAssetsActionPerformed(evt);
             }
         });
 
@@ -87,11 +88,12 @@ public class RetailerBusinessAnalystMenuJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(101, 101, 101)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnRetailerBusinessViewInventory1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(79, 79, 79)
-                        .addComponent(btnRetailerBusinessViewInventory, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(8, 8, 8)
+                        .addComponent(btnRetailerBusinessViewInventory2, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(71, 71, 71)
+                        .addComponent(btnRetailerBusinessViewInventory, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(146, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -102,7 +104,7 @@ public class RetailerBusinessAnalystMenuJPanel extends javax.swing.JPanel {
                 .addGap(75, 75, 75)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRetailerBusinessViewInventory, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRetailerBusinessViewInventory1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnRetailerBusinessViewInventory2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(316, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -127,29 +129,14 @@ public class RetailerBusinessAnalystMenuJPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnRetailerBusinessViewInventoryIdentifyResourceAssetsActionPerformed
 
-    private void btnRetailerBusinessViewInventory1IdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetailerBusinessViewInventory1IdentifyResourceAssetsActionPerformed
+    private void btnRetailerBusinessViewInventory2IdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetailerBusinessViewInventory2IdentifyResourceAssetsActionPerformed
         // TODO add your handling code here:
-        StoreLocationsJPanel storeLocationsWorkAreaJPanel
-                = new StoreLocationsJPanel(
-                        userProcessContainer,
-                        userAccount,
-                        organization,
-                        business
-                );
-
-        userProcessContainer.add(
-                "StoreLocationsJPanel",
-                storeLocationsWorkAreaJPanel
-        );
-
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
-    }//GEN-LAST:event_btnRetailerBusinessViewInventory1IdentifyResourceAssetsActionPerformed
+    }//GEN-LAST:event_btnRetailerBusinessViewInventory2IdentifyResourceAssetsActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRetailerBusinessViewInventory;
-    private javax.swing.JButton btnRetailerBusinessViewInventory1;
+    private javax.swing.JButton btnRetailerBusinessViewInventory2;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

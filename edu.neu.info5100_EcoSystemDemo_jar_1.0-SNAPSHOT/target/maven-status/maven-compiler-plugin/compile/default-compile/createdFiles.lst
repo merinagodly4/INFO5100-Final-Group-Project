@@ -19,6 +19,7 @@ ui\SupplierPricingAnalystRole\SupplierPricingAnalystInventoryJPanel$3.class
 ui\AdministrativeRole\ManageUserAccountJPanel$3.class
 ui\RetailBusinessAnalystWorkArea\RetailerBusinessAnalystMenuJPanel$1.class
 ui\ShippingPricingAnalystWorkArea\ShippingContactSupplierJPanel.class
+ui\RetailBusinessAnalystWorkArea\SellSupplierProductsJPanel$1.class
 Business\Enterprise\ManufacturerEnterprise.class
 ui\RetailDataAnalystWorkArea\RetailDataAnalystWorkAreaJPanel$4.class
 ui\StoreAssociateWorkArea\StoreAssociateWorkAreaJPanel$2.class
@@ -69,6 +70,7 @@ ui\SupplierPricingAnalystRole\SupplierPricingAnalystRDAJPanel$4.class
 ui\SystemAdminWorkArea\ManageEnterpriseJPanel$2.class
 ui\ManufacturingPricingAnalystWorkArea\ManufacturingPricingAnalystMenuJPanel$2.class
 Business\Organization\OrganizationDirectory$1.class
+ui\RetailBusinessAnalystWorkArea\SellSupplierProductsJPanel$5.class
 ui\RetailBusinessAnalystWorkArea\StoreLocationsJPanel$2.class
 Business\Enterprise\EnterpriseDirectory.class
 ui\AdministrativeRole\AdminWorkAreaJPanel.class
@@ -94,6 +96,7 @@ ui\RetailBusinessAnalystWorkArea\RetailBusinessAnalystWorkAreaJPanel.class
 ui\SystemAdminWorkArea\SystemAdminWorkAreaJPanel$4.class
 Business\WorkQueue\WorkRequest.class
 ui\StoreManagerWorkArea\StoreManagerMenuJPanel.class
+ui\RetailBusinessAnalystWorkArea\SellSupplierProductsJPanel$7.class
 ui\RetailBusinessAnalystWorkArea\RetailBusinessAnalystWorkAreaJPanel$4.class
 Business\OrderModel\RetailerProductCatalog.class
 ui\SystemAdminWorkArea\ManageEnterpriseAdminJPanel.class
@@ -117,6 +120,7 @@ ui\StoreAssociateWorkArea\StoreAssociateMenuJPanel$2.class
 ui\ProductionPlannerWorkArea\ProductionPlannerMenuJPanel$3.class
 ui\StoreAssociateWorkArea\SellRetailProductsJPanel$6.class
 ui\SystemAdminWorkArea\ManageEnterpriseAdminJPanel$4.class
+ui\RetailBusinessAnalystWorkArea\SellSupplierProductsJPanel$6.class
 ui\AdministrativeRole\ManageEmployeeJPanel$1.class
 Business\Organization\OrganizationDirectory.class
 Business\Role\ProductionPlannerRole.class
@@ -126,6 +130,7 @@ Business\Role\Role$RoleType.class
 Business\Enterprise\RetailEnterprise.class
 Business\Role\SupplierPricingAnalyst.class
 ui\RetailBusinessAnalystWorkArea\StoreLocationsJPanel$3.class
+ui\RetailBusinessAnalystWorkArea\SellSupplierProductsJPanel.class
 ui\SupplierPricingAnalystRole\SupplierPricingAnalystInventoryJPanel.class
 ui\ShippingCoordinatorWorkArea\ShippingConfirmProductionRequestsJPanel1$3.class
 ui\ManufacturingPricingAnalystWorkArea\ManufacturingPricingAnalystSendQuotesJPanel$2.class
@@ -134,6 +139,7 @@ Business\WorkQueue\RestockRequest.class
 ui\SupplierPricingAnalystRole\SupplierPricingAnalystMenuJPanel$2.class
 ui\SystemAdminWorkArea\ManageNetworkJPanel$3.class
 ui\StoreAssociateWorkArea\StoreAssociateInventoryJPanel$1.class
+ui\RetailBusinessAnalystWorkArea\SellSupplierProductsJPanel$9.class
 ui\RetailDataAnalystWorkArea\RetailDataAnalystPricingRequestJPanel$2.class
 Business\Employee\EmployeeDirectory.class
 ui\StoreManagerWorkArea\StoreManagerMenuJPanel$2.class
@@ -155,6 +161,7 @@ ui\ProductionPlannerWorkArea\ViewApprovedQuotesJPanel$1.class
 ui\StoreAssociateWorkArea\SellRetailProductsJPanel$8.class
 ui\RetailBusinessAnalystWorkArea\StoreLocationsJPanel$1.class
 ui\SystemAdminWorkArea\ManageEnterpriseAdminJPanel$2.class
+ui\RetailBusinessAnalystWorkArea\SellSupplierProductsJPanel$4.class
 Business\Organization\SupplierMarketingOrganization.class
 ui\ProductionPlannerWorkArea\ProductionPlannerRequestsJPanel$3.class
 ui\StoreAssociateWorkArea\StoreAssociateMenuJPanel$1.class
@@ -172,11 +179,13 @@ Business\WorkQueue\ShipmentsRequest.class
 ui\ProductionPlannerWorkArea\ViewApprovedQuotesJPanel$2.class
 Business\Organization\AdminOrganization.class
 ui\ProductionPlannerWorkArea\ShippingCoordinatorRequestJPanel$2.class
+ui\RetailBusinessAnalystWorkArea\SellSupplierProductsJPanel$3.class
 Business\WorkQueue\MarketingOverstockedRequest.class
 ui\ProductionPlannerWorkArea\ProductionPlannerWorkAreaJPanel$3.class
 Business\WorkQueue\ProductionMaterialsRequest.class
 Business\EcoSystem.class
 ui\ShippingCoordinatorWorkArea\ShippingCoordinatorWorkAreaJPanel$2.class
+ui\RetailBusinessAnalystWorkArea\SellSupplierProductsJPanel$8.class
 ui\RetailDataAnalystWorkArea\RetailDataAnalystMenuJPanel$2.class
 ui\ShippingPricingAnalystWorkArea\ShippingPricingAnalystMenuJPanel$1.class
 ui\ProductionPlannerWorkArea\ProductionPlannerRequestsJPanel.class
@@ -202,6 +211,7 @@ ui\StoreAssociateWorkArea\SellRetailProductsJPanel$3.class
 ui\SupplierPricingAnalystRole\SupplierPricingAnalystSPAJPanel$4.class
 Business\OrderModel\OrderItem.class
 ui\ProductionPlannerWorkArea\ProductionPlannerRequestsJPanel$5.class
+ui\RetailBusinessAnalystWorkArea\SellSupplierProductsJPanel$2.class
 Business\Organization\SupplierPricingOrganization.class
 ui\AdministrativeRole\ManageUserAccountJPanel$4.class
 ui\RetailDataAnalystWorkArea\RetailDataAnalystMenuJPanel$3.class
@@ -247,6 +257,7 @@ ui\AdministrativeRole\AdminWorkAreaJPanel$2.class
 ui\ManufacturingPricingAnalystWorkArea\ManufacturingPricingAnalystWorkAreaJPanel.class
 Business\Role\ShippingPricingAnalystRole.class
 Business\Role\StoreManagerRole.class
+ui\RetailBusinessAnalystWorkArea\RetailerBusinessAnalystMenuJPanel$3.class
 ui\ShippingPricingAnalystWorkArea\ShippingApprovedQuotesJPanel$1.class
 ui\SupplierPricingAnalystRole\SupplierPricingAnalystSPAJPanel$1.class
 ui\ManufacturingPricingAnalystWorkArea\ManufacturingPricingAnalystSendQuotesJPanel$3.class

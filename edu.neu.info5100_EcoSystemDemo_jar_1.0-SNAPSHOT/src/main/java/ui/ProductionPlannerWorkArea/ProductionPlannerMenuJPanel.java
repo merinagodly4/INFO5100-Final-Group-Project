@@ -5,6 +5,7 @@
 package ui.ProductionPlannerWorkArea;
 
 import Business.EcoSystem;
+import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
@@ -22,16 +23,18 @@ public class ProductionPlannerMenuJPanel extends javax.swing.JPanel {
     private UserAccount userAccount;
     private Organization organization;
     private EcoSystem business;
+    private Enterprise enterprise;
 
     /**
      * Creates new form ProductionPlannerMenuJPanel
      */
-    public ProductionPlannerMenuJPanel(JPanel userProcessContainer, UserAccount userAccount, Organization organization, EcoSystem business) {
+    public ProductionPlannerMenuJPanel(JPanel userProcessContainer, UserAccount userAccount, Organization organization, EcoSystem business, Enterprise enterprise) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.userAccount = userAccount;
         this.organization = organization;
         this.business = business;
+        this.enterprise = enterprise;
     }
 
     /**
@@ -163,17 +166,17 @@ public class ProductionPlannerMenuJPanel extends javax.swing.JPanel {
 
     private void btnMessagesShippingCoordinatorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMessagesShippingCoordinatorActionPerformed
         // TODO add your handling code here:
-        ProductionPlannerRequestsJPanel productionPlannerRequestsJPanel
-                = new ProductionPlannerRequestsJPanel(
+        FromSCtoPPJPanel fromSCtoPPJPanel
+                = new FromSCtoPPJPanel(
                         userProcessContainer,
                         userAccount,
-                        organization,
-                        business
+                        null,
+                        business, enterprise
                 );
 
         userProcessContainer.add(
-                "ProductionPlannerRequestsJPanel",
-                productionPlannerRequestsJPanel
+                "FromSCtoPPJPanel",
+                fromSCtoPPJPanel
         );
 
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();

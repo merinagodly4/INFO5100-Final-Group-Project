@@ -2,11 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package ui.ShippingCoordinatorWorkArea;
+package ui.ProductionPlannerWorkArea;
 
+import ui.ShippingCoordinatorWorkArea.*;
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
+import Business.Organization.ShippingFacilityOrganization;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.FinishedGoodsDispatchRequest;
 import Business.WorkQueue.WorkRequest;
@@ -19,51 +21,58 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author lajon
  */
-public class ShippingConfirmProductionRequestsJPanel1 extends javax.swing.JPanel {
+public class FromSCtoPPJPanel extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
     private UserAccount userAccount;
     private Organization organization;
     private EcoSystem business;
+    private ShippingFacilityOrganization shippingFacilityOrganization;
     private Enterprise enterprise;
 
     /**
      * Creates new form ShippingConfirmRequestsJPanel
      */
-    public ShippingConfirmProductionRequestsJPanel1() {
+    public FromSCtoPPJPanel() {
         initComponents();
     }
 
-    public ShippingConfirmProductionRequestsJPanel1(JPanel userProcessContainer, UserAccount userAccount, Organization organization, EcoSystem business, Enterprise enterprise) {
+    public FromSCtoPPJPanel(JPanel userProcessContainer, UserAccount userAccount, Organization organization, EcoSystem business, Enterprise enterprise) {
         this.userProcessContainer = userProcessContainer;
         this.userAccount = userAccount;
         this.organization = organization;
         this.business = business;
         this.enterprise = enterprise;
+        this.shippingFacilityOrganization = (ShippingFacilityOrganization) organization;
         initComponents();
         populateTable();
     }
 
-    private void populateTable() {
-        DefaultTableModel model = (DefaultTableModel) workRequestJTable1.getModel();
+private void populateTable() {
+
+     Enterprise targetEnterprise = business.getNetworkList().get(0).getEnterpriseDirectory().getEnterpriseList().stream().filter(e -> e.getName().equals("USPS")).findFirst().orElse(null);
+    for (Organization org : targetEnterprise.getOrganizationDirectory().getOrganizationList()) {
+        System.out.println("Checking org: " + org.getName()); // DEBUG
+ 
+        if (org.getName().equalsIgnoreCase("East Shipping Facility")) {
+            Organization targetOrg = org;   
+    
+    
+    DefaultTableModel model = (DefaultTableModel) workRequestJTable1.getModel();
         model.setRowCount(0);
 
-        for (WorkRequest wr : organization.getWorkQueue().getWorkRequestList()) {
+        for (WorkRequest wr : targetOrg.getWorkQueue().getWorkRequestList()) {
 
-            if (wr instanceof FinishedGoodsDispatchRequest) {
+            Object[] row = new Object[2];
 
-                FinishedGoodsDispatchRequest req = (FinishedGoodsDispatchRequest) wr;
+            row[0] = wr;
+            row[1] = wr.getStatus();
 
-                Object[] row = new Object[2];
-
-                row[0] = req;
-                row[1] = req.getStatus();
-
-                model.addRow(row);
-            }
+            model.addRow(row);
         }
     }
-
+    }
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -73,19 +82,12 @@ public class ShippingConfirmProductionRequestsJPanel1 extends javax.swing.JPanel
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        assignJButton = new javax.swing.JButton();
         refreshJButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         workRequestJTable1 = new javax.swing.JTable();
         btnBack = new javax.swing.JButton();
-
-        assignJButton.setText("Confirm Production Planner Requests");
-        assignJButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                assignJButtonActionPerformed(evt);
-            }
-        });
+        refreshJButton5 = new javax.swing.JButton();
 
         refreshJButton.setText("Refresh");
         refreshJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -95,7 +97,7 @@ public class ShippingConfirmProductionRequestsJPanel1 extends javax.swing.JPanel
         });
 
         jLabel2.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        jLabel2.setText("Messages from Production Planner ");
+        jLabel2.setText("Messages: Shipment Coordinator ");
 
         workRequestJTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -132,20 +134,28 @@ public class ShippingConfirmProductionRequestsJPanel1 extends javax.swing.JPanel
             }
         });
 
+        refreshJButton5.setText("Make Request");
+        refreshJButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshJButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(54, 54, 54)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2)
-                    .addComponent(assignJButton)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(282, 282, 282)
-                        .addComponent(refreshJButton)))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(refreshJButton5)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jScrollPane2)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addGap(282, 282, 282)
+                            .addComponent(refreshJButton))))
+                .addContainerGap(31, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(26, 26, 26)
@@ -155,15 +165,18 @@ public class ShippingConfirmProductionRequestsJPanel1 extends javax.swing.JPanel
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(refreshJButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(54, 54, 54)
+                        .addComponent(refreshJButton))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2)))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(assignJButton)
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addComponent(refreshJButton5)
+                .addContainerGap(51, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(20, 20, 20)
@@ -171,46 +184,6 @@ public class ShippingConfirmProductionRequestsJPanel1 extends javax.swing.JPanel
                     .addContainerGap(434, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void assignJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignJButtonActionPerformed
-
-            int selectedRow = workRequestJTable1.getSelectedRow();
-
-    if (selectedRow < 0) {
-        JOptionPane.showMessageDialog(this, "Please select a request.");
-        return;
-    }
-
-    WorkRequest wr = (WorkRequest) workRequestJTable1.getValueAt(selectedRow, 0);
-
-    if (!(wr instanceof FinishedGoodsDispatchRequest)) {
-        JOptionPane.showMessageDialog(this, "Invalid request type.");
-        return;
-    }
-
-    FinishedGoodsDispatchRequest req = (FinishedGoodsDispatchRequest) wr;
-
-    // update
-    req.setReceiver(userAccount);
-    req.setStatus("Confirmed");
-
-    Organization targetOrg = null;
-
-    for (Organization org : enterprise.getOrganizationDirectory().getOrganizationList()) {
-        if (org.getName().equals("Manufacturing Operations Organization")) {
-            targetOrg = org;
-            break;
-        }
-    }
-
-    // move request
-    if (targetOrg != null) {
-        targetOrg.getWorkQueue().getWorkRequestList().add(req);
-        organization.getWorkQueue().getWorkRequestList().remove(req);
-    }
-
-    populateTable();
-    }//GEN-LAST:event_assignJButtonActionPerformed
 
     private void refreshJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButtonActionPerformed
         populateTable();
@@ -224,13 +197,29 @@ public class ShippingConfirmProductionRequestsJPanel1 extends javax.swing.JPanel
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void refreshJButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButton5ActionPerformed
+        // TODO add your handling code here:
+        ShippingCoordinatorRequestJPanel panel
+                = new ShippingCoordinatorRequestJPanel(
+                        userProcessContainer,
+                        organization,
+                        userAccount,
+                        business
+                );
+
+        userProcessContainer.add("ShippingCoordinatorRequestJPanel", panel);
+
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.show(userProcessContainer, "ShippingCoordinatorRequestJPanel");
+    }//GEN-LAST:event_refreshJButton5ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton assignJButton;
     private javax.swing.JButton btnBack;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton refreshJButton;
+    private javax.swing.JButton refreshJButton5;
     private javax.swing.JTable workRequestJTable1;
     // End of variables declaration//GEN-END:variables
 }

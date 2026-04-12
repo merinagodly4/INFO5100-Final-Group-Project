@@ -22,7 +22,7 @@ public class ProductionPlannerRole extends Role {
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business) {
-        return new ProductionPlannerMenuJPanel(userProcessContainer, account, organization, business);
+        return new ProductionPlannerMenuJPanel(userProcessContainer, account, organization, business, enterprise);
     }
     
 }

@@ -239,7 +239,7 @@ public class StoreManagerInventoryJPanel extends javax.swing.JPanel {
     Organization targetOrg = null;
 
     for (Organization org : enterprise.getOrganizationDirectory().getOrganizationList()) {
-        System.out.println("Checking org: " + org.getName()); // DEBUG
+        System.out.println("Checking org: " + org.getName());
 
         if (org.getName().equalsIgnoreCase("Retail Analytics Organization")) {
             targetOrg = org;

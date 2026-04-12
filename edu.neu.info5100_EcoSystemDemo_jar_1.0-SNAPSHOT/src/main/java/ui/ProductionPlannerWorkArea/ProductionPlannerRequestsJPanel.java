@@ -40,6 +40,7 @@ public class ProductionPlannerRequestsJPanel extends javax.swing.JPanel {
         this.business = business;
         initComponents();
         populateTable();
+        
     }
 
     /**

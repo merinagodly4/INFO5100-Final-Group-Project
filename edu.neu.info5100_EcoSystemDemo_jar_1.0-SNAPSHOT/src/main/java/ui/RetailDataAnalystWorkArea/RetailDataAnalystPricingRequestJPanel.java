@@ -89,7 +89,7 @@ public class RetailDataAnalystPricingRequestJPanel extends javax.swing.JPanel {
         add(refreshJButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 50, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        jLabel4.setText("Messages from Pricing Analyst");
+        jLabel4.setText("Messages for Pricing Analyst");
         add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, -1, -1));
 
         workRequestJTable2.setModel(new javax.swing.table.DefaultTableModel(

@@ -44,12 +44,14 @@ public class SupplierPricingAnalystRDAJPanel extends javax.swing.JPanel {
         this.userAccount = account;
         this.organization = organization;
         this.business = business;
+        populateTable();
     }
      public SupplierPricingAnalystRDAJPanel(JPanel userProcessContainer,
                                                  WorkRequest request) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.request = request;
+        populateTable();
     }
     
     /**

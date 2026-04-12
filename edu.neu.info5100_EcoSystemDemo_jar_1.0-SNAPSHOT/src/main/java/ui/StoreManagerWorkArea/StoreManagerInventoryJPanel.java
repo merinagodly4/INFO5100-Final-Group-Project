@@ -10,6 +10,11 @@ import java.awt.CardLayout;
 import Business.EcoSystem;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.StoreManagerToRetailBARestockRequest;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 
 /**
@@ -22,6 +27,10 @@ public class StoreManagerInventoryJPanel extends javax.swing.JPanel {
     private UserAccount userAccount;
     private Organization organization;
     private EcoSystem business;
+    
+     // Simple in-panel inventory: [productName, price, quantity]
+    private List<Object[]> inventoryData = new ArrayList<>();
+
     /**
      * Creates new form RequestDataAnalystInventoryJPanel
      */
@@ -34,7 +43,25 @@ public class StoreManagerInventoryJPanel extends javax.swing.JPanel {
         this.userAccount = account;
         this.organization = organization;
         this.business = business;
+        
+        
+        // TEMP sample inventory data
+        inventoryData.add(new Object[]{"Nike Shoes", 2000.0, 10});
+        inventoryData.add(new Object[]{"Running Shorts", 800.0, 25});
+        inventoryData.add(new Object[]{"Sports Socks", 200.0, 50});
+
+        populateTable();
     }
+    
+      private void populateTable() {
+        DefaultTableModel model = (DefaultTableModel) workRequestJTable.getModel();
+        model.setRowCount(0);
+
+        for (Object[] row : inventoryData) {
+            model.addRow(row);
+        }
+    }
+
       
     /**
      * This method is called from within the constructor to initialize the form.
@@ -50,7 +77,7 @@ public class StoreManagerInventoryJPanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         refreshJButton1 = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
-        assignJButton1 = new javax.swing.JButton();
+        btnStoreRequestRestock = new javax.swing.JButton();
 
         workRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -97,10 +124,10 @@ public class StoreManagerInventoryJPanel extends javax.swing.JPanel {
             }
         });
 
-        assignJButton1.setText("Request Restock");
-        assignJButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnStoreRequestRestock.setText("Request Restock");
+        btnStoreRequestRestock.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                assignJButton1ActionPerformed(evt);
+                btnStoreRequestRestockActionPerformed(evt);
             }
         });
 
@@ -116,13 +143,14 @@ public class StoreManagerInventoryJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(45, 45, 45)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(assignJButton1)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel3)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(refreshJButton1))
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 610, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(btnStoreRequestRestock)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(415, 415, 415)
+                                .addComponent(refreshJButton1))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 610, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(51, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -134,16 +162,17 @@ public class StoreManagerInventoryJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(refreshJButton1))
-                .addGap(18, 18, 18)
+                .addGap(30, 30, 30)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(assignJButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnStoreRequestRestock)
                 .addContainerGap(43, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void refreshJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButton1ActionPerformed
         // TODO add your handling code here:
+        populateTable();
     }//GEN-LAST:event_refreshJButton1ActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -154,14 +183,66 @@ public class StoreManagerInventoryJPanel extends javax.swing.JPanel {
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
-    private void assignJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignJButton1ActionPerformed
+    private void btnStoreRequestRestockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStoreRequestRestockActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_assignJButton1ActionPerformed
+    // Store Manager → Retail Business Analyst: Restock Request
+
+        int selectedRow = workRequestJTable.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(this, "Please select an item in the inventory table.");
+            return;
+        }
+
+        DefaultTableModel model = (DefaultTableModel) workRequestJTable.getModel();
+        String itemName = (String) model.getValueAt(selectedRow, 0);
+
+        String qtyStr = JOptionPane.showInputDialog(
+                this,
+                "Enter quantity to request for item: " + itemName,
+                "Request Restock",
+                JOptionPane.PLAIN_MESSAGE
+        );
+        if (qtyStr == null) {
+            return; // cancelled
+        }
+        qtyStr = qtyStr.trim();
+        if (qtyStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter a quantity.");
+            return;
+        }
+
+        int quantity;
+        try {
+            quantity = Integer.parseInt(qtyStr);
+            if (quantity <= 0) {
+                JOptionPane.showMessageDialog(this, "Quantity must be positive.");
+                return;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Please enter a valid integer quantity.");
+            return;
+        }
+
+        String msg = "Request restock of " + itemName + " x " + quantity;
+
+        StoreManagerToRetailBARestockRequest request = new StoreManagerToRetailBARestockRequest();
+        request.setMessage(msg);        // base WorkRequest message
+        request.setTestResult(msg);     // your own field
+        request.setSender(userAccount);
+        request.setStatus("Sent");
+
+        // Target org: 'organization' should be the Retail BA org when creating this panel
+        organization.getWorkQueue().getWorkRequestList().add(request);
+        userAccount.getWorkQueue().getWorkRequestList().add(request);
+
+        JOptionPane.showMessageDialog(this, "Restock request sent to Retail Business Analyst.");
+ 
+    }//GEN-LAST:event_btnStoreRequestRestockActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton assignJButton1;
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnStoreRequestRestock;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton refreshJButton1;

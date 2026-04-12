@@ -43,24 +43,21 @@ public class StoreAssociateWorkAreaJPanel extends javax.swing.JPanel {
       
     }
     
-    private void populateTasksTable() {
-        DefaultTableModel model = (DefaultTableModel) workRequestJTable1.getModel(); // table that will show tasks
-        model.setRowCount(0);
-
-        for (WorkRequest wr : retailStoreOrganization.getWorkQueue().getWorkRequestList()) {
-            if (wr instanceof StoreManagerToStoreARestockRequest) {
-                StoreManagerToStoreARestockRequest req = (StoreManagerToStoreARestockRequest) wr;
-
-                // Optionally filter: only show tasks not completed, or assigned to this associate, etc.
-                Object[] row = new Object[4];
-                row[0] = req; // toString() = task description
-                row[1] = req.getSender() == null ? null : req.getSender().getEmployee().getName();
-                row[2] = req.getReceiver() == null ? null : req.getReceiver().getEmployee().getName();
-                row[3] = req.getStatus();
-                model.addRow(row);
-            }
+ private void populateTasksTable() {
+    DefaultTableModel model = (DefaultTableModel) workRequestJTable1.getModel();
+    model.setRowCount(0);
+    for (WorkRequest wr : retailStoreOrganization.getWorkQueue().getWorkRequestList()) {
+        if (wr instanceof StoreManagerToStoreARestockRequest) {
+            StoreManagerToStoreARestockRequest req = (StoreManagerToStoreARestockRequest) wr;
+            Object[] row = new Object[4];
+            row[0] = req; // toString() = task description
+            row[1] = req.getSender() == null ? null : req.getSender().getEmployee().getName();
+            row[2] = req.getReceiver() == null ? null : req.getReceiver().getEmployee().getName();
+            row[3] = req.getStatus();
+            model.addRow(row);
         }
     }
+}
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -160,7 +157,7 @@ public class StoreAssociateWorkAreaJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void refreshJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButtonActionPerformed
-
+    populateTasksTable();
     }//GEN-LAST:event_refreshJButtonActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed

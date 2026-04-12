@@ -9,7 +9,7 @@ import Business.UserAccount.UserAccount;
 import ui.RetailDataAnalystWorkArea.*;
 import javax.swing.JPanel;
 import java.awt.CardLayout;
-
+ import Business.WorkQueue.StoreAssociateToStoreMRestockRequest;
 /**
  *
  * @author lajon
@@ -17,18 +17,23 @@ import java.awt.CardLayout;
 public class StoreAssociateInventoryJPanel extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
+    private EcoSystem business;
+    private UserAccount userAccount;
+    private Business.Organization.RetailStoreOrganization retailStoreOrganization;
     /**
      * Creates new form RequestDataAnalystInventoryJPanel
      */
+  
     public StoreAssociateInventoryJPanel(JPanel userProcessContainer,
-                                          UserAccount account,
-                                          Organization organization,
-                                          EcoSystem business) {
-        initComponents();
-        this.userProcessContainer = userProcessContainer;
-        
+                                 UserAccount account,
+                                 Organization organization,
+                                 EcoSystem business) {
+    initComponents();
+    this.userProcessContainer = userProcessContainer;
+    this.userAccount = account;
+    this.retailStoreOrganization = (Business.Organization.RetailStoreOrganization) organization;
+     this.business = business;
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -149,6 +154,32 @@ public class StoreAssociateInventoryJPanel extends javax.swing.JPanel {
 
     private void assignJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignJButton1ActionPerformed
         // TODO add your handling code here:
+         int row = workRequestJTable.getSelectedRow();
+    String item;
+    if (row >= 0) {
+        item = String.valueOf(workRequestJTable.getValueAt(row, 0));
+    } else {
+        // fallback: prompt for item
+        item = javax.swing.JOptionPane.showInputDialog(this, "Item name/ID:");
+        if (item == null || item.trim().isEmpty()) return;
+    }
+    String qty = javax.swing.JOptionPane.showInputDialog(this, "Quantity for " + item + ":");
+if (qty == null || qty.trim().isEmpty()) return;
+
+String msg = "Restock request: " + item.trim() + " x " + qty.trim();
+
+StoreAssociateToStoreMRestockRequest req = new StoreAssociateToStoreMRestockRequest();
+req.setMessage(msg);
+req.setTestResult(msg);
+req.setSender(userAccount);
+req.setStatus("Sent");
+
+// Target = same RetailStoreOrganization the manager reads
+retailStoreOrganization.getWorkQueue().getWorkRequestList().add(req);
+userAccount.getWorkQueue().getWorkRequestList().add(req);
+
+javax.swing.JOptionPane.showMessageDialog(this, "Request sent to Store Manager.");
+
     }//GEN-LAST:event_assignJButton1ActionPerformed
 
 

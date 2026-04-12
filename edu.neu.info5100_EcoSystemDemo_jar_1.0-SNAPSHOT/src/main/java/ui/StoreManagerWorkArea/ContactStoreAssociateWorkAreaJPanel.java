@@ -209,6 +209,19 @@ public class ContactStoreAssociateWorkAreaJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Please enter an item name or ID.");
             return;
         }
+        
+        StoreManagerToStoreARestockRequest req = new StoreManagerToStoreARestockRequest();
+req.setMessage(taskType + " " + item);
+req.setTestResult(taskType + " " + item);
+req.setSender(userAccount);
+req.setStatus("Sent");
+
+// Same RetailStoreOrganization the associate panel reads
+retailStoreOrganization.getWorkQueue().getWorkRequestList().add(req);
+userAccount.getWorkQueue().getWorkRequestList().add(req);
+
+JOptionPane.showMessageDialog(this, "Task sent to store associates.");
+populateTable();
     }//GEN-LAST:event_assignJButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -3,27 +3,29 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Business.WorkQueue;
+
 import Business.UserAccount.UserAccount;
+
 /**
  *
  * @author lajon
  */
-public class ProductionMaterialsRequest extends WorkRequest {
-  private String productionMaterials;
+public class StoreAssociateToStoreMRestockRequest extends WorkRequest {
+  private String restockItemsToStoreManager;
     private boolean approval = false;
     private UserAccount approvedBy;
     
     
 
     public String getTestResult() {
-        return productionMaterials;
+        return restockItemsToStoreManager;
     }
 
-    public void setTestResult(String productionMaterials) {
-        this.productionMaterials = productionMaterials;
-    } 
+    public void setTestResult(String restockItemsToStoreManager) {
+        this.restockItemsToStoreManager = restockItemsToStoreManager;
+    }     
     
-    public boolean isApproval() {
+     public boolean isApproval() {
         return approval;
     }
 
@@ -41,6 +43,6 @@ public class ProductionMaterialsRequest extends WorkRequest {
 
     @Override
     public String toString() {
-        return productionMaterials;
+        return restockItemsToStoreManager;
     }
 }

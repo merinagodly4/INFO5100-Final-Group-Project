@@ -26,5 +26,24 @@ public class ManufacturingQuotesRequest extends WorkRequest{
         this.manufacturingQuote = manufacturingQuote;
     }
     
-    
+      public boolean isApproval() {
+        return approval;
+    }
+
+    public void setApproval(boolean approval) {
+        this.approval = approval;
+    }
+
+    public UserAccount getApprovedBy() {
+        return approvedBy;
+    }
+
+    public void setApprovedBy(UserAccount approvedBy) {
+        this.approvedBy = approvedBy;
+    }
+
+    @Override
+    public String toString() {
+        return manufacturingQuote;
+    }
 }

@@ -8,7 +8,7 @@ import Business.UserAccount.UserAccount;
  *
  * @author lajon
  */
-public class ItemsRequest {
+public class ItemsRequest extends WorkRequest {
   private String needItems;
     private boolean approval = false;
     private UserAccount approvedBy;
@@ -21,5 +21,26 @@ public class ItemsRequest {
 
     public void setTestResult(String needItems) {
         this.needItems = needItems;
-    }     
+    }  
+    
+      public boolean isApproval() {
+        return approval;
+    }
+
+    public void setApproval(boolean approval) {
+        this.approval = approval;
+    }
+
+    public UserAccount getApprovedBy() {
+        return approvedBy;
+    }
+
+    public void setApprovedBy(UserAccount approvedBy) {
+        this.approvedBy = approvedBy;
+    }
+
+    @Override
+    public String toString() {
+        return needItems;
+    }
 }

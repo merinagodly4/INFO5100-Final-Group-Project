@@ -8,7 +8,7 @@ import Business.UserAccount.UserAccount;
  *
  * @author lajon
  */
-public class ShipmentsRequest {
+public class ShipmentsRequest extends WorkRequest  {
   private String trackShipments;
     private boolean approval = false;
     private UserAccount approvedBy;
@@ -21,5 +21,26 @@ public class ShipmentsRequest {
 
     public void setTestResult(String trackShipments) {
         this.trackShipments = trackShipments;
-    }           
+    } 
+    
+     public boolean isApproval() {
+        return approval;
+    }
+
+    public void setApproval(boolean approval) {
+        this.approval = approval;
+    }
+
+    public UserAccount getApprovedBy() {
+        return approvedBy;
+    }
+
+    public void setApprovedBy(UserAccount approvedBy) {
+        this.approvedBy = approvedBy;
+    }
+
+    @Override
+    public String toString() {
+        return trackShipments;
+    }
 }

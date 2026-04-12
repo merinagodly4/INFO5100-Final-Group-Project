@@ -8,22 +8,22 @@ import Business.UserAccount.UserAccount;
  *
  * @author lajon
  */
-public class ProductionMaterialsRequest extends WorkRequest {
-  private String productionMaterials;
+public class StoreManagerToRetailBARestockRequest extends WorkRequest{
+  private String restockItemsToRetailBA;
     private boolean approval = false;
     private UserAccount approvedBy;
     
     
 
     public String getTestResult() {
-        return productionMaterials;
+        return restockItemsToRetailBA;
     }
 
-    public void setTestResult(String productionMaterials) {
-        this.productionMaterials = productionMaterials;
-    } 
+    public void setTestResult(String restockItemsToRetailBA) {
+        this.restockItemsToRetailBA = restockItemsToRetailBA;
+    }     
     
-    public boolean isApproval() {
+     public boolean isApproval() {
         return approval;
     }
 
@@ -41,6 +41,6 @@ public class ProductionMaterialsRequest extends WorkRequest {
 
     @Override
     public String toString() {
-        return productionMaterials;
+        return restockItemsToRetailBA;
     }
 }

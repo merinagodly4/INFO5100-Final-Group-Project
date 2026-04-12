@@ -8,7 +8,7 @@ import Business.UserAccount.UserAccount;
  *
  * @author lajon
  */
-public class MarketingOverstockedRequest {
+public class MarketingOverstockedRequest extends WorkRequest {
    private String marketingOverstocked;
     private boolean approval = false;
     private UserAccount approvedBy;
@@ -22,4 +22,25 @@ public class MarketingOverstockedRequest {
     public void setTestResult(String marketingOverstocked) {
         this.marketingOverstocked = marketingOverstocked;
     }  
+    
+    public boolean isApproval() {
+        return approval;
+    }
+
+    public void setApproval(boolean approval) {
+        this.approval = approval;
+    }
+
+    public UserAccount getApprovedBy() {
+        return approvedBy;
+    }
+
+    public void setApprovedBy(UserAccount approvedBy) {
+        this.approvedBy = approvedBy;
+    }
+
+    @Override
+    public String toString() {
+        return marketingOverstocked;
+    }
 }

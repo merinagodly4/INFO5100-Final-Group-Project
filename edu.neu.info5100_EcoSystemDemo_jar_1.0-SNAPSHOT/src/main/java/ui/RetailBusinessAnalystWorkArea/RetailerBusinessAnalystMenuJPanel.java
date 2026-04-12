@@ -5,6 +5,7 @@
 package ui.RetailBusinessAnalystWorkArea;
 import ui.SupplierPricingAnalystRole.SellSupplierProductsJPanel;
 import Business.EcoSystem;
+import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
@@ -18,24 +19,26 @@ public class RetailerBusinessAnalystMenuJPanel extends javax.swing.JPanel {
     private EcoSystem business;
     private UserAccount userAccount;
     private Organization organization;
+    private Enterprise enterprise;
 
     /**
      * Creates new form RetailerBusinessAnalystMenu
      */
     public RetailerBusinessAnalystMenuJPanel() {
-        this(null, null, null, null);
+        
     }
 
     // Real constructor used from Role.createWorkArea(...)
     public RetailerBusinessAnalystMenuJPanel(JPanel userProcessContainer,
                                        UserAccount account,
                                        Organization organization,
-                                       EcoSystem business) {
+                                       EcoSystem business, Enterprise enterprise) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.userAccount = account;
         this.organization = organization;
         this.business = business;
+        this.enterprise = enterprise;
     }
 
 
@@ -115,12 +118,13 @@ public class RetailerBusinessAnalystMenuJPanel extends javax.swing.JPanel {
             return;
         }
 
+
         RetailBusinessAnalystWorkAreaJPanel workAreaPanel =
             new RetailBusinessAnalystWorkAreaJPanel(
                 userProcessContainer,
                 userAccount,
                 organization,
-                business
+                business, enterprise
             );
 
         userProcessContainer.add("RetailBusinessAnalystWorkAreaJPanel", workAreaPanel);

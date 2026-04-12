@@ -20,7 +20,7 @@ public class RetailBusinessAnalystRole extends Role {
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business) {
-        return new RetailerBusinessAnalystMenuJPanel(userProcessContainer, account, organization, business);
+        return new RetailerBusinessAnalystMenuJPanel(userProcessContainer, account, organization, business, enterprise);
     }
     
 }

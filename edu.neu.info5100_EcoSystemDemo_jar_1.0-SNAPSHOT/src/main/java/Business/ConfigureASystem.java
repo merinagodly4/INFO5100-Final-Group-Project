@@ -18,6 +18,7 @@ import Business.Organization.RetailStoreOrganization;
 import Business.Organization.ShippingFacilityOrganization;
 import Business.Organization.SupplierPricingOrganization;
 import Business.Organization.SupplierMarketingOrganization;
+import Business.Organization.RetailAnalyticsOrganization;
 import Business.Role.*;
 import Business.UserAccount.UserAccount;
 import com.github.javafaker.Faker;
@@ -107,7 +108,7 @@ public class ConfigureASystem {
         // 3. Retail Analytics Organization
         //    -> Retail Business Analyst
         Organization retailAnalyticsOrg = retail.getOrganizationDirectory()
-                .createOrganization(Organization.Type.RetailStore); // swap type when RetailAnalytics type is added
+                .createOrganization(Organization.Type.RetailAnalytics); // swap type when RetailAnalytics type is added
         retailAnalyticsOrg.setName("Retail Analytics Organization");
 
         Employee retailBAEmp = retailAnalyticsOrg.getEmployeeDirectory()

@@ -44,6 +44,9 @@ public class OrganizationDirectory {
             case ManufacturingPricing:
                 organization = new ManufacturingPricingOrganization();
                 break;
+            case RetailAnalytics:
+                organization = new RetailAnalyticsOrganization();
+                break;
 
             case ManufacturingOperations:
                 organization = new ManufacturingOperationsOrganization();

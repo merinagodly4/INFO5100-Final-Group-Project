@@ -8,8 +8,10 @@ import ui.RetailDataAnalystWorkArea.*;
 import ui.StoreAssociateWorkArea.*;
 import ui.StoreManagerWorkArea.*;
 import Business.EcoSystem;
+import Business.Enterprise.Enterprise;
+import Business.OrderModel.Product;
 import Business.Organization.Organization;
-import Business.Organization.RetailStoreOrganization;
+import Business.Organization.RetailAnalyticsOrganization;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.ManufacturingQuotesRequest;
 import Business.WorkQueue.WorkRequest;
@@ -17,6 +19,7 @@ import java.awt.CardLayout;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import Business.WorkQueue.StoreManagerToRetailBARestockRequest;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -27,22 +30,39 @@ public class RetailBusinessAnalystWorkAreaJPanel extends javax.swing.JPanel {
     private JPanel userProcessContainer;
     private EcoSystem business;
     private UserAccount userAccount;
-    private RetailStoreOrganization retailStoreOrganization;
-    
+    private RetailAnalyticsOrganization retailAnalyticsOrganization;
+    private Enterprise enterprise;
+
     /**
      * Creates new form LabAssistantWorkAreaJPanel
      */
-    public RetailBusinessAnalystWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, EcoSystem business) {
+    public RetailBusinessAnalystWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, EcoSystem business, Enterprise enterprise) {
         initComponents();
-        
+
         this.userProcessContainer = userProcessContainer;
         this.userAccount = account;
         this.business = business;
-        this.retailStoreOrganization = (RetailStoreOrganization) organization;
-        
-    }
-    
+        this.retailAnalyticsOrganization = (RetailAnalyticsOrganization) organization;
+        this.enterprise = enterprise;
+        populateTable();
 
+    }
+
+    private void populateTable() {
+
+        DefaultTableModel model = (DefaultTableModel) workRequestJTable1.getModel();
+        model.setRowCount(0);
+
+        for (WorkRequest wr : retailAnalyticsOrganization.getWorkQueue().getWorkRequestList()) {
+
+            Object[] row = new Object[2];
+
+            row[0] = wr;
+            row[1] = wr.getStatus();
+
+            model.addRow(row);
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -68,7 +88,7 @@ public class RetailBusinessAnalystWorkAreaJPanel extends javax.swing.JPanel {
                 refreshJButtonActionPerformed(evt);
             }
         });
-        add(refreshJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 60, -1, -1));
+        add(refreshJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 70, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jLabel2.setText("Messages from Store Manager");
@@ -76,41 +96,41 @@ public class RetailBusinessAnalystWorkAreaJPanel extends javax.swing.JPanel {
 
         workRequestJTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Message", "Sender", "Receiver", "Status"
+                "Message", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Object.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, true, false
+                false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -123,7 +143,7 @@ public class RetailBusinessAnalystWorkAreaJPanel extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(workRequestJTable1);
 
-        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, 570, 290));
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 800, 290));
 
         assignJButton1.setText("Confirm Restock");
         assignJButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -147,7 +167,43 @@ public class RetailBusinessAnalystWorkAreaJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_refreshJButtonActionPerformed
 
     private void assignJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignJButton1ActionPerformed
-        // TODO add your handling code here:
+
+        int selectedRow = workRequestJTable1.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a request.");
+            return;
+        }
+
+        DefaultTableModel model = (DefaultTableModel) workRequestJTable1.getModel();
+        StoreManagerToRetailBARestockRequest request
+                = (StoreManagerToRetailBARestockRequest) model.getValueAt(selectedRow, 0);
+
+        String verdict = JOptionPane.showInputDialog(
+                this,
+                "Enter Verdict (Approve / Deny):",
+                "Restock Decision",
+                JOptionPane.PLAIN_MESSAGE
+        );
+
+        if (verdict == null || verdict.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Verdict cannot be empty.");
+            return;
+        }
+
+        verdict = verdict.trim();
+
+// Set ONLY status
+        request.setStatus(
+                verdict.equalsIgnoreCase("Approve") ? "Approved" : "Denied"
+        );
+
+// do NOT touch message
+        JOptionPane.showMessageDialog(this,
+                "Decision recorded: " + request.getStatus()
+        );
+
+        populateTable();
+
     }//GEN-LAST:event_assignJButton1ActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed

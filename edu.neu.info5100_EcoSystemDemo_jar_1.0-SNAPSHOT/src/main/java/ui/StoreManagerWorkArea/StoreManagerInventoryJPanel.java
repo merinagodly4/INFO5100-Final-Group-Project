@@ -8,6 +8,7 @@ import ui.RetailDataAnalystWorkArea.*;
 import javax.swing.JPanel;
 import java.awt.CardLayout;
 import Business.EcoSystem;
+import Business.Enterprise.Enterprise;
 import Business.OrderModel.Product;
 import Business.OrderModel.RetailerProductCatalog;
 import Business.Organization.Organization;
@@ -30,6 +31,7 @@ public class StoreManagerInventoryJPanel extends javax.swing.JPanel {
     private UserAccount userAccount;
     private Organization organization;
     private EcoSystem business;
+    private Enterprise enterprise;
     RetailerProductCatalog productCatalog;
     
      // Simple in-panel inventory: [productName, price, quantity]
@@ -41,13 +43,14 @@ public class StoreManagerInventoryJPanel extends javax.swing.JPanel {
     public StoreManagerInventoryJPanel(JPanel userProcessContainer,
                                    UserAccount account,
                                    Organization organization,
-                                   EcoSystem business) {
+                                   EcoSystem business,  Enterprise enterprise) {
     initComponents();
     this.userProcessContainer = userProcessContainer;
     this.userAccount = account;
     this.organization = organization;   
     this.business = business;
      this.productCatalog = business.getRetailerProductCatalog();
+     this.enterprise = enterprise; 
         
      
         populateProductTable();
@@ -189,57 +192,74 @@ public class StoreManagerInventoryJPanel extends javax.swing.JPanel {
 
     private void btnStoreRequestRestockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStoreRequestRestockActionPerformed
         // TODO add your handling code here:
-    // Store Manager → Retail Business Analyst: Restock Request
+    int selectedRow = workRequestJTable1.getSelectedRow();
+    if (selectedRow < 0) {
+        JOptionPane.showMessageDialog(this, "Please select an item in the inventory table.");
+        return;
+    }
 
-        int selectedRow = workRequestJTable1.getSelectedRow();
-        if (selectedRow < 0) {
-            JOptionPane.showMessageDialog(this, "Please select an item in the inventory table.");
+    DefaultTableModel model = (DefaultTableModel) workRequestJTable1.getModel();
+    Product product = (Product) model.getValueAt(selectedRow, 0);
+
+    String qtyStr = JOptionPane.showInputDialog(
+            this,
+            "Enter quantity to request for item: " + product.getProdName(),
+            "Request Restock",
+            JOptionPane.PLAIN_MESSAGE
+    );
+
+    if (qtyStr == null) return; // user cancelled
+
+    qtyStr = qtyStr.trim();
+    if (qtyStr.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Please enter a quantity.");
+        return;
+    }
+
+    int quantity;
+    try {
+        quantity = Integer.parseInt(qtyStr);
+        if (quantity <= 0) {
+            JOptionPane.showMessageDialog(this, "Quantity must be positive.");
             return;
         }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Please enter a valid integer.");
+        return;
+    }
 
-        DefaultTableModel model = (DefaultTableModel) workRequestJTable1.getModel();
-        String itemName = (String) model.getValueAt(selectedRow, 0);
+    String msg = "Request restock of " + product.getProdName() + " x " + quantity;
 
-        String qtyStr = JOptionPane.showInputDialog(
-                this,
-                "Enter quantity to request for item: " + itemName,
-                "Request Restock",
-                JOptionPane.PLAIN_MESSAGE
-        );
-        if (qtyStr == null) {
-            return; // cancelled
+    StoreManagerToRetailBARestockRequest request = new StoreManagerToRetailBARestockRequest();
+    request.setMessage(msg);
+    request.setTestResult(msg); // if you're using this field
+    request.setSender(userAccount);
+    request.setStatus("Sent");
+
+    Organization targetOrg = null;
+
+    for (Organization org : enterprise.getOrganizationDirectory().getOrganizationList()) {
+        System.out.println("Checking org: " + org.getName()); // DEBUG
+
+        if (org.getName().equalsIgnoreCase("Retail Analytics Organization")) {
+            targetOrg = org;
+            break;
         }
-        qtyStr = qtyStr.trim();
-        if (qtyStr.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please enter a quantity.");
-            return;
-        }
+    }
+    if (targetOrg == null) {
+        JOptionPane.showMessageDialog(this, "Retail Analytics Organization not found.");
+        return;
+    }
 
-        int quantity;
-        try {
-            quantity = Integer.parseInt(qtyStr);
-            if (quantity <= 0) {
-                JOptionPane.showMessageDialog(this, "Quantity must be positive.");
-                return;
-            }
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Please enter a valid integer quantity.");
-            return;
-        }
 
-        String msg = "Request restock of " + itemName + " x " + quantity;
+    targetOrg.getWorkQueue().getWorkRequestList().add(request);
+    userAccount.getWorkQueue().getWorkRequestList().add(request);
 
-        StoreManagerToRetailBARestockRequest request = new StoreManagerToRetailBARestockRequest();
-        request.setMessage(msg);        // base WorkRequest message
-        request.setTestResult(msg);     //  own field
-        request.setSender(userAccount);
-        request.setStatus("Sent");
+    System.out.println("Request sent. Total in target org: " +
+        targetOrg.getWorkQueue().getWorkRequestList().size()); // DEBUG
 
-        // Target org: 'organization' should be the Retail BA org when creating this panel
-        organization.getWorkQueue().getWorkRequestList().add(request);
-        userAccount.getWorkQueue().getWorkRequestList().add(request);
+    JOptionPane.showMessageDialog(this, "Restock request sent successfully.");
 
-        JOptionPane.showMessageDialog(this, "Restock request sent to Retail Business Analyst.");
  
     }//GEN-LAST:event_btnStoreRequestRestockActionPerformed
 

@@ -6,8 +6,12 @@ package ui.ShippingCoordinatorWorkArea;
 import Business.EcoSystem;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.ShipmentsRequest;
+import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -32,7 +36,26 @@ public ShippingConfirmRequestsJPanel(JPanel userProcessContainer, UserAccount us
     this.organization = organization;
     this.business = business;
     initComponents();
+    populateTable();
 }
+ private void populateTable() {
+        DefaultTableModel model = (DefaultTableModel) workRequestJTable1.getModel();
+        model.setRowCount(0);
+
+        // Loop through the shipping organization's work queue
+        for (WorkRequest wr : organization.getWorkQueue().getWorkRequestList()) {
+            // Filter only ShipmentsRequest objects
+            if (wr instanceof ShipmentsRequest) {
+                ShipmentsRequest req = (ShipmentsRequest) wr;
+                Object[] row = new Object[4];
+                row[0] = req; // toString() shows the message
+                row[1] = req.getSender() == null ? null : req.getSender().getEmployee().getName();
+                row[2] = req.getReceiver() == null ? null : req.getReceiver().getEmployee().getName();
+                row[3] = req.getStatus();
+                model.addRow(row);
+            }
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -141,12 +164,30 @@ public ShippingConfirmRequestsJPanel(JPanel userProcessContainer, UserAccount us
     }// </editor-fold>//GEN-END:initComponents
 
     private void assignJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignJButtonActionPerformed
+int selectedRow = workRequestJTable1.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a request from the table.");
+            return;
+        }
 
+        WorkRequest wr = (WorkRequest) workRequestJTable1.getValueAt(selectedRow, 0);
+        if (!(wr instanceof ShipmentsRequest)) {
+            JOptionPane.showMessageDialog(this, "Invalid request type for confirmation.");
+            return;
+        }
+
+        // Set receiver to the current user and update status
+        ShipmentsRequest req = (ShipmentsRequest) wr;
+        req.setReceiver(userAccount);
+        req.setStatus("Completed"); // Mark as Completed
+
+        JOptionPane.showMessageDialog(this, "Shipment request confirmed and marked as Completed.");
+        populateTable(); // Refresh table to show new status
        
     }//GEN-LAST:event_assignJButtonActionPerformed
 
     private void refreshJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButtonActionPerformed
-
+populateTable();
     }//GEN-LAST:event_refreshJButtonActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed

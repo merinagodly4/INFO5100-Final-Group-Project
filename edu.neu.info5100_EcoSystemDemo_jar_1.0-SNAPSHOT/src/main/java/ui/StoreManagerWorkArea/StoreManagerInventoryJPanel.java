@@ -227,7 +227,7 @@ public class StoreManagerInventoryJPanel extends javax.swing.JPanel {
 
         StoreManagerToRetailBARestockRequest request = new StoreManagerToRetailBARestockRequest();
         request.setMessage(msg);        // base WorkRequest message
-        request.setTestResult(msg);     // your own field
+        request.setTestResult(msg);     //  own field
         request.setSender(userAccount);
         request.setStatus("Sent");
 

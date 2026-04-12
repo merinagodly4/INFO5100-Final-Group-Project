@@ -5,9 +5,14 @@
 package ui.StoreManagerWorkArea;
 
 import Business.EcoSystem;
+import Business.Enterprise.Enterprise;
+import Business.Enterprise.Enterprise.EnterpriseType;
+import Business.Network.Network;
 import Business.Organization.Organization;
+import Business.Organization.ShippingFacilityOrganization;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 
@@ -21,24 +26,23 @@ public class StoreManagerMenuJPanel extends javax.swing.JPanel {
     private JPanel userProcessContainer;
     private UserAccount userAccount;
     private Organization organization;
-
+    private Enterprise enterprise;
     /**
      * Creates new form StoreManagerMenuJPanel
      */
     
-    public StoreManagerMenuJPanel() {
-        this(null, null, null, null);
-    }
 
     // Real constructor used from Role.createWorkArea(...)
     public StoreManagerMenuJPanel(JPanel userProcessContainer,
                                   UserAccount account,
                                   Organization organization,
+                                  Enterprise enterprise,
                                   EcoSystem business) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.userAccount = account;
         this.organization = organization;
+        this.enterprise = enterprise;
         this.business = business;
     }
 
@@ -157,21 +161,39 @@ public class StoreManagerMenuJPanel extends javax.swing.JPanel {
 
     private void btnContactShippingCompanyIdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContactShippingCompanyIdentifyResourceAssetsActionPerformed
         // TODO add your handling code here:
-         if (userProcessContainer == null) {
-            return;
+  if (userProcessContainer == null) {
+        return;
+    }
+
+    Organization shippingOrg = null;
+
+    // Find ShippingFacilityOrganization in the SHIPPING enterprise anywhere in the system
+    for (Network net : business.getNetworkList()) {
+        for (Enterprise ent : net.getEnterpriseDirectory().getEnterpriseList()) {
+            if (ent.getEnterpriseType() == EnterpriseType.SHIPPING) {
+                for (Organization org : ent.getOrganizationDirectory().getOrganizationList()) {
+                    if (org instanceof ShippingFacilityOrganization) {
+                        shippingOrg = org;
+                        break;
+                    }
+                }
+            }
+            if (shippingOrg != null) break;
         }
+        if (shippingOrg != null) break;
+    }
 
-        ContactShippingWorkAreaJPanel1 contactShippingWorkAreaJPanel1 =
-            new ContactShippingWorkAreaJPanel1(
-                userProcessContainer,
-                userAccount,
-                organization,
-                business
-            );
+    if (shippingOrg == null) {
+        JOptionPane.showMessageDialog(this, "No shipping organization found.");
+        return;
+    }
 
-        userProcessContainer.add("ContactShippingWorkAreaJPanel1", contactShippingWorkAreaJPanel1);
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
+    ContactShippingWorkAreaJPanel1 panel =
+        new ContactShippingWorkAreaJPanel1(userProcessContainer, userAccount, shippingOrg, business);
+    userProcessContainer.add("ContactShippingWorkAreaJPanel1", panel);
+    CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+    layout.next(userProcessContainer);
+
     }//GEN-LAST:event_btnContactShippingCompanyIdentifyResourceAssetsActionPerformed
 
     private void btnConfirmRequestsAssociatesIdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmRequestsAssociatesIdentifyResourceAssetsActionPerformed

@@ -12,9 +12,15 @@ import Business.Organization.Organization;
 import Business.Organization.RetailStoreOrganization;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.ManufacturingQuotesRequest;
+import Business.WorkQueue.ShipmentsRequest;
 import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
+import java.awt.GridLayout;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -26,7 +32,7 @@ public class ContactShippingWorkAreaJPanel1 extends javax.swing.JPanel {
     private JPanel userProcessContainer;
     private EcoSystem business;
     private UserAccount userAccount;
-   private RetailStoreOrganization retailStoreOrganization;
+    private Organization shippingOrganization;
     
     /**
      * Creates new form LabAssistantWorkAreaJPanel
@@ -37,12 +43,29 @@ public class ContactShippingWorkAreaJPanel1 extends javax.swing.JPanel {
         this.userProcessContainer = userProcessContainer;
         this.userAccount = account;
         this.business = business;
-        this.retailStoreOrganization = (RetailStoreOrganization) organization;
-        
+        this.shippingOrganization = organization;
+        populateTable();
       
     }
     
-   
+       
+  private void populateTable() {
+        DefaultTableModel model = (DefaultTableModel) workRequestJTable1.getModel();
+        model.setRowCount(0);
+
+        for (WorkRequest wr : shippingOrganization.getWorkQueue().getWorkRequestList()) {
+            if (wr instanceof ShipmentsRequest) {
+                ShipmentsRequest req = (ShipmentsRequest) wr;
+                Object[] row = new Object[4];
+                row[0] = req;
+                row[1] = req.getSender() == null ? null : req.getSender().getEmployee().getName();
+                row[2] = req.getReceiver() == null ? null : req.getReceiver().getEmployee().getName();
+                row[3] = req.getStatus();
+                model.addRow(row);
+            }
+        }
+    }
+
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -142,7 +165,7 @@ public class ContactShippingWorkAreaJPanel1 extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void refreshJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButtonActionPerformed
-
+    populateTable();
     }//GEN-LAST:event_refreshJButtonActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -155,6 +178,51 @@ public class ContactShippingWorkAreaJPanel1 extends javax.swing.JPanel {
 
     private void assignJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignJButton1ActionPerformed
         // TODO add your handling code here:
+      // New message to shipping customer service
+
+        JPanel panel = new JPanel(new GridLayout(0, 2, 5, 5));
+        panel.add(new JLabel("Inquiry Type:"));
+        JComboBox<String> cbType = new JComboBox<>(
+                new String[]{"SHIPPING_TIME", "STATUS_UPDATE", "GENERAL"}
+        );
+        panel.add(cbType);
+
+        panel.add(new JLabel("Message:"));
+        JTextField txtMsg = new JTextField();
+        panel.add(txtMsg);
+
+        int result = JOptionPane.showConfirmDialog(
+                this,
+                panel,
+                "New Message to Shipping Company",
+                JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.PLAIN_MESSAGE
+        );
+        if (result != JOptionPane.OK_OPTION) {
+            return;
+        }
+
+        String type = (String) cbType.getSelectedItem();
+        String msg = txtMsg.getText().trim();
+        if (msg.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter a message.");
+            return;
+        }
+
+        String fullMessage = type + ": " + msg;
+
+        ShipmentsRequest request = new ShipmentsRequest();
+        request.setMessage(fullMessage);
+        request.setTestResult(fullMessage);
+        request.setSender(userAccount);
+        request.setStatus("Sent");
+
+        shippingOrganization.getWorkQueue().getWorkRequestList().add(request);
+        userAccount.getWorkQueue().getWorkRequestList().add(request);
+
+        JOptionPane.showMessageDialog(this, "Message sent to Shipping Company.");
+        populateTable();
+  
     }//GEN-LAST:event_assignJButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

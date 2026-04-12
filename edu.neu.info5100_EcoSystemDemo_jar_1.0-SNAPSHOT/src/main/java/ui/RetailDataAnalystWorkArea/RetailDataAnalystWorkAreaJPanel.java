@@ -12,9 +12,11 @@ import Business.EcoSystem;
 import Business.Organization.SupplierPricingOrganization;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.ItemsRequest;
 import Business.WorkQueue.ManufacturingQuotesRequest;
 import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -27,8 +29,7 @@ public class RetailDataAnalystWorkAreaJPanel extends javax.swing.JPanel {
     private JPanel userProcessContainer;
     private EcoSystem business;
     private UserAccount userAccount;
-    private SupplierPricingOrganization supplierPricingOrganization;
-    
+     private Organization organization;
     /**
      * Creates new form LabAssistantWorkAreaJPanel
      */
@@ -38,11 +39,27 @@ public class RetailDataAnalystWorkAreaJPanel extends javax.swing.JPanel {
         this.userProcessContainer = userProcessContainer;
         this.userAccount = account;
         this.business = business;
-        this.supplierPricingOrganization = (SupplierPricingOrganization) organization;
-        
+        this.organization = organization;  
+        populateTable();
      
     }
-    
+    private void populateTable() {
+        DefaultTableModel model = (DefaultTableModel) workRequestJTable1.getModel();
+        model.setRowCount(0);
+
+        for (WorkRequest wr : organization.getWorkQueue().getWorkRequestList()) {
+            if (wr instanceof ItemsRequest) {
+                ItemsRequest ir = (ItemsRequest) wr;
+                Object[] row = new Object[4];
+                row[0] = ir; // toString() = needItems
+                row[1] = ir.getSender() == null ? null : ir.getSender().getEmployee().getName();
+                row[2] = ir.getReceiver() == null ? null : ir.getReceiver().getEmployee().getName();
+                row[3] = ir.getStatus();
+                model.addRow(row);
+            }
+        }
+    }
+
     
 
     /**
@@ -58,7 +75,7 @@ public class RetailDataAnalystWorkAreaJPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         workRequestJTable1 = new javax.swing.JTable();
-        assignJButton1 = new javax.swing.JButton();
+        btnManuMakeRequest = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -125,13 +142,13 @@ public class RetailDataAnalystWorkAreaJPanel extends javax.swing.JPanel {
 
         add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, 540, 340));
 
-        assignJButton1.setText("Make Request");
-        assignJButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnManuMakeRequest.setText("Make Request");
+        btnManuMakeRequest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                assignJButton1ActionPerformed(evt);
+                btnManuMakeRequestActionPerformed(evt);
             }
         });
-        add(assignJButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 450, -1, -1));
+        add(btnManuMakeRequest, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 450, -1, -1));
 
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -143,12 +160,41 @@ public class RetailDataAnalystWorkAreaJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void refreshJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButtonActionPerformed
-
+    populateTable();
     }//GEN-LAST:event_refreshJButtonActionPerformed
 
-    private void assignJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignJButton1ActionPerformed
+    private void btnManuMakeRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManuMakeRequestActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_assignJButton1ActionPerformed
+    // Make Request to Manufacturer for more items
+
+        String msg = JOptionPane.showInputDialog(
+                this,
+                "Enter request details for more items (e.g., item + quantity):",
+                "Items Request",
+                JOptionPane.PLAIN_MESSAGE
+        );
+        if (msg == null) {
+            return; // cancelled
+        }
+        msg = msg.trim();
+        if (msg.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter a message.");
+            return;
+        }
+
+        ItemsRequest request = new ItemsRequest();
+        request.setMessage(msg);        // base WorkRequest message
+        request.setTestResult(msg);     // your own field needItems
+        request.setSender(userAccount);
+        request.setStatus("Sent");
+
+        // Add to Manufacturer org queue and sender's queue
+        organization.getWorkQueue().getWorkRequestList().add(request);
+        userAccount.getWorkQueue().getWorkRequestList().add(request);
+
+        JOptionPane.showMessageDialog(this, "Request for items sent to Manufacturer.");
+        populateTable();    
+    }//GEN-LAST:event_btnManuMakeRequestActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
 
@@ -159,11 +205,13 @@ public class RetailDataAnalystWorkAreaJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnBackActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton assignJButton1;
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnManuMakeRequest;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton refreshJButton;
     private javax.swing.JTable workRequestJTable1;
     // End of variables declaration//GEN-END:variables
+
+    
 }

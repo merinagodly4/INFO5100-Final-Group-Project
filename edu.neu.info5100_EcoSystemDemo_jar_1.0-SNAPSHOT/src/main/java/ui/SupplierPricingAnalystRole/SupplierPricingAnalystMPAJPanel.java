@@ -8,10 +8,13 @@ package ui.SupplierPricingAnalystRole;
 import Business.EcoSystem;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.ManufacturingQuotesRequest;
 import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
 import java.awt.Component;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -46,6 +49,24 @@ public class SupplierPricingAnalystMPAJPanel extends javax.swing.JPanel {
         this.request = request;
     }
     
+      private void populateTable() {
+        DefaultTableModel model = (DefaultTableModel) workRequestJTable1.getModel();
+        model.setRowCount(0);
+
+        for (WorkRequest wr : organization.getWorkQueue().getWorkRequestList()) {
+            // Filter only ManufacturingQuotesRequest
+            if (wr instanceof ManufacturingQuotesRequest) {
+                ManufacturingQuotesRequest req = (ManufacturingQuotesRequest) wr;
+                Object[] row = new Object[4];
+                row[0] = req; // Message containing items + total price
+                row[1] = req.getSender() == null ? null : req.getSender().getEmployee().getName();
+                row[2] = req.getReceiver() == null ? null : req.getReceiver().getEmployee().getName();
+                row[3] = req.getStatus();
+                model.addRow(row);
+            }
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -172,7 +193,7 @@ public class SupplierPricingAnalystMPAJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void refreshJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButtonActionPerformed
-
+    populateTable();
     }//GEN-LAST:event_refreshJButtonActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -185,6 +206,26 @@ public class SupplierPricingAnalystMPAJPanel extends javax.swing.JPanel {
 
     private void assignJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignJButton1ActionPerformed
         // TODO add your handling code here:
+        
+        int selectedRow = workRequestJTable1.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a quote to confirm.");
+            return;
+        }
+
+        WorkRequest wr = (WorkRequest) workRequestJTable1.getValueAt(selectedRow, 0);
+        if (!(wr instanceof ManufacturingQuotesRequest)) {
+            JOptionPane.showMessageDialog(this, "Invalid request type.");
+            return;
+        }
+
+        ManufacturingQuotesRequest req = (ManufacturingQuotesRequest) wr;
+        req.setReceiver(userAccount);
+        req.setStatus("Completed"); // Set status to Completed
+
+        JOptionPane.showMessageDialog(this, "Manufacturing Quote confirmed successfully.");
+        populateTable(); // Refresh the table
+
     }//GEN-LAST:event_assignJButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

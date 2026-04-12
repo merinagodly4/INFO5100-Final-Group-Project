@@ -9,6 +9,9 @@ import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+import Business.WorkQueue.WorkRequest;
+import Business.WorkQueue.FinishedGoodsDispatchRequest;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -36,6 +39,7 @@ public class ProductionPlannerRequestsJPanel extends javax.swing.JPanel {
         this.organization = organization;
         this.business = business;
         initComponents();
+        populateTable();
     }
 
     /**
@@ -74,40 +78,40 @@ public class ProductionPlannerRequestsJPanel extends javax.swing.JPanel {
 
         workRequestJTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Message", "Sender", "Receiver", "Status"
+                "Message", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Object.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, true, false
+                false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -175,7 +179,7 @@ public class ProductionPlannerRequestsJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void refreshJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButtonActionPerformed
-
+        populateTable();
     }//GEN-LAST:event_refreshJButtonActionPerformed
 
     private void refreshJButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButton2ActionPerformed
@@ -206,6 +210,25 @@ public class ProductionPlannerRequestsJPanel extends javax.swing.JPanel {
         layout.show(userProcessContainer, "ShippingCoordinatorRequestJPanel");
     }//GEN-LAST:event_refreshJButton5ActionPerformed
 
+    private void populateTable() {
+    DefaultTableModel model = (DefaultTableModel) workRequestJTable2.getModel();
+    model.setRowCount(0);
+
+    for (WorkRequest wr : organization.getWorkQueue().getWorkRequestList()) {
+
+        // adjust this type depending on what Shipping Coordinator sends
+        if (wr instanceof FinishedGoodsDispatchRequest) {
+
+            FinishedGoodsDispatchRequest req = (FinishedGoodsDispatchRequest) wr;
+
+            Object[] row = new Object[2];
+            row[0] = req;                  // Message (toString())
+            row[1] = req.getStatus();      // Status
+
+            model.addRow(row);
+        }
+    }
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel2;

@@ -4,6 +4,7 @@
  */
 package ui.ShippingCoordinatorWorkArea;
 import Business.EcoSystem;
+import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
@@ -20,15 +21,17 @@ public class ShippingCoordinatorMenuJPanel extends javax.swing.JPanel {
  private UserAccount userAccount;
  private Organization organization;
  private EcoSystem business;
+ private Enterprise enterprise;
     /**
      * Creates new form ShippingCoordinatorMenuJPanel
      */
- public ShippingCoordinatorMenuJPanel(JPanel userProcessContainer, UserAccount userAccount, Organization organization, EcoSystem business) {
+ public ShippingCoordinatorMenuJPanel(JPanel userProcessContainer, UserAccount userAccount, Organization organization, EcoSystem business, Enterprise enterprise) {
  initComponents();
  this.userProcessContainer = userProcessContainer;
  this.userAccount = userAccount;
  this.organization = organization;
  this.business = business;
+ this.enterprise = enterprise;
  }
 
     /**
@@ -163,7 +166,7 @@ public class ShippingCoordinatorMenuJPanel extends javax.swing.JPanel {
             userProcessContainer,
             userAccount,
             organization,
-            business
+            business, enterprise
         );
 
     userProcessContainer.add("ShippingConfirmProductionRequestsJPanel1", panel);

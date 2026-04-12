@@ -12,6 +12,7 @@ import Business.Organization.Organization;
 import Business.Organization.RetailStoreOrganization;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.ManufacturingQuotesRequest;
+import Business.WorkQueue.StoreAssociateToStoreMRestockRequest;
 import Business.WorkQueue.StoreManagerToStoreARestockRequest;
 import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
@@ -47,16 +48,17 @@ public class ContactStoreAssociateWorkAreaJPanel extends javax.swing.JPanel {
         populateTable();
       
     }
-    
-   private void populateTable() {
-        DefaultTableModel model = (DefaultTableModel) workRequestJTable1.getModel();
+  private void populateTable() {
+
+ DefaultTableModel model = (DefaultTableModel) workRequestJTable1.getModel();
         model.setRowCount(0);
 
+        // Filter for StoreAssociateToStoreMRestockRequest (from associates to manager)
         for (WorkRequest wr : retailStoreOrganization.getWorkQueue().getWorkRequestList()) {
-            if (wr instanceof StoreManagerToStoreARestockRequest) {
-                StoreManagerToStoreARestockRequest req = (StoreManagerToStoreARestockRequest) wr;
+            if (wr instanceof StoreAssociateToStoreMRestockRequest) {
+                StoreAssociateToStoreMRestockRequest req = (StoreAssociateToStoreMRestockRequest) wr;
                 Object[] row = new Object[4];
-                row[0] = req; // toString() = restockItemsToStoreAssistants (the task description)
+                row[0] = req; // toString() will display the message
                 row[1] = req.getSender() == null ? null : req.getSender().getEmployee().getName();
                 row[2] = req.getReceiver() == null ? null : req.getReceiver().getEmployee().getName();
                 row[3] = req.getStatus();
@@ -177,51 +179,26 @@ public class ContactStoreAssociateWorkAreaJPanel extends javax.swing.JPanel {
 
     private void assignJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignJButton1ActionPerformed
         // TODO add your handling code here:
-    // Make requests to associates: RESTOCK / COUNT / TAKE DOWN + item name/ID
-
-        // Build small input panel: combo box + text field
-        JPanel panel = new JPanel(new GridLayout(0, 2, 5, 5));
-        panel.add(new JLabel("Task Type:"));
-        JComboBox<String> cbTaskType = new JComboBox<>(
-                new String[]{"RESTOCK", "COUNT", "TAKE_DOWN"}
-        );
-        panel.add(cbTaskType);
-
-        panel.add(new JLabel("Item name/ID:"));
-        JTextField txtItem = new JTextField();
-        panel.add(txtItem);
-
-        int result = JOptionPane.showConfirmDialog(
-                this,
-                panel,
-                "New Task for Store Associate",
-                JOptionPane.OK_CANCEL_OPTION,
-                JOptionPane.PLAIN_MESSAGE
-        );
-        if (result != JOptionPane.OK_OPTION) {
-            return; // cancelled
-        }
-
-        String taskType = (String) cbTaskType.getSelectedItem();
-        String item = txtItem.getText().trim();
-
-        if (item.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please enter an item name or ID.");
+  int selectedRow = workRequestJTable1.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a request to confirm.");
             return;
         }
-        
-        StoreManagerToStoreARestockRequest req = new StoreManagerToStoreARestockRequest();
-req.setMessage(taskType + " " + item);
-req.setTestResult(taskType + " " + item);
-req.setSender(userAccount);
-req.setStatus("Sent");
 
-// Same RetailStoreOrganization the associate panel reads
-retailStoreOrganization.getWorkQueue().getWorkRequestList().add(req);
-userAccount.getWorkQueue().getWorkRequestList().add(req);
+        WorkRequest wr = (WorkRequest) workRequestJTable1.getValueAt(selectedRow, 0);
+        if (!(wr instanceof StoreAssociateToStoreMRestockRequest)) {
+            JOptionPane.showMessageDialog(this, "Invalid request type for confirmation.");
+            return;
+        }
 
-JOptionPane.showMessageDialog(this, "Task sent to store associates.");
-populateTable();
+        // Process / Confirm the restock request
+        StoreAssociateToStoreMRestockRequest req = (StoreAssociateToStoreMRestockRequest) wr;
+        req.setReceiver(userAccount);      // Manager assigns themselves as receiver
+        req.setStatus("Confirmed");         // Manager confirms the associate's request
+
+        JOptionPane.showMessageDialog(this, "Restock request from associate confirmed.");
+        populateTable(); // Refresh table to show new status
+
     }//GEN-LAST:event_assignJButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

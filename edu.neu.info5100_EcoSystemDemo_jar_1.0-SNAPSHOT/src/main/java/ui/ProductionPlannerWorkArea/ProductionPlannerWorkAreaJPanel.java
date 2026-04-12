@@ -10,7 +10,7 @@ import ui.StoreManagerWorkArea.*;
 import ui.SupplierPricingAnalystRole.*;
 import ui.SupplierPricingAnalystRole.*;
 import Business.EcoSystem;
-import Business.Organization.SupplierPricingOrganization;
+import Business.Organization.ManufacturingOperationsOrganization;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.ManufacturingQuotesRequest;
@@ -28,7 +28,7 @@ public class ProductionPlannerWorkAreaJPanel extends javax.swing.JPanel {
     private JPanel userProcessContainer;
     private EcoSystem business;
     private UserAccount userAccount;
-    private SupplierPricingOrganization supplierPricingOrganization;
+    private ManufacturingOperationsOrganization manufacturingOperationsOrganization;
 
     /**
      * Creates new form LabAssistantWorkAreaJPanel
@@ -39,7 +39,7 @@ public class ProductionPlannerWorkAreaJPanel extends javax.swing.JPanel {
         this.userProcessContainer = userProcessContainer;
         this.userAccount = account;
         this.business = business;
-        this.supplierPricingOrganization = (SupplierPricingOrganization) organization;
+        this.manufacturingOperationsOrganization = (ManufacturingOperationsOrganization) organization;
 
     }
 

@@ -142,42 +142,34 @@ public class ShippingCoordinatorMenuJPanel extends javax.swing.JPanel {
 
     private void btnConfirmRequestsSMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmRequestsSMActionPerformed
         // TODO add your handling code here:
-        if (userProcessContainer == null) {
-            return;
-        }
-
-        ShippingConfirmRequestsJPanel shippingConfirmRequestSJPanel =
+         ShippingConfirmRequestsJPanel panel =
         new ShippingConfirmRequestsJPanel(
             userProcessContainer,
             userAccount,
             organization,
             business
         );
-     Component shippingConfirmRequestsJPanel = null;
 
-        userProcessContainer.add("ShippingConfirmRequestsJPanel", shippingConfirmRequestsJPanel);
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
+    userProcessContainer.add("ShippingConfirmRequestsJPanel", panel);
+
+    CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+    layout.next(userProcessContainer);
     }//GEN-LAST:event_btnConfirmRequestsSMActionPerformed
 
     private void btnConfirmRequestsPPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmRequestsPPActionPerformed
         // TODO add your handling code here:
-      if (userProcessContainer == null) {
-            return;
-        }
-
-        ShippingConfirmProductionRequestsJPanel1 shippingConfirmProductionRequestsJPanel1 =
+       ShippingConfirmProductionRequestsJPanel1 panel =
         new ShippingConfirmProductionRequestsJPanel1(
             userProcessContainer,
             userAccount,
             organization,
             business
         );
-     Component shippingConfirmRequestsJPanel = null;
 
-        userProcessContainer.add("ShippingConfirmProductionRequestsJPanel1", shippingConfirmProductionRequestsJPanel1);
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.next(userProcessContainer);   
+    userProcessContainer.add("ShippingConfirmProductionRequestsJPanel1", panel);
+
+    CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+    layout.next(userProcessContainer);
     }//GEN-LAST:event_btnConfirmRequestsPPActionPerformed
 
 

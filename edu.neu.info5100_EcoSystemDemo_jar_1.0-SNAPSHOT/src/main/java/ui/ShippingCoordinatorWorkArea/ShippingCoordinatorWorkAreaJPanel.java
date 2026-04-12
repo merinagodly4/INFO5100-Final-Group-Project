@@ -4,13 +4,11 @@
  */
 package ui.ShippingCoordinatorWorkArea;
 
-import ui.StoreAssociateWorkArea.*;
-import ui.StoreManagerWorkArea.*;
-import ui.SupplierPricingAnalystRole.*;
-import ui.SupplierPricingAnalystRole.*;
+
 import Business.EcoSystem;
 import Business.Organization.SupplierPricingOrganization;
 import Business.Organization.Organization;
+import Business.Organization.ShippingFacilityOrganization;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.ManufacturingQuotesRequest;
 import Business.WorkQueue.WorkRequest;
@@ -27,7 +25,7 @@ public class ShippingCoordinatorWorkAreaJPanel extends javax.swing.JPanel {
     private JPanel userProcessContainer;
     private EcoSystem business;
     private UserAccount userAccount;
-    private SupplierPricingOrganization supplierPricingOrganization;
+    private ShippingFacilityOrganization shippingFacilityOrganization;
     
     /**
      * Creates new form LabAssistantWorkAreaJPanel
@@ -38,7 +36,7 @@ public class ShippingCoordinatorWorkAreaJPanel extends javax.swing.JPanel {
         this.userProcessContainer = userProcessContainer;
         this.userAccount = account;
         this.business = business;
-        this.supplierPricingOrganization = (SupplierPricingOrganization) organization;
+        this.shippingFacilityOrganization = (ShippingFacilityOrganization) organization;
         
         populateTable();
     }
@@ -48,7 +46,7 @@ public class ShippingCoordinatorWorkAreaJPanel extends javax.swing.JPanel {
         
         model.setRowCount(0);
         
-        for(WorkRequest request : supplierPricingOrganization.getWorkQueue().getWorkRequestList()){
+        for(WorkRequest request : shippingFacilityOrganization.getWorkQueue().getWorkRequestList()){
             Object[] row = new Object[4];
             row[0] = request;
             row[1] = request.getSender().getEmployee().getName();

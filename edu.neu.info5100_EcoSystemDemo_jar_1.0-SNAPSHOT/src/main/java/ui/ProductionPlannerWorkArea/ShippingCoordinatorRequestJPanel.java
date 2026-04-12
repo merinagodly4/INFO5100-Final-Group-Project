@@ -120,8 +120,6 @@ public class ShippingCoordinatorRequestJPanel extends javax.swing.JPanel {
 
         Component[] componentArray = userProcessContainer.getComponents();
         Component component = componentArray[componentArray.length - 1];
-        ProductionPlannerWorkAreaJPanel panel = (ProductionPlannerWorkAreaJPanel) component;
-        //panel.populateTable();
 
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);

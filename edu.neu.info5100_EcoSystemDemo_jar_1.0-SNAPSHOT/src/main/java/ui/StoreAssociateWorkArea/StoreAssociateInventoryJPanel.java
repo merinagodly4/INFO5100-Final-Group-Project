@@ -4,12 +4,15 @@
  */
 package ui.StoreAssociateWorkArea;
 import Business.EcoSystem;
+import Business.OrderModel.Product;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import ui.RetailDataAnalystWorkArea.*;
 import javax.swing.JPanel;
+import Business.OrderModel.RetailerProductCatalog;
 import java.awt.CardLayout;
  import Business.WorkQueue.StoreAssociateToStoreMRestockRequest;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author lajon
@@ -20,6 +23,7 @@ public class StoreAssociateInventoryJPanel extends javax.swing.JPanel {
     private EcoSystem business;
     private UserAccount userAccount;
     private Business.Organization.RetailStoreOrganization retailStoreOrganization;
+     RetailerProductCatalog productCatalog;
     /**
      * Creates new form RequestDataAnalystInventoryJPanel
      */
@@ -31,8 +35,10 @@ public class StoreAssociateInventoryJPanel extends javax.swing.JPanel {
     initComponents();
     this.userProcessContainer = userProcessContainer;
     this.userAccount = account;
+     this.productCatalog = business.getRetailerProductCatalog();
     this.retailStoreOrganization = (Business.Organization.RetailStoreOrganization) organization;
      this.business = business;
+     populateProductTable();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -52,20 +58,20 @@ public class StoreAssociateInventoryJPanel extends javax.swing.JPanel {
 
         workRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Product Name", "Price", "Quantity"
+                "Product Name", "Product ID", "Price", "Availability"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Double.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.Double.class, java.lang.Integer.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, true
+                false, false, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -182,6 +188,19 @@ javax.swing.JOptionPane.showMessageDialog(this, "Request sent to Store Manager."
 
     }//GEN-LAST:event_assignJButton1ActionPerformed
 
+    private void populateProductTable() {
+        DefaultTableModel model = (DefaultTableModel) workRequestJTable.getModel();
+        model.setRowCount(0);
+        for (Product p : productCatalog.getProductcatalog()){ 
+            
+                Object row[] = new Object[4];
+                row[0] = p;
+                row[1] = p.getModelNumber();
+                row[2] = p.getPrice();
+                row[3] = p.getAvail();
+                model.addRow(row);
+            
+        }}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton assignJButton1;

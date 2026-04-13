@@ -21,6 +21,7 @@ public class RetailDataAnalystMenuJPanel extends javax.swing.JPanel {
     private EcoSystem business;
     private UserAccount userAccount;
     private Organization organization;
+    
     /**
      * Creates new form RetailDataAnalystMenuJPanel
      */
@@ -50,7 +51,7 @@ public class RetailDataAnalystMenuJPanel extends javax.swing.JPanel {
 
         btnDataRequestManufacturer = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        btnDataViewInventory = new javax.swing.JButton();
+        btnSalesData = new javax.swing.JButton();
         btnDataRequestPricing = new javax.swing.JButton();
 
         btnDataRequestManufacturer.setBackground(new java.awt.Color(102, 153, 255));
@@ -69,16 +70,16 @@ public class RetailDataAnalystMenuJPanel extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setText("Retail Data Analyst Menu");
 
-        btnDataViewInventory.setBackground(new java.awt.Color(102, 153, 255));
-        btnDataViewInventory.setForeground(new java.awt.Color(255, 255, 255));
-        btnDataViewInventory.setText("View Sales Data ");
-        btnDataViewInventory.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnDataViewInventory.setMaximumSize(new java.awt.Dimension(200, 40));
-        btnDataViewInventory.setMinimumSize(new java.awt.Dimension(20, 23));
-        btnDataViewInventory.setPreferredSize(new java.awt.Dimension(240, 30));
-        btnDataViewInventory.addActionListener(new java.awt.event.ActionListener() {
+        btnSalesData.setBackground(new java.awt.Color(102, 153, 255));
+        btnSalesData.setForeground(new java.awt.Color(255, 255, 255));
+        btnSalesData.setText("View Sales Data ");
+        btnSalesData.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnSalesData.setMaximumSize(new java.awt.Dimension(200, 40));
+        btnSalesData.setMinimumSize(new java.awt.Dimension(20, 23));
+        btnSalesData.setPreferredSize(new java.awt.Dimension(240, 30));
+        btnSalesData.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDataViewInventoryIdentifyResourceAssetsActionPerformed(evt);
+                btnSalesDataIdentifyResourceAssetsActionPerformed(evt);
             }
         });
 
@@ -105,7 +106,7 @@ public class RetailDataAnalystMenuJPanel extends javax.swing.JPanel {
                         .addGap(101, 101, 101)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnDataViewInventory, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnSalesData, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(75, 75, 75)
                                 .addComponent(btnDataRequestPricing, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -121,7 +122,7 @@ public class RetailDataAnalystMenuJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addGap(76, 76, 76)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnDataViewInventory, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSalesData, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDataRequestPricing, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40)
                 .addComponent(btnDataRequestManufacturer, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -149,26 +150,33 @@ public class RetailDataAnalystMenuJPanel extends javax.swing.JPanel {
     layout.next(userProcessContainer);
     }//GEN-LAST:event_btnDataRequestManufacturerIdentifyEventsActionPerformed
 
-    private void btnDataViewInventoryIdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDataViewInventoryIdentifyResourceAssetsActionPerformed
+    private void btnSalesDataIdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalesDataIdentifyResourceAssetsActionPerformed
         // TODO add your handling code here:
-       RetailDataAnalystOrdersJPanel retailDataAnalystInventoryJPanel
-                = new RetailDataAnalystOrdersJPanel(
-                        userProcessContainer          
-                       // ,userAccount,
-                        //organization,
-                        //business
-                );
+        Enterprise targetEnterprise = business.getNetworkList().get(0).getEnterpriseDirectory().getEnterpriseList().stream().filter(e -> e.getName().equals("Nike")).findFirst().orElse(null);
+        for (Organization org : targetEnterprise.getOrganizationDirectory().getOrganizationList()) {
+            System.out.println("Checking org: " + org.getName()); // DEBUG
 
-        userProcessContainer.add(
+            if (org.getName().equalsIgnoreCase("Retail Data Analytics Organization")) {
+                Organization targetOrg = org;
+                RetailDataAnalystOrdersJPanel retailDataAnalystInventoryJPanel
+                    = new RetailDataAnalystOrdersJPanel(
+                        userProcessContainer          
+                        ,userAccount,
+                        org,
+                        business,
+                        targetEnterprise
+                    );
+
+            userProcessContainer.add(
                 "RetailDataAnalystInventoryJPanel",
                 retailDataAnalystInventoryJPanel
-        );
+            );
 
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
-
- 
-    }//GEN-LAST:event_btnDataViewInventoryIdentifyResourceAssetsActionPerformed
+            CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+            layout.next(userProcessContainer);
+            }
+        }
+    }//GEN-LAST:event_btnSalesDataIdentifyResourceAssetsActionPerformed
 
     private void btnDataRequestPricingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDataRequestPricingActionPerformed
         // TODO add your handling code here:
@@ -201,7 +209,7 @@ public class RetailDataAnalystMenuJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDataRequestManufacturer;
     private javax.swing.JButton btnDataRequestPricing;
-    private javax.swing.JButton btnDataViewInventory;
+    private javax.swing.JButton btnSalesData;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

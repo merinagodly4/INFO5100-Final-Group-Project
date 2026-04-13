@@ -3,8 +3,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package ui.RetailDataAnalystWorkArea;
+import Business.EcoSystem;
+import Business.Enterprise.Enterprise;
+import Business.OrderModel.OrderItem;
+import Business.OrderModel.WholesaleOrder;
+import Business.Organization.Organization;
+import Business.Organization.RetailAnalyticsOrganization;
+import Business.Organization.RetailDataAnalyticsOrganization;
+import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
 import java.awt.CardLayout;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -13,14 +22,40 @@ import java.awt.CardLayout;
 public class RetailDataAnalystOrdersJPanel extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
+    private EcoSystem business;
+    private UserAccount userAccount;
+    private RetailDataAnalyticsOrganization retailAnalyticsOrganization;
+    private Enterprise enterprise;
     /**
      * Creates new form RequestDataAnalystInventoryJPanel
      */
-    public RetailDataAnalystOrdersJPanel(JPanel userProcessContainer) {
+    public RetailDataAnalystOrdersJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, EcoSystem business, Enterprise enterprise) {
+         this.userProcessContainer = userProcessContainer;
+        this.userAccount = account;
+        this.business = business;
+        this.retailAnalyticsOrganization = (RetailDataAnalyticsOrganization) organization;
+        this.enterprise = enterprise;
         initComponents();
-        this.userProcessContainer = userProcessContainer;
+        populateSalesDataTable();
     }
+    private void populateSalesDataTable() {
+        DefaultTableModel model = (DefaultTableModel) salesDataJTable.getModel();
+        model.setRowCount(0);
 
+        if (business.getWholesaleMasterOrderList() != null) {
+            for (WholesaleOrder order : business.getWholesaleMasterOrderList().getOrderList()) {
+                for (OrderItem oi : order.getOrderItemList()) {
+                    Object[] row = new Object[5];
+                    row[0] = oi.getProduct().getProdName();                      // Name
+                    row[1] = oi.getProduct();                                    // Product object
+                    row[2] = oi.getProduct().getModelNumber();                   // Product ID
+                    row[3] = oi.getQuantity();                                   // Products Sold
+                    row[4] = oi.getProduct().getPrice() * oi.getQuantity();      // Revenue
+                    model.addRow(row);
+                }
+            }
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -31,27 +66,27 @@ public class RetailDataAnalystOrdersJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        workRequestJTable = new javax.swing.JTable();
+        salesDataJTable = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         refreshJButton1 = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
 
-        workRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
+        salesDataJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Product Name", "Price", "Quantity Sold"
+                "Name", "Product", "ProductID", "Products Sold", "Revenue"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Double.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Double.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, true
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -62,7 +97,7 @@ public class RetailDataAnalystOrdersJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(workRequestJTable);
+        jScrollPane1.setViewportView(salesDataJTable);
 
         jLabel3.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jLabel3.setText("Sales Data");
@@ -111,8 +146,8 @@ public class RetailDataAnalystOrdersJPanel extends javax.swing.JPanel {
                     .addComponent(refreshJButton1)
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(271, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(97, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -134,6 +169,6 @@ public class RetailDataAnalystOrdersJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton refreshJButton1;
-    private javax.swing.JTable workRequestJTable;
+    private javax.swing.JTable salesDataJTable;
     // End of variables declaration//GEN-END:variables
 }

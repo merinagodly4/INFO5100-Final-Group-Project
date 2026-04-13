@@ -75,6 +75,7 @@ public class SupplierPAToManufacturer extends javax.swing.JPanel {
         workRequestJTable1 = new javax.swing.JTable();
         btnManuMakeRequest = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -155,6 +156,14 @@ public class SupplierPAToManufacturer extends javax.swing.JPanel {
             }
         });
         add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+
+        jButton1.setText("Accept/Deny");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 450, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void refreshJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButtonActionPerformed
@@ -202,9 +211,32 @@ public class SupplierPAToManufacturer extends javax.swing.JPanel {
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = workRequestJTable1.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a task.");
+            return;
+        }
+
+        WorkRequest wr = (WorkRequest) workRequestJTable1.getValueAt(selectedRow, 0);
+        if (!(wr instanceof ItemsRequest)) {
+            JOptionPane.showMessageDialog(this, "Invalid task type.");
+            return;
+        }
+
+        ItemsRequest req = (ItemsRequest) wr;
+        
+        req.setStatus("Completed");
+
+        
+        populateTable();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnManuMakeRequest;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton refreshJButton;

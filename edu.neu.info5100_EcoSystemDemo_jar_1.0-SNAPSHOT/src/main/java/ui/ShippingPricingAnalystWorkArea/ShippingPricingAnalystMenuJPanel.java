@@ -4,6 +4,7 @@
  */
 package ui.ShippingPricingAnalystWorkArea;
 import Business.EcoSystem;
+import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
@@ -127,21 +128,32 @@ public class ShippingPricingAnalystMenuJPanel extends javax.swing.JPanel {
 
     private void btnMessagesfromSupplierPAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMessagesfromSupplierPAActionPerformed
         // TODO add your handling code here:
-        if (userProcessContainer == null) {
+        Organization targetOrg = null;
+        Enterprise targetEnterprise = business.getNetworkList().get(0).getEnterpriseDirectory().getEnterpriseList().stream().filter(e -> e.getName().equals("Nike")).findFirst().orElse(null);
+        for (Organization org : targetEnterprise.getOrganizationDirectory().getOrganizationList()) {
+            System.out.println("Checking org: " + org.getName()); // DEBUG
+
+            if (org.getName().equalsIgnoreCase("Supplier Pricing Organization")) {
+                targetOrg = org;
+            }
+            if (userProcessContainer == null) {
             return;
+            }
         }
 
-        ShippingContactSupplierJPanel shippingContactSupplierJPanel =
-        new ShippingContactSupplierJPanel(
+            ShippingContactSupplierJPanel shippingContactSupplierJPanel =
+            new ShippingContactSupplierJPanel(
             userProcessContainer,
             userAccount,
-            organization,
+            targetOrg,
             business
         );
+        
 
         userProcessContainer.add("ShippingContactSupplierJPanel", shippingContactSupplierJPanel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
+        
     }//GEN-LAST:event_btnMessagesfromSupplierPAActionPerformed
 
 

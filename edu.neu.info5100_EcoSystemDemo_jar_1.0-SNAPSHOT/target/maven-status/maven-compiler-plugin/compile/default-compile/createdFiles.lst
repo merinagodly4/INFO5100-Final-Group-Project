@@ -16,7 +16,6 @@ ui\RetailMarketingSpecialistWorkArea\RetailMarketingSpecialistMenuJPanel$1.class
 ui\StoreAssociateWorkArea\SellRetailProductsJPanel.class
 Business\UserAccount\UserAccount.class
 ui\SupplierPricingAnalystRole\SupplierPricingAnalystMenuJPanel.class
-ui\ManufacturingPricingAnalystWorkArea\ManufacturingPricingAnalystMenuJPanel$3.class
 ui\RetailMarketingSpecialistWorkArea\RetailMarketingSpecialistInventoryJPanel.class
 ui\MainJFrame$2.class
 ui\SupplierPricingAnalystRole\SupplierPricingAnalystInventoryJPanel$3.class
@@ -48,12 +47,13 @@ Business\Role\ManufacturingPricingAnalystRole.class
 ui\ManufacturingPricingAnalystWorkArea\ProductionChangesJPanel$2.class
 ui\RetailBusinessAnalystWorkArea\RetailBusinessAnalystWorkAreaJPanel$1.class
 ui\RetailDataAnalystWorkArea\RetailDataAnalystOrdersJPanel$3.class
-ui\ShippingPricingAnalystWorkArea\ShippingApprovedQuotesJPanel$3.class
 ui\RetailMarketingSpecialistWorkArea\RetailMarketingSpecialistMenuJPanel.class
+ui\SupplierPricingAnalystRole\SupplierPricingAnalystSPAJPanel$5.class
 Business\Role\SystemAdminRole.class
 ui\ManufacturingPricingAnalystWorkArea\ManufacturingPricingAnalystWorkAreaJPanel$3.class
 ui\SupplierPricingAnalystRole\SellSupplierProductsJPanel$9.class
 ui\SupplierPricingAnalystRole\SupplierPricingAnalystInventoryJPanel$2.class
+.netbeans_automatic_build
 ui\SystemAdminWorkArea\ManageEnterpriseJPanel$3.class
 ui\StoreManagerWorkArea\ContactShippingWorkAreaJPanel1$4.class
 ui\SystemAdminWorkArea\SystemAdminWorkAreaJPanel$2.class
@@ -121,6 +121,7 @@ ui\AdministrativeRole\ManageOrganizationJPanel$1.class
 ui\MainJFrame.class
 Business\Organization\ShippingFacilityOrganization.class
 ui\StoreAssociateWorkArea\StoreAssociateWorkAreaJPanel$1.class
+ui\SupplierPricingAnalystRole\SupplierPAToManufacturer$5.class
 ui\MainJFrame$1.class
 ui\ProductionPlannerWorkArea\ProductionPlannerMenuJPanel$2.class
 ui\ShippingCoordinatorWorkArea\ShippingCoordinatorMenuJPanel$1.class

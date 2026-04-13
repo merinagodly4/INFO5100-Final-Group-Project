@@ -15,6 +15,8 @@ import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import Business.WorkQueue.ShippingQuotesRequest;
 import Business.Organization.SupplierPricingOrganization;
+import Business.WorkQueue.ItemsRequest;
+import javax.swing.JOptionPane;
 /**
  *
  * @author raunak
@@ -80,6 +82,7 @@ public class SupplierPricingAnalystSPAJPanel extends javax.swing.JPanel {
         workRequestJTable1 = new javax.swing.JTable();
         btnBack = new javax.swing.JButton();
         assignJButton1 = new javax.swing.JButton();
+        assignJButton2 = new javax.swing.JButton();
 
         refreshJButton.setText("Refresh");
         refreshJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -153,6 +156,13 @@ public class SupplierPricingAnalystSPAJPanel extends javax.swing.JPanel {
             }
         });
 
+        assignJButton2.setText("Approve Quote");
+        assignJButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                assignJButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -166,6 +176,8 @@ public class SupplierPricingAnalystSPAJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(assignJButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(assignJButton2)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -188,7 +200,9 @@ public class SupplierPricingAnalystSPAJPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(assignJButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(assignJButton1)
+                    .addComponent(assignJButton2))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -207,17 +221,56 @@ public class SupplierPricingAnalystSPAJPanel extends javax.swing.JPanel {
 
     private void assignJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignJButton1ActionPerformed
         // TODO add your handling code here:
-        int row = workRequestJTable1.getSelectedRow();
-if (row < 0) return;
-WorkRequest wr = (WorkRequest) workRequestJTable1.getValueAt(row, 0);
-if (!(wr instanceof ShippingQuotesRequest)) return;
-wr.setReceiver(userAccount);
-wr.setStatus("Completed"); // or "Processing" then later "Completed"
-populateTable();
+         // TODO add your handling code here:
+    // Make Request to Manufacturer for more items
+
+        String msg = JOptionPane.showInputDialog(
+                this,
+                "Enter request details for more items (e.g., item + quantity):",
+                "Items Request",
+                JOptionPane.PLAIN_MESSAGE
+        );
+        if (msg == null) {
+            return; // cancelled
+        }
+        msg = msg.trim();
+        if (msg.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter a message.");
+            return;
+        }
+
+        ShippingQuotesRequest request = new ShippingQuotesRequest();
+        request.setMessage(msg);        // base WorkRequest message
+        request.setTestResult(msg);     // your own field needItems
+        request.setSender(userAccount);
+        request.setStatus("Sent");
+
+        // Add to Manufacturer org queue and sender's queue
+        organization.getWorkQueue().getWorkRequestList().add(request);
+        userAccount.getWorkQueue().getWorkRequestList().add(request);
+
+        JOptionPane.showMessageDialog(this, "Request for quote sent to Shipping.");
+        populateTable();
     }//GEN-LAST:event_assignJButton1ActionPerformed
+
+    private void assignJButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignJButton2ActionPerformed
+       int selectedRow = workRequestJTable1.getSelectedRow();
+if (selectedRow < 0) {
+    JOptionPane.showMessageDialog(this, "Please select a request.");
+    return;
+}
+
+DefaultTableModel model = (DefaultTableModel) workRequestJTable1.getModel();
+ShippingQuotesRequest request = (ShippingQuotesRequest) model.getValueAt(selectedRow, 0);
+
+request.setStatus("Approved");
+
+populateTable();
+    }//GEN-LAST:event_assignJButton2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton assignJButton1;
+    private javax.swing.JButton assignJButton2;
     private javax.swing.JButton btnBack;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;

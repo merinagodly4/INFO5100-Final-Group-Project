@@ -15,6 +15,7 @@ import Business.WorkQueue.ShippingQuotesRequest;
 import Business.Network.Network;
 import javax.swing.table.DefaultTableModel;
 import Business.Enterprise.Enterprise; 
+import javax.swing.JOptionPane;
 
 
 /**
@@ -213,41 +214,41 @@ private Organization findSupplierPricingOrg() {
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void assignJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignJButton1ActionPerformed
-        // TODO add your handling code here:
-          String msg = javax.swing.JOptionPane.showInputDialog(
-        this,
-        "Enter quote details (items + total price):",
-        "New Shipping Quote",
-        javax.swing.JOptionPane.PLAIN_MESSAGE
-    );
-    if (msg == null) return;
-    msg = msg.trim();
-    if (msg.isEmpty()) {
-        javax.swing.JOptionPane.showMessageDialog(this, "Please enter a message.");
+        int selectedRow = workRequestJTable1.getSelectedRow();
+    if (selectedRow < 0) {
+        JOptionPane.showMessageDialog(this, "Please select a request.");
         return;
     }
-    
-    Organization supplierPricingOrg = findSupplierPricingOrg();
-if (supplierPricingOrg == null) {
-    javax.swing.JOptionPane.showMessageDialog(this, "No Supplier Pricing Organization found.");
-    return;
-}
 
-ShippingQuotesRequest req = new ShippingQuotesRequest();
-req.setMessage(msg);
-req.setTestResult(msg);      // keep your field in sync
-req.setSender(userAccount);
-req.setStatus("Sent");
+    DefaultTableModel model = (DefaultTableModel) workRequestJTable1.getModel();
+    ShippingQuotesRequest request = (ShippingQuotesRequest) model.getValueAt(selectedRow, 0);
 
-// Send to Supplier Pricing org
-supplierPricingOrg.getWorkQueue().getWorkRequestList().add(req);
-// Optional: keep a copy in shipping analyst’s queue
-userAccount.getWorkQueue().getWorkRequestList().add(req);
-// Optional: also reflect in this (shipping) org’s queue so it lists locally
-organization.getWorkQueue().getWorkRequestList().add(req);
+    // Single dialog for price quote
+    String quote = JOptionPane.showInputDialog(
+            this,
+            "Enter price quote:",
+            "Manufacturing Quote",
+            JOptionPane.PLAIN_MESSAGE
+    );
 
-javax.swing.JOptionPane.showMessageDialog(this, "Quote sent to Supplier Pricing Analyst.");
-populateTable();
+    if (quote == null || quote.trim().isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Quote cannot be empty.");
+        return;
+    }
+
+    quote = quote.trim();
+
+    // Update the request with the quote
+    request.setStatus("Quote Provided: " + quote);
+    request.setMessage(quote);  // Store quote in message field
+    // Or if you have a specific method:
+    // request.setPriceQuote(quote);
+
+    JOptionPane.showMessageDialog(this,
+            "Quote recorded: " + quote + "\nStatus updated."
+    );
+
+    populateTable();
     }//GEN-LAST:event_assignJButton1ActionPerformed
 
 

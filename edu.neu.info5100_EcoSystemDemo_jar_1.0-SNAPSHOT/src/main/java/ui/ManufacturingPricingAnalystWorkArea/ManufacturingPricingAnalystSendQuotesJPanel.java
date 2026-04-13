@@ -7,8 +7,11 @@ import Business.EcoSystem;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.ItemsRequest;
+import Business.WorkQueue.ManufacturingQuotesRequest;
+import Business.WorkQueue.StoreManagerToRetailBARestockRequest;
 import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 /**
@@ -48,6 +51,7 @@ public class ManufacturingPricingAnalystSendQuotesJPanel extends javax.swing.JPa
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         workRequestJTable1 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         refreshJButton1.setText("Refresh");
         refreshJButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -114,37 +118,44 @@ public class ManufacturingPricingAnalystSendQuotesJPanel extends javax.swing.JPa
         });
         jScrollPane2.setViewportView(workRequestJTable1);
 
+        jButton1.setText("Send Quotes");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(refreshJButton2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(87, 87, 87)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(98, 98, 98)
-                                .addComponent(refreshJButton1)))))
-                .addContainerGap(50, Short.MAX_VALUE))
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel2)
+                        .addGap(98, 98, 98)
+                        .addComponent(refreshJButton1))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1)
+                    .addComponent(refreshJButton2))
+                .addContainerGap(174, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(refreshJButton2)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(refreshJButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addGap(47, 47, 47))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -159,6 +170,44 @@ public class ManufacturingPricingAnalystSendQuotesJPanel extends javax.swing.JPa
     layout.previous(userProcessContainer);
         // TODO add your handling code here:
     }//GEN-LAST:event_refreshJButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int selectedRow = workRequestJTable1.getSelectedRow();
+    if (selectedRow < 0) {
+        JOptionPane.showMessageDialog(this, "Please select a request.");
+        return;
+    }
+
+    DefaultTableModel model = (DefaultTableModel) workRequestJTable1.getModel();
+    ItemsRequest request = (ItemsRequest) model.getValueAt(selectedRow, 0);
+
+    // Single dialog for price quote
+    String quote = JOptionPane.showInputDialog(
+            this,
+            "Enter price quote:",
+            "Manufacturing Quote",
+            JOptionPane.PLAIN_MESSAGE
+    );
+
+    if (quote == null || quote.trim().isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Quote cannot be empty.");
+        return;
+    }
+
+    quote = quote.trim();
+
+    // Update the request with the quote
+    request.setStatus("Quote Provided: " + quote);
+    request.setMessage(quote);  // Store quote in message field
+    // Or if you have a specific method:
+    // request.setPriceQuote(quote);
+
+    JOptionPane.showMessageDialog(this,
+            "Quote recorded: " + quote + "\nStatus updated."
+    );
+
+    populateTable();
+    }//GEN-LAST:event_jButton1ActionPerformed
     private void populateTable() {
         DefaultTableModel model = (DefaultTableModel) workRequestJTable1.getModel();
         model.setRowCount(0);
@@ -177,6 +226,7 @@ public class ManufacturingPricingAnalystSendQuotesJPanel extends javax.swing.JPa
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton refreshJButton1;

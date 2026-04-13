@@ -152,7 +152,7 @@ public class ProductionPlannerMenuJPanel extends javax.swing.JPanel {
                         userProcessContainer,
                         userAccount,
                         organization,
-                        business
+                        business, enterprise
                 );
 
         userProcessContainer.add(

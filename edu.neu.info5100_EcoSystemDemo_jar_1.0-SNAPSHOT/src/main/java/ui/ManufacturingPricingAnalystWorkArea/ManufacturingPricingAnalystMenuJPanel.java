@@ -4,6 +4,7 @@
  */
 package ui.ManufacturingPricingAnalystWorkArea;
 import Business.EcoSystem;
+import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
@@ -19,15 +20,17 @@ public class ManufacturingPricingAnalystMenuJPanel extends javax.swing.JPanel {
  private UserAccount userAccount;
  private Organization organization;
  private EcoSystem business;
+ private Enterprise enterprise;
     /**
      * Creates new form ManufacturingPricingAnalystMenuJPanel
      */
- public ManufacturingPricingAnalystMenuJPanel(JPanel userProcessContainer, UserAccount userAccount, Organization organization, EcoSystem business) {
+ public ManufacturingPricingAnalystMenuJPanel(JPanel userProcessContainer, UserAccount userAccount, Organization organization, EcoSystem business, Enterprise enterprise) {
  initComponents();
  this.userProcessContainer = userProcessContainer;
  this.userAccount = userAccount;
  this.organization = organization;
  this.business = business;
+ this.enterprise = enterprise;
  }
 
     /**
@@ -42,6 +45,7 @@ public class ManufacturingPricingAnalystMenuJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         btnViewProducts = new javax.swing.JButton();
         btnSendQuotes = new javax.swing.JButton();
+        btnRequestChangeProduction = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setText("Manufacturing Pricing Analyst Menu");
@@ -72,6 +76,19 @@ public class ManufacturingPricingAnalystMenuJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnRequestChangeProduction.setBackground(new java.awt.Color(102, 153, 255));
+        btnRequestChangeProduction.setForeground(new java.awt.Color(255, 255, 255));
+        btnRequestChangeProduction.setText("Make Request to Change Production");
+        btnRequestChangeProduction.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnRequestChangeProduction.setMaximumSize(new java.awt.Dimension(200, 40));
+        btnRequestChangeProduction.setMinimumSize(new java.awt.Dimension(20, 20));
+        btnRequestChangeProduction.setPreferredSize(new java.awt.Dimension(240, 25));
+        btnRequestChangeProduction.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRequestChangeProductionActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -79,25 +96,30 @@ public class ManufacturingPricingAnalystMenuJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(146, 146, 146)
-                        .addComponent(btnViewProducts, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(62, 62, 62)
-                        .addComponent(btnSendQuotes, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(76, 76, 76)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(89, Short.MAX_VALUE))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(146, 146, 146)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnSendQuotes, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(60, 60, 60)
+                                .addComponent(btnRequestChangeProduction, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnViewProducts, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(159, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jLabel1)
-                .addGap(76, 76, 76)
+                .addGap(80, 80, 80)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnViewProducts, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSendQuotes, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(312, Short.MAX_VALUE))
+                    .addComponent(btnSendQuotes, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRequestChangeProduction, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(47, 47, 47)
+                .addComponent(btnViewProducts, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(221, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -140,8 +162,30 @@ public class ManufacturingPricingAnalystMenuJPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnSendQuotesActionPerformed
 
+    private void btnRequestChangeProductionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestChangeProductionActionPerformed
+        // TODO add your handling code here:
+
+        ProductionChangesJPanel productionChangesJPanel
+        = new ProductionChangesJPanel(
+            userProcessContainer,
+            userAccount,
+            organization,
+            business,
+                enterprise
+        );
+
+        userProcessContainer.add(
+            "ProductionChangesJPanel",
+            productionChangesJPanel
+        );
+
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnRequestChangeProductionActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnRequestChangeProduction;
     private javax.swing.JButton btnSendQuotes;
     private javax.swing.JButton btnViewProducts;
     private javax.swing.JLabel jLabel1;

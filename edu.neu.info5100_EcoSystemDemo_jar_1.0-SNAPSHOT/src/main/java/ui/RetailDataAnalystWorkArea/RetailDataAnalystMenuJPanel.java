@@ -4,6 +4,7 @@
  */
 package ui.RetailDataAnalystWorkArea;
 
+import ui.SupplierPricingAnalystRole.SupplierPAToManufacturer;
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
@@ -137,8 +138,8 @@ public class RetailDataAnalystMenuJPanel extends javax.swing.JPanel {
     }
     
     // Go to the panel that lets analyst make manufacturer & pricing requests
-    RetailDataAnalystFromManufacturer panel =
-        new RetailDataAnalystFromManufacturer(
+    SupplierPAToManufacturer panel =
+        new SupplierPAToManufacturer(
             userProcessContainer,
             userAccount,
             organization,

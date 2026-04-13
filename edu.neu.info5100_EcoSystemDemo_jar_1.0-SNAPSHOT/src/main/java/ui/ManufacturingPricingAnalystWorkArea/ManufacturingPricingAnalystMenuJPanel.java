@@ -106,15 +106,26 @@ public class ManufacturingPricingAnalystMenuJPanel extends javax.swing.JPanel {
 
     private void btnSendQuotesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendQuotesActionPerformed
         // TODO add your handling code here:
-    if (userProcessContainer == null) {
-     return;
-    }
+        Organization targetOrg = null;
+    
+        Enterprise targetEnterprise = business.getNetworkList().get(0).getEnterpriseDirectory().getEnterpriseList().stream().filter(e -> e.getName().equals("Nike")).findFirst().orElse(null);
+        for (Organization org : targetEnterprise.getOrganizationDirectory().getOrganizationList()) {
+            System.out.println("Checking org: " + org.getName()); // DEBUG
+
+            if (org.getName().equalsIgnoreCase("Supplier Pricing Organization")) {
+                targetOrg = org;
+                
+            }
+            if (userProcessContainer == null) {
+            return;
+            }
+        }
 
     ManufacturingPricingAnalystSendQuotesJPanel manufacturingPricingAnalystSendQuotesJPanel =
      new ManufacturingPricingAnalystSendQuotesJPanel(
          userProcessContainer,
          userAccount,
-         organization,
+         targetOrg,
          business
      );
 

@@ -6,8 +6,11 @@ package ui.ManufacturingPricingAnalystWorkArea;
 import Business.EcoSystem;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.ItemsRequest;
+import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author lajon
@@ -29,6 +32,7 @@ public class ManufacturingPricingAnalystSendQuotesJPanel extends javax.swing.JPa
      this.organization = organization;
      this.business = business;
      initComponents();
+     populateTable();
      }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -155,7 +159,22 @@ public class ManufacturingPricingAnalystSendQuotesJPanel extends javax.swing.JPa
     layout.previous(userProcessContainer);
         // TODO add your handling code here:
     }//GEN-LAST:event_refreshJButton2ActionPerformed
+    private void populateTable() {
+        DefaultTableModel model = (DefaultTableModel) workRequestJTable1.getModel();
+        model.setRowCount(0);
 
+        for (WorkRequest wr : organization.getWorkQueue().getWorkRequestList()) {
+            if (wr instanceof ItemsRequest) {
+                ItemsRequest ir = (ItemsRequest) wr;
+                Object[] row = new Object[4];
+                row[0] = ir; // toString() = needItems
+                row[1] = ir.getSender() == null ? null : ir.getSender().getEmployee().getName();
+                row[2] = ir.getReceiver() == null ? null : ir.getReceiver().getEmployee().getName();
+                row[3] = ir.getStatus();
+                model.addRow(row);
+            }
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel2;

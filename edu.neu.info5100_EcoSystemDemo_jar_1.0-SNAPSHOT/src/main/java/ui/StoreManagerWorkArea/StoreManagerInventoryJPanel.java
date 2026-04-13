@@ -237,7 +237,7 @@ public class StoreManagerInventoryJPanel extends javax.swing.JPanel {
     request.setStatus("Sent");
 
     Organization targetOrg = null;
-
+    
     for (Organization org : enterprise.getOrganizationDirectory().getOrganizationList()) {
         System.out.println("Checking org: " + org.getName());
 

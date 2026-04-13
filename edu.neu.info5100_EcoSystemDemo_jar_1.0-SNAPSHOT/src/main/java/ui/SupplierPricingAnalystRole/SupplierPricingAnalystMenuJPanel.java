@@ -212,15 +212,15 @@ public class SupplierPricingAnalystMenuJPanel extends javax.swing.JPanel {
             return;
         }
 
-        SupplierPricingAnalystMPAJPanel supplierPricingAnalystMPAJPanel =
-            new SupplierPricingAnalystMPAJPanel(
+        SupplierPAToManufacturer supplierPAToManufacturer =
+            new SupplierPAToManufacturer(
                 userProcessContainer,
                 userAccount,
                 organization,
                 business
             );
 
-        userProcessContainer.add("SupplierPricingAnalystMPAJPanel",supplierPricingAnalystMPAJPanel );
+        userProcessContainer.add("SupplierPAToManufacturer",supplierPAToManufacturer );
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer); 
     }//GEN-LAST:event_btnMessageManufacturingPAIdentifyResourceAssetsActionPerformed

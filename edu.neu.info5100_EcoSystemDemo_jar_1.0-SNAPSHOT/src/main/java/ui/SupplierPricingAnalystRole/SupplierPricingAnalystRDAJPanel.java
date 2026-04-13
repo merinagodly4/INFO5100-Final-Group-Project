@@ -82,40 +82,40 @@ public class SupplierPricingAnalystRDAJPanel extends javax.swing.JPanel {
 
         workRequestJTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Message", "Sender", "Receiver", "Status"
+                "Message", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Object.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, true, false
+                false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -246,11 +246,9 @@ public class SupplierPricingAnalystRDAJPanel extends javax.swing.JPanel {
 
         for (WorkRequest wr : organization.getWorkQueue().getWorkRequestList()) {
             if (wr instanceof PriceChangeRequest) {
-                Object[] row = new Object[4];
+                Object[] row = new Object[2];
                 row[0] = wr;                                 // will call toString() on PriceChangeRequest
-                row[1] = wr.getSender() == null ? null : wr.getSender().getEmployee().getName();
-                row[2] = wr.getReceiver() == null ? null : wr.getReceiver().getEmployee().getName();
-                row[3] = wr.getStatus();
+                row[1] = wr.getStatus();
                 model.addRow(row);
             }
         }

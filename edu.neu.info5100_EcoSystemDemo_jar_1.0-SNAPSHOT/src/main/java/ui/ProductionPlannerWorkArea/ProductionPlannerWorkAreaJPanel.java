@@ -56,7 +56,7 @@ public class ProductionPlannerWorkAreaJPanel extends javax.swing.JPanel {
     }
 
     private void populateTable() {
-    DefaultTableModel m = new DefaultTableModel(new Object[][]{}, new String[] {"Message","Sender","Status"}) {
+    DefaultTableModel m = new DefaultTableModel(new Object[][]{}, new String[] {"Message","Status"}) {
         public boolean isCellEditable(int r,int c){ return false; }
     };
     workRequestJTable1.setModel(m);
@@ -164,7 +164,7 @@ public class ProductionPlannerWorkAreaJPanel extends javax.swing.JPanel {
         });
         add(refreshJButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 60, -1, -1));
 
-        refreshJButton4.setText("Request Change in Production");
+        refreshJButton4.setText("Provide Change Verdict");
         refreshJButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 refreshJButton4ActionPerformed(evt);
@@ -187,41 +187,41 @@ public class ProductionPlannerWorkAreaJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_refreshJButton3ActionPerformed
 
     private void refreshJButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButton4ActionPerformed
-        // TODO add your handling code here:
-        JPanel panel = new JPanel(new java.awt.GridLayout(0,2));
-    panel.add(new JLabel("Action:"));
-    JComboBox cb = new JComboBox<>(new String[] {"RAMP_UP","SLOW_DOWN"});
-    panel.add(cb);
-    panel.add(new JLabel("Material / Item:"));
-    JTextField txtItem = new JTextField();
-    panel.add(txtItem);
-    panel.add(new JLabel("Quantity/Rate:"));
-    JTextField txtQty = new JTextField();
-    panel.add(txtQty);
+      int selectedRow = workRequestJTable1.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a request.");
+            return;
+        }
 
-int res = JOptionPane.showConfirmDialog(this, panel, "Request Production Change", JOptionPane.OK_CANCEL_OPTION);
-if (res != JOptionPane.OK_OPTION) return;
-String action = (String) cb.getSelectedItem();
-String item = txtItem.getText().trim();
-String qty = txtQty.getText().trim();
-if (item.isEmpty() || qty.isEmpty()) {
-    JOptionPane.showMessageDialog(this, "Please enter item and quantity/rate.");
-    return;
-}
-String msg = action + ": " + item + " x " + qty;
+        DefaultTableModel model = (DefaultTableModel) workRequestJTable1.getModel();
+        ProductionMaterialsRequest request
+                = (ProductionMaterialsRequest) model.getValueAt(selectedRow, 0);
 
-ProductionMaterialsRequest req = new ProductionMaterialsRequest();
-req.setMessage(msg);
-req.setTestResult(msg);
-req.setSender(userAccount);
-req.setStatus("Sent");
+        String verdict = JOptionPane.showInputDialog(
+                this,
+                "Enter Verdict (Approve / Deny):",
+                "Restock Decision",
+                JOptionPane.PLAIN_MESSAGE
+        );
 
-// send to organization (operations) or to target org:
-organization.getWorkQueue().getWorkRequestList().add(req);
-userAccount.getWorkQueue().getWorkRequestList().add(req);
+        if (verdict == null || verdict.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Verdict cannot be empty.");
+            return;
+        }
 
-JOptionPane.showMessageDialog(this, "Request sent.");
-populateTable();
+        verdict = verdict.trim();
+
+// Set ONLY status
+        request.setStatus(
+                verdict.equalsIgnoreCase("Approve") ? "Approved" : "Denied"
+        );
+
+// do NOT touch message
+        JOptionPane.showMessageDialog(this,
+                "Decision recorded: " + request.getStatus()
+        );
+
+        populateTable();
     }//GEN-LAST:event_refreshJButton4ActionPerformed
 
     private void refreshJButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButton2ActionPerformed

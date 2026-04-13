@@ -159,6 +159,9 @@ private Organization findSupplierPricingOrg() {
             }
         });
         jScrollPane1.setViewportView(workRequestJTable);
+        if (workRequestJTable.getColumnModel().getColumnCount() > 0) {
+            workRequestJTable.getColumnModel().getColumn(1).setHeaderValue("Quanity");
+        }
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 510, 390));
 

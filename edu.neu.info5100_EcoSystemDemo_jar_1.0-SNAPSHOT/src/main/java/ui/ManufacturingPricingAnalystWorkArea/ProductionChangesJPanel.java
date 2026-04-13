@@ -49,7 +49,7 @@ public class ProductionChangesJPanel extends javax.swing.JPanel {
     }
 
     private void populateTable() {
-    DefaultTableModel m = new DefaultTableModel(new Object[][]{}, new String[] {"Message","Sender","Status"}) {
+    DefaultTableModel m = new DefaultTableModel(new Object[][]{}, new String[] {"Message","Status"}) {
         public boolean isCellEditable(int r,int c){ return false; }
     };
     workRequestJTable1.setModel(m);

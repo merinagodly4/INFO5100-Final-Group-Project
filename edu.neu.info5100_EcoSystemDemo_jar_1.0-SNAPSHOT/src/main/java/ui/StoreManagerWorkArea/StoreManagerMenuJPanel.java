@@ -182,23 +182,25 @@ public class StoreManagerMenuJPanel extends javax.swing.JPanel {
     private void btnContactShippingCompanyIdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContactShippingCompanyIdentifyResourceAssetsActionPerformed
         // TODO add your handling code here:
     // find the ShippingFacilityOrganization
-    Organization shippingOrg = null;
-    for (Organization org : /* shippingEnterprise */ enterprise.getOrganizationDirectory().getOrganizationList()) {
-        if (org instanceof ShippingFacilityOrganization) {
-            shippingOrg = org;
-            break;
-        }
-    }
-    if (shippingOrg == null) {
+    Enterprise targetEnterprise = business.getNetworkList().get(0).getEnterpriseDirectory().getEnterpriseList().stream().filter(e -> e.getName().equals("USPS")).findFirst().orElse(null);
+    for (Organization org : targetEnterprise.getOrganizationDirectory().getOrganizationList()) {
+        System.out.println("Checking org: " + org.getName()); // DEBUG
+ 
+        if (org.getName().equalsIgnoreCase("East Shipping Facility")) {
+            Organization targetOrg = org;
+    
+    if (targetOrg == null) {
         JOptionPane.showMessageDialog(this, "No shipping organization found.");
         return;
     }
 
     ContactShippingWorkAreaJPanel1 panel =
-        new ContactShippingWorkAreaJPanel1(userProcessContainer, userAccount, shippingOrg, business);
+        new ContactShippingWorkAreaJPanel1(userProcessContainer, userAccount, targetOrg, business);
     userProcessContainer.add("ContactShippingWorkAreaJPanel1", panel);
     CardLayout layout = (CardLayout) userProcessContainer.getLayout();
     layout.next(userProcessContainer);
+        }
+    }
     }//GEN-LAST:event_btnContactShippingCompanyIdentifyResourceAssetsActionPerformed
 
     private void btnConfirmRequestsAssociatesIdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmRequestsAssociatesIdentifyResourceAssetsActionPerformed

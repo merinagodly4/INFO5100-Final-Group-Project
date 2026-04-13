@@ -24,6 +24,7 @@ import Business.UserAccount.UserAccount;
 import com.github.javafaker.Faker;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
+import Business.Organization.RetailAnalyticsOrganization;
 
 public class ConfigureASystem {
 

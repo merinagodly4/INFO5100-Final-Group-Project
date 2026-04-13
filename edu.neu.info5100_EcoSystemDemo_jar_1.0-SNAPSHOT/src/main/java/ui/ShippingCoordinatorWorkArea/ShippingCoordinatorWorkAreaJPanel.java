@@ -8,6 +8,7 @@ package ui.ShippingCoordinatorWorkArea;
 import Business.EcoSystem;
 import Business.Organization.SupplierPricingOrganization;
 import Business.Organization.Organization;
+import Business.OrderModel.Shipment;
 import Business.Organization.ShippingFacilityOrganization;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.ManufacturingQuotesRequest;
@@ -42,8 +43,21 @@ public class ShippingCoordinatorWorkAreaJPanel extends javax.swing.JPanel {
     }
     
     public void populateTable(){
-        
-        
+        DefaultTableModel model = (DefaultTableModel) workRequestJTable.getModel();
+        model.setRowCount(0);
+
+        // Check if shipment directory exists and has shipments
+        if (business.getShipmentDirectory() != null) {
+            for (Shipment shipment : business.getShipmentDirectory().getShipmentList()) {
+                Object[] row = new Object[5];
+                row[0] = shipment.getShipmentID();
+                row[1] = shipment.getOrigin();
+                row[2] = shipment.getDestination();
+                row[3] = shipment.getDepartureDate();
+                row[4] = shipment.getEstimatedArrival();
+                model.addRow(row);
+            }
+        }
     }
 
     /**

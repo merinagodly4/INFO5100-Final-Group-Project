@@ -3,11 +3,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package ui.RetailMarketingSpecialistWorkArea;
+import Business.WorkQueue.ItemsRequest;
 import ui.StoreManagerWorkArea.*;
 import ui.StoreAssociateWorkArea.*;
 import ui.RetailDataAnalystWorkArea.*;
 import javax.swing.JPanel;
 import java.awt.CardLayout;
+import java.io.File;
+import java.net.URL;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -97,36 +104,34 @@ public class RetailMarketingSpecialistInventoryJPanel extends javax.swing.JPanel
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnBack)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnBack))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(assignJButton1)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel3)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(refreshJButton1))
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 610, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(51, Short.MAX_VALUE))
+                    .addComponent(assignJButton1)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel3)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(refreshJButton1))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 610, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(btnBack)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(refreshJButton1))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(assignJButton1)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnBack)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(refreshJButton1))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(assignJButton1)))
+                .addContainerGap(121, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -144,6 +149,40 @@ public class RetailMarketingSpecialistInventoryJPanel extends javax.swing.JPanel
 
     private void assignJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignJButton1ActionPerformed
         // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser();
+fileChooser.setFileFilter(new FileNameExtensionFilter(
+    "Assignment Files (*.pdf, *.doc, *.docx, *.txt)", 
+    "pdf", "doc", "docx", "txt"));
+
+int returnVal = fileChooser.showOpenDialog(this);
+
+if (returnVal == JFileChooser.APPROVE_OPTION) {
+    File selectedFile = fileChooser.getSelectedFile();
+    
+    // Now get the selected row from the table
+    int selectedRow = workRequestJTable.getSelectedRow();
+    if (selectedRow < 0) {
+        JOptionPane.showMessageDialog(this, "Please select a request.");
+        return;
+    }
+
+    DefaultTableModel model = (DefaultTableModel) workRequestJTable.getModel();
+    ItemsRequest request = (ItemsRequest) model.getValueAt(selectedRow, 0);
+
+    // Set status to "Complete"
+    request.setStatus("Complete");
+    
+    // Optional: Store the file path in the message
+    request.setMessage("File uploaded: " + selectedFile.getName());
+
+    JOptionPane.showMessageDialog(this,
+            "File uploaded: " + selectedFile.getName() + "\nStatus set to Complete."
+    );
+
+    
+} else {
+    JOptionPane.showMessageDialog(this, "File upload cancelled.");
+}
     }//GEN-LAST:event_assignJButton1ActionPerformed
 
 

@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package ui.RetailDataAnalystWorkArea;
+package ui.SupplierPricingAnalystRole;
 
 import ui.StoreAssociateWorkArea.*;
 import ui.StoreManagerWorkArea.*;
@@ -24,7 +24,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author raunak
  */
-public class RetailDataAnalystFromManufacturer extends javax.swing.JPanel {
+public class SupplierPAToManufacturer extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
     private EcoSystem business;
@@ -33,7 +33,7 @@ public class RetailDataAnalystFromManufacturer extends javax.swing.JPanel {
     /**
      * Creates new form LabAssistantWorkAreaJPanel
      */
-    public RetailDataAnalystFromManufacturer(JPanel userProcessContainer, UserAccount account, Organization organization, EcoSystem business) {
+    public SupplierPAToManufacturer(JPanel userProcessContainer, UserAccount account, Organization organization, EcoSystem business) {
         initComponents();
         
         this.userProcessContainer = userProcessContainer;
@@ -89,7 +89,7 @@ public class RetailDataAnalystFromManufacturer extends javax.swing.JPanel {
         add(refreshJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 60, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        jLabel2.setText("Messages from Manufacturer");
+        jLabel2.setText("Messages to Manufacturer");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, -1, -1));
 
         workRequestJTable1.setModel(new javax.swing.table.DefaultTableModel(

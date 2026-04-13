@@ -2,20 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package ui.ProductionPlannerWorkArea;
+package ui.ManufacturingPricingAnalystWorkArea;
 
-import ui.RetailDataAnalystWorkArea.*;
-import ui.StoreAssociateWorkArea.*;
-import ui.StoreManagerWorkArea.*;
-import ui.SupplierPricingAnalystRole.*;
-import ui.SupplierPricingAnalystRole.*;
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import Business.Organization.ManufacturingOperationsOrganization;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
-import Business.WorkQueue.ManufacturingQuotesRequest;
 import Business.WorkQueue.ProductionMaterialsRequest;
 import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
@@ -30,25 +24,24 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author raunak
  */
-public class ProductionPlannerWorkAreaJPanel extends javax.swing.JPanel {
+public class ProductionChangesJPanel extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
     private EcoSystem business;
-    private Enterprise enterprise;
     private UserAccount userAccount;
-    private ManufacturingOperationsOrganization manufacturingOperationsOrganization;
     private  Organization organization;
+    private Enterprise enterprise;
 
     /**
      * Creates new form LabAssistantWorkAreaJPanel
      */
-    public ProductionPlannerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, EcoSystem business, Enterprise enterprise) {
+    public ProductionChangesJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, EcoSystem business, Enterprise enterprise) {
         initComponents();
 
         this.userProcessContainer = userProcessContainer;
         this.userAccount = account;
         this.business = business;
-        this.manufacturingOperationsOrganization = (ManufacturingOperationsOrganization) organization;
+        
         this.organization = organization;
         this.enterprise = enterprise;
 
@@ -217,7 +210,7 @@ req.setSender(userAccount);
 req.setStatus("Sent");
 
 // send to organization (operations) or to target org:
-organization.getWorkQueue().getWorkRequestList().add(req);
+enterprise.getWorkQueue().getWorkRequestList().add(req);
 userAccount.getWorkQueue().getWorkRequestList().add(req);
 
 JOptionPane.showMessageDialog(this, "Request sent.");

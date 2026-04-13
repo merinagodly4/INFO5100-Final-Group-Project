@@ -6,12 +6,15 @@ package ui.SupplierPricingAnalystRole;
 
 
 import Business.EcoSystem;
+import Business.OrderModel.Product;
+import Business.OrderModel.SupplierProductCatalog;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -24,6 +27,7 @@ public class SupplierPricingAnalystInventoryJPanel extends javax.swing.JPanel {
     private Organization organization;
     private EcoSystem business;
     private WorkRequest request;
+    SupplierProductCatalog productCatalog;
     
     /**
      * Creates new form ProcessWorkRequestJPanel
@@ -38,6 +42,8 @@ public class SupplierPricingAnalystInventoryJPanel extends javax.swing.JPanel {
         this.userAccount = account;
         this.organization = organization;
         this.business = business;
+        this.productCatalog = business.getSupplierProductCatalog();
+        populateProductTable();
     }
      public SupplierPricingAnalystInventoryJPanel(JPanel userProcessContainer,
                                                  WorkRequest request) {
@@ -45,7 +51,20 @@ public class SupplierPricingAnalystInventoryJPanel extends javax.swing.JPanel {
         this.userProcessContainer = userProcessContainer;
         this.request = request;
     }
-    
+    private void populateProductTable() {
+        DefaultTableModel model = (DefaultTableModel) tblProductCatalog.getModel();
+        model.setRowCount(0);
+        
+        for (Product p : productCatalog.getProductcatalog()) {
+            Object row[] = new Object[4];
+            row[0] = p;
+            row[1] = p.getModelNumber();
+            row[2] = p.getPrice();
+            row[3] = p.getAvail();
+            model.addRow(row);
+        }
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -56,27 +75,27 @@ public class SupplierPricingAnalystInventoryJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        workRequestJTable = new javax.swing.JTable();
+        tblProductCatalog = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         refreshJButton1 = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
 
-        workRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
+        tblProductCatalog.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Product Name", "Price", "Quantity"
+                "Product Name", "Product ID", "Price", "Quantity"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Double.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, true
+                false, true, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -87,7 +106,7 @@ public class SupplierPricingAnalystInventoryJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(workRequestJTable);
+        jScrollPane1.setViewportView(tblProductCatalog);
 
         jLabel3.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jLabel3.setText("Store Inventory");
@@ -142,6 +161,7 @@ public class SupplierPricingAnalystInventoryJPanel extends javax.swing.JPanel {
 
     private void refreshJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButton1ActionPerformed
         // TODO add your handling code here:
+        populateProductTable();
     }//GEN-LAST:event_refreshJButton1ActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -157,6 +177,6 @@ public class SupplierPricingAnalystInventoryJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton refreshJButton1;
-    private javax.swing.JTable workRequestJTable;
+    private javax.swing.JTable tblProductCatalog;
     // End of variables declaration//GEN-END:variables
 }

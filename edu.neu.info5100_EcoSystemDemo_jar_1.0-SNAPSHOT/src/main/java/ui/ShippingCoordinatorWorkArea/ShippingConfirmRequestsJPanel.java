@@ -47,11 +47,9 @@ public ShippingConfirmRequestsJPanel(JPanel userProcessContainer, UserAccount us
             // Filter only ShipmentsRequest objects
             if (wr instanceof ShipmentsRequest) {
                 ShipmentsRequest req = (ShipmentsRequest) wr;
-                Object[] row = new Object[4];
+                Object[] row = new Object[2];
                 row[0] = req; // toString() shows the message
-                row[1] = req.getSender() == null ? null : req.getSender().getEmployee().getName();
-                row[2] = req.getReceiver() == null ? null : req.getReceiver().getEmployee().getName();
-                row[3] = req.getStatus();
+                row[1] = req.getStatus();
                 model.addRow(row);
             }
         }
@@ -74,7 +72,7 @@ public ShippingConfirmRequestsJPanel(JPanel userProcessContainer, UserAccount us
         workRequestJTable1 = new javax.swing.JTable();
         btnBack = new javax.swing.JButton();
 
-        assignJButton.setText("Confirm Store Manager Requests");
+        assignJButton.setText("Provide Status Update");
         assignJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 assignJButtonActionPerformed(evt);
@@ -93,20 +91,20 @@ public ShippingConfirmRequestsJPanel(JPanel userProcessContainer, UserAccount us
 
         workRequestJTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Message", "Sender", "Receiver", "Status"
+                "Message", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Object.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, true, false
+                false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -164,25 +162,41 @@ public ShippingConfirmRequestsJPanel(JPanel userProcessContainer, UserAccount us
     }// </editor-fold>//GEN-END:initComponents
 
     private void assignJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignJButtonActionPerformed
-int selectedRow = workRequestJTable1.getSelectedRow();
-        if (selectedRow < 0) {
-            JOptionPane.showMessageDialog(this, "Please select a request from the table.");
-            return;
-        }
+  int selectedRow = workRequestJTable1.getSelectedRow();
+    if (selectedRow < 0) {
+        JOptionPane.showMessageDialog(this, "Please select a request.");
+        return;
+    }
 
-        WorkRequest wr = (WorkRequest) workRequestJTable1.getValueAt(selectedRow, 0);
-        if (!(wr instanceof ShipmentsRequest)) {
-            JOptionPane.showMessageDialog(this, "Invalid request type for confirmation.");
-            return;
-        }
+    DefaultTableModel model = (DefaultTableModel) workRequestJTable1.getModel();
+    ShipmentsRequest request = (ShipmentsRequest) model.getValueAt(selectedRow, 0);
 
-        // Set receiver to the current user and update status
-        ShipmentsRequest req = (ShipmentsRequest) wr;
-        req.setReceiver(userAccount);
-        req.setStatus("Completed"); // Mark as Completed
+    // Single dialog for price quote
+    String quote = JOptionPane.showInputDialog(
+            this,
+            "Enter Status Update:",
+            "Status Update",
+            JOptionPane.PLAIN_MESSAGE
+    );
 
-        JOptionPane.showMessageDialog(this, "Shipment request confirmed and marked as Completed.");
-        populateTable(); // Refresh table to show new status
+    if (quote == null || quote.trim().isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Quote cannot be empty.");
+        return;
+    }
+
+    quote = quote.trim();
+
+    // Update the request with the quote
+    request.setStatus("Update: " + quote);
+    request.setMessage(quote);  // Store quote in message field
+    // Or if you have a specific method:
+    // request.setPriceQuote(quote);
+
+    JOptionPane.showMessageDialog(this,
+            "Status: " + quote
+    );
+
+    populateTable();
        
     }//GEN-LAST:event_assignJButtonActionPerformed
 

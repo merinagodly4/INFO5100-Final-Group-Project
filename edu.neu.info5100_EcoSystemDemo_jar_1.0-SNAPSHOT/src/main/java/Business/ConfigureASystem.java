@@ -64,7 +64,7 @@ public class ConfigureASystem {
         ShipmentDirectory shipmentDirectory = configureShipments(supplierCatalog);
 
         // -- Wholesale orders (supplier -> retailer)
-        configureWholesaleOrders(supplierCatalog);
+        configureWholesaleOrders(supplierCatalog, system);
 
         return system;
     }
@@ -308,7 +308,7 @@ public class ConfigureASystem {
     }
 
     // Documents sales from supplier (Nike) to retailer (Dick's)
-    private static void configureWholesaleOrders(SupplierProductCatalog supplierCatalog) {
+    private static void configureWholesaleOrders(SupplierProductCatalog supplierCatalog, EcoSystem system) {
 
         String[][] stores = {
             {"1", "Dick's - Boston"},
@@ -329,6 +329,7 @@ public class ConfigureASystem {
                 Product p = supplierCatalog.getProductcatalog().get(randomIndex);
                 int qty = faker.number().numberBetween(5, 50);
                 order.addNewOrderItem(p, p.getPrice(), qty);
+                system.getWholesaleMasterOrderList().addNewOrder(order);
             }
 
 

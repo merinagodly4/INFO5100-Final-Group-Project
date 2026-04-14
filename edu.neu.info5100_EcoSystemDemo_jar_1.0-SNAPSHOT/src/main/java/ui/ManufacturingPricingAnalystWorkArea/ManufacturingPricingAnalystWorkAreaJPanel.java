@@ -4,9 +4,6 @@
  */
 package ui.ManufacturingPricingAnalystWorkArea;
 
-import ui.RetailDataAnalystWorkArea.*;
-import ui.StoreAssociateWorkArea.*;
-import ui.StoreManagerWorkArea.*;
 import ui.SupplierPricingAnalystRole.*;
 import ui.SupplierPricingAnalystRole.*;
 import Business.EcoSystem;

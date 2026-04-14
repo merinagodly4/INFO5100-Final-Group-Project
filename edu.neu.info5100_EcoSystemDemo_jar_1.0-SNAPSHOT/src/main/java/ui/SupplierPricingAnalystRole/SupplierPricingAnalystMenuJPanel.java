@@ -8,7 +8,7 @@ import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
-import ui.StoreAssociateWorkArea.SellRetailProductsJPanel;
+import ui.RetailAssociateWorkArea.SellRetailProductsJPanel;
 
 
 /**
@@ -192,8 +192,8 @@ public class SupplierPricingAnalystMenuJPanel extends javax.swing.JPanel {
             return;
         }
 
-        SupplierPricingAnalystRDAJPanel supplierPricingAnalystRDAJPanel =
-            new SupplierPricingAnalystRDAJPanel(
+        SupplierPAToSupplierDAJPanel supplierPricingAnalystRDAJPanel =
+            new SupplierPAToSupplierDAJPanel(
                 userProcessContainer,
                 userAccount,
                 organization,
@@ -212,8 +212,8 @@ public class SupplierPricingAnalystMenuJPanel extends javax.swing.JPanel {
             return;
         }
 
-        SupplierPAToManufacturer supplierPAToManufacturer =
-            new SupplierPAToManufacturer(
+        SupplierPAToManufacturePA supplierPAToManufacturer =
+            new SupplierPAToManufacturePA(
                 userProcessContainer,
                 userAccount,
                 organization,
@@ -231,8 +231,8 @@ public class SupplierPricingAnalystMenuJPanel extends javax.swing.JPanel {
             return;
         }
 
-        SupplierPricingAnalystSPAJPanel supplierPricingAnalystSPAJPanel =
-            new SupplierPricingAnalystSPAJPanel(
+        SupplierPAToShippingPAJPanel supplierPricingAnalystSPAJPanel =
+            new SupplierPAToShippingPAJPanel(
                 userProcessContainer,
                 userAccount,
                 organization,

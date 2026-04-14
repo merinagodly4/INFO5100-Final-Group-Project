@@ -5,25 +5,26 @@
 package Business.Organization;
 
 import Business.Role.Role;
-import Business.Role.RetailBusinessAnalystRole;
+
+import Business.Role.SupplierDataAnalystRole;
 import java.util.ArrayList;
 
 /**
  *
  * @author raunak
  */
-public class RetailDataAnalyticsOrganization extends Organization{
+public class SupplierDataAnalyticsOrganization extends Organization{
 
 
-    public RetailDataAnalyticsOrganization() {
-        super(Organization.Type.RetailDataAnalytics.getValue());
+    public SupplierDataAnalyticsOrganization() {
+        super(Organization.Type.SupplierDataAnalytics.getValue());
     }
 
 
     @Override
     public ArrayList<Role> getSupportedRole() {
         ArrayList<Role> roles = new ArrayList();
-        roles.add(new RetailBusinessAnalystRole());
+        roles.add(new SupplierDataAnalystRole());
         return roles;
     }
 

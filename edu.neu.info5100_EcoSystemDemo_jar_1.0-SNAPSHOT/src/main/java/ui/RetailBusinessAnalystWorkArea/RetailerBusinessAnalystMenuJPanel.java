@@ -119,8 +119,8 @@ public class RetailerBusinessAnalystMenuJPanel extends javax.swing.JPanel {
         }
 
 
-        RetailBusinessAnalystWorkAreaJPanel workAreaPanel =
-            new RetailBusinessAnalystWorkAreaJPanel(
+        RetailBusinessAnalystToStoreManagerRequest workAreaPanel =
+            new RetailBusinessAnalystToStoreManagerRequest(
                 userProcessContainer,
                 userAccount,
                 organization,

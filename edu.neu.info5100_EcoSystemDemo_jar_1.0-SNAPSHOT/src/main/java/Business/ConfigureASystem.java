@@ -18,13 +18,13 @@ import Business.Organization.RetailStoreOrganization;
 import Business.Organization.ShippingFacilityOrganization;
 import Business.Organization.SupplierPricingOrganization;
 import Business.Organization.SupplierMarketingOrganization;
-import Business.Organization.RetailAnalyticsOrganization;
+import Business.Organization.RetailDataAnalyticsOrganization;
 import Business.Role.*;
 import Business.UserAccount.UserAccount;
 import com.github.javafaker.Faker;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
-import Business.Organization.RetailAnalyticsOrganization;
+import Business.Organization.RetailDataAnalyticsOrganization;
 
 public class ConfigureASystem {
 
@@ -87,13 +87,13 @@ public class ConfigureASystem {
         supplierPricingOrg.getUserAccountDirectory().createUserAccount(
                 "supplierpa", "supplierpa", supplierPricingEmp, new SupplierPricingAnalyst());
         
-         Organization retailDataAnalyticsOrg = supplier.getOrganizationDirectory()
-                .createOrganization(Organization.Type.RetailDataAnalytics);
-        retailDataAnalyticsOrg.setName("Retail Data Analytics Organization");
+        Organization supplierDataAnalyticsOrg = supplier.getOrganizationDirectory()
+                .createOrganization(Organization.Type.SupplierDataAnalytics);
+        supplierDataAnalyticsOrg.setName("Supplier Data Analytics Organization");
 
-        Employee supplierDataAnalystEmp = retailDataAnalyticsOrg.getEmployeeDirectory()
+        Employee supplierDataAnalystEmp = supplierDataAnalyticsOrg.getEmployeeDirectory()
                 .createEmployee(faker.name().fullName());
-        retailDataAnalyticsOrg.getUserAccountDirectory().createUserAccount(
+        supplierDataAnalyticsOrg.getUserAccountDirectory().createUserAccount(
                 "supplierda", "supplierda", supplierDataAnalystEmp, new SupplierDataAnalystRole());
 
         // 2. Supplier Marketing Organization
@@ -113,7 +113,7 @@ public class ConfigureASystem {
         // 3. Retail Analytics Organization
         //    -> Retail Business Analyst
         Organization retailAnalyticsOrg = retail.getOrganizationDirectory()
-                .createOrganization(Organization.Type.RetailAnalytics); // swap type when RetailAnalytics type is added
+                .createOrganization(Organization.Type.RetailDataAnalytics); 
         retailAnalyticsOrg.setName("Retail Analytics Organization");
 
         Employee retailBAEmp = retailAnalyticsOrg.getEmployeeDirectory()

@@ -8,7 +8,7 @@ import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
-import ui.RetailDataAnalystWorkArea.RetailDataAnalystMenuJPanel;
+import ui.SupplierDataAnalystWorkArea.SupplierDataAnalystMenuJPanel;
 
 /**
  *
@@ -17,7 +17,7 @@ import ui.RetailDataAnalystWorkArea.RetailDataAnalystMenuJPanel;
 public class SupplierDataAnalystRole extends Role {
      @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business) {
-        return new RetailDataAnalystMenuJPanel(userProcessContainer, account, organization, business);
+        return new SupplierDataAnalystMenuJPanel(userProcessContainer, account, organization, business);
     }
 }
  

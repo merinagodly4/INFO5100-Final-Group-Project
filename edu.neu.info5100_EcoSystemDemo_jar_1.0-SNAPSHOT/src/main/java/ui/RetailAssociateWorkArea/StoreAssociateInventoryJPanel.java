@@ -1,70 +1,43 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package ui.SupplierPricingAnalystRole;
-
-
+package ui.RetailAssociateWorkArea;
 import Business.EcoSystem;
 import Business.OrderModel.Product;
-import Business.OrderModel.SupplierProductCatalog;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
-import Business.WorkQueue.WorkRequest;
-import java.awt.CardLayout;
-import java.awt.Component;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import Business.OrderModel.RetailerProductCatalog;
+import java.awt.CardLayout;
+ import Business.WorkQueue.StoreAssociateToStoreMRestockRequest;
 import javax.swing.table.DefaultTableModel;
-
 /**
  *
- * @author raunak
+ * @author lajon
  */
-public class SupplierPricingAnalystInventoryJPanel extends javax.swing.JPanel {
-  
+public class StoreAssociateInventoryJPanel extends javax.swing.JPanel {
+
     private JPanel userProcessContainer;
-    private UserAccount userAccount;
-    private Organization organization;
     private EcoSystem business;
-    private WorkRequest request;
-    SupplierProductCatalog productCatalog;
-    
+    private UserAccount userAccount;
+    private Business.Organization.RetailStoreOrganization retailStoreOrganization;
+     RetailerProductCatalog productCatalog;
     /**
-     * Creates new form ProcessWorkRequestJPanel
+     * Creates new form RequestDataAnalystInventoryJPanel
      */
- 
-    public SupplierPricingAnalystInventoryJPanel(JPanel userProcessContainer,
-                                                 UserAccount account,
-                                                 Organization organization,
-                                                 EcoSystem business) {
-        initComponents();
-        this.userProcessContainer = userProcessContainer;
-        this.userAccount = account;
-        this.organization = organization;
-        this.business = business;
-        this.productCatalog = business.getSupplierProductCatalog();
-        populateProductTable();
-    }
-     public SupplierPricingAnalystInventoryJPanel(JPanel userProcessContainer,
-                                                 WorkRequest request) {
-        initComponents();
-        this.userProcessContainer = userProcessContainer;
-        this.request = request;
-    }
-    private void populateProductTable() {
-        DefaultTableModel model = (DefaultTableModel) tblProductCatalog.getModel();
-        model.setRowCount(0);
-        
-        for (Product p : productCatalog.getProductcatalog()) {
-            Object row[] = new Object[4];
-            row[0] = p;
-            row[1] = p.getModelNumber();
-            row[2] = p.getPrice();
-            row[3] = p.getAvail();
-            model.addRow(row);
-        }
-        
+  
+    public StoreAssociateInventoryJPanel(JPanel userProcessContainer,
+                                 UserAccount account,
+                                 Organization organization,
+                                 EcoSystem business) {
+    initComponents();
+    this.userProcessContainer = userProcessContainer;
+    this.userAccount = account;
+     this.productCatalog = business.getRetailerProductCatalog();
+    this.retailStoreOrganization = (Business.Organization.RetailStoreOrganization) organization;
+     this.business = business;
+     populateProductTable();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -76,13 +49,13 @@ public class SupplierPricingAnalystInventoryJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblProductCatalog = new javax.swing.JTable();
+        workRequestJTable = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         refreshJButton1 = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
-        assignJButton2 = new javax.swing.JButton();
+        assignJButton1 = new javax.swing.JButton();
 
-        tblProductCatalog.setModel(new javax.swing.table.DefaultTableModel(
+        workRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -90,14 +63,14 @@ public class SupplierPricingAnalystInventoryJPanel extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Product Name", "Product ID", "Price", "Quantity"
+                "Product Name", "Product ID", "Price", "Availability"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.Double.class, java.lang.Integer.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, false, true
+                false, false, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -108,7 +81,7 @@ public class SupplierPricingAnalystInventoryJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tblProductCatalog);
+        jScrollPane1.setViewportView(workRequestJTable);
 
         jLabel3.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jLabel3.setText("Store Inventory");
@@ -127,10 +100,10 @@ public class SupplierPricingAnalystInventoryJPanel extends javax.swing.JPanel {
             }
         });
 
-        assignJButton2.setText("Change Price");
-        assignJButton2.addActionListener(new java.awt.event.ActionListener() {
+        assignJButton1.setText("Request Restock");
+        assignJButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                assignJButton2ActionPerformed(evt);
+                assignJButton1ActionPerformed(evt);
             }
         });
 
@@ -146,14 +119,14 @@ public class SupplierPricingAnalystInventoryJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(45, 45, 45)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(assignJButton2)
+                            .addComponent(assignJButton1)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel3)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(refreshJButton1))
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 610, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,15 +139,14 @@ public class SupplierPricingAnalystInventoryJPanel extends javax.swing.JPanel {
                     .addComponent(refreshJButton1))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(assignJButton2)
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(assignJButton1)
+                .addContainerGap(43, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void refreshJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButton1ActionPerformed
         // TODO add your handling code here:
-        populateProductTable();
     }//GEN-LAST:event_refreshJButton1ActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -185,48 +157,56 @@ public class SupplierPricingAnalystInventoryJPanel extends javax.swing.JPanel {
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
-    private void assignJButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignJButton2ActionPerformed
-        int selectedRow = tblProductCatalog.getSelectedRow();
-        if (selectedRow < 0) {
-        JOptionPane.showMessageDialog(this, "Please select a product.");
-        return;
-        }
-    
+    private void assignJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignJButton1ActionPerformed
+        // TODO add your handling code here:
+         int row = workRequestJTable.getSelectedRow();
+    String item;
+    if (row >= 0) {
+        item = String.valueOf(workRequestJTable.getValueAt(row, 0));
+    } else {
+        // fallback: prompt for item
+        item = javax.swing.JOptionPane.showInputDialog(this, "Item name/ID:");
+        if (item == null || item.trim().isEmpty()) return;
+    }
+    String qty = javax.swing.JOptionPane.showInputDialog(this, "Quantity for " + item + ":");
+if (qty == null || qty.trim().isEmpty()) return;
 
-        DefaultTableModel model = (DefaultTableModel) tblProductCatalog.getModel();
-        Product product = (Product) model.getValueAt(selectedRow, 0);
+String msg = "Restock request: " + item.trim() + " x " + qty.trim();
 
+StoreAssociateToStoreMRestockRequest req = new StoreAssociateToStoreMRestockRequest();
+req.setMessage(msg);
+req.setTestResult(msg);
+req.setSender(userAccount);
+req.setStatus("Sent");
 
-        String priceInput = JOptionPane.showInputDialog(this, 
-        "Enter new price for product: " + product.getProdName(), 
-        JOptionPane.QUESTION_MESSAGE);
+// Target = same RetailStoreOrganization the manager reads
+retailStoreOrganization.getWorkQueue().getWorkRequestList().add(req);
+userAccount.getWorkQueue().getWorkRequestList().add(req);
 
-        if (priceInput == null) {
-        return; // User cancelled
-        }
+javax.swing.JOptionPane.showMessageDialog(this, "Request sent to Store Manager.");
 
-        try {
-        double newPrice = Double.parseDouble(priceInput);
-        product.setPrice(newPrice);
-    
-        JOptionPane.showMessageDialog(this, 
-        "Price for " + product.getProdName() + " updated to: $" + String.format("%.2f", newPrice));
-    
-        populateProductTable(); // Refresh the table to show updated price
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, 
-            "Invalid price entered. Please enter a valid number (e.g., 19.99).", 
-            "Input Error", 
-            JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_assignJButton2ActionPerformed
+    }//GEN-LAST:event_assignJButton1ActionPerformed
+
+    private void populateProductTable() {
+        DefaultTableModel model = (DefaultTableModel) workRequestJTable.getModel();
+        model.setRowCount(0);
+        for (Product p : productCatalog.getProductcatalog()){ 
+            
+                Object row[] = new Object[4];
+                row[0] = p;
+                row[1] = p.getModelNumber();
+                row[2] = p.getPrice();
+                row[3] = p.getAvail();
+                model.addRow(row);
+            
+        }}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton assignJButton2;
+    private javax.swing.JButton assignJButton1;
     private javax.swing.JButton btnBack;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton refreshJButton1;
-    private javax.swing.JTable tblProductCatalog;
+    private javax.swing.JTable workRequestJTable;
     // End of variables declaration//GEN-END:variables
 }

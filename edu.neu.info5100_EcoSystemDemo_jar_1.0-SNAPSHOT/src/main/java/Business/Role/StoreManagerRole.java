@@ -9,7 +9,7 @@ import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
-import ui.StoreManagerWorkArea.StoreManagerMenuJPanel;
+import ui.RetailManagerWorkArea.ManagerMenuJPanel;
 
 
 /**
@@ -24,6 +24,6 @@ public class StoreManagerRole extends Role {
                              Organization organization,
                              Enterprise enterprise,
                              EcoSystem business) {
-    return new StoreManagerMenuJPanel(userProcessContainer, account, organization, enterprise, business);
+    return new ManagerMenuJPanel(userProcessContainer, account, organization, enterprise, business);
 }
 }

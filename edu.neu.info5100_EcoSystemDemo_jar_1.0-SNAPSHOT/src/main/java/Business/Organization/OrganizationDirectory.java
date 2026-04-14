@@ -41,15 +41,15 @@ public class OrganizationDirectory {
                 organization = new RetailStoreOrganization();
                 break;
                 
-            case RetailDataAnalytics:
-                organization = new RetailDataAnalyticsOrganization();
+            case SupplierDataAnalytics:
+                organization = new SupplierDataAnalyticsOrganization();
                 break;
 
             case ManufacturingPricing:
                 organization = new ManufacturingPricingOrganization();
                 break;
-            case RetailAnalytics:
-                organization = new RetailAnalyticsOrganization();
+            case RetailDataAnalytics:
+                organization = new RetailDataAnalyticsOrganization();
                 break;
 
             case ManufacturingOperations:

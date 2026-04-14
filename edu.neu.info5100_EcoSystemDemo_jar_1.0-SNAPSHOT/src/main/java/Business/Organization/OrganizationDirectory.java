@@ -5,7 +5,13 @@
 package Business.Organization;
 
 import Business.Organization.Organization.Type;
+import static Business.Organization.Organization.Type.Admin;
 import static Business.Organization.Organization.Type.ManufacturingOperations;
+import static Business.Organization.Organization.Type.ManufacturingPricing;
+import static Business.Organization.Organization.Type.RetailStore;
+import static Business.Organization.Organization.Type.ShippingFacility;
+import static Business.Organization.Organization.Type.SupplierMarketing;
+import static Business.Organization.Organization.Type.SupplierPricing;
 import java.util.ArrayList;
 
 /**
@@ -29,45 +35,40 @@ public class OrganizationDirectory {
         Organization organization = null;
 
         switch (type) {
+            case Admin:
+                organization = new AdminOrganization();
+                break;
             case SupplierPricing:
                 organization = new SupplierPricingOrganization();
                 break;
-                
             case SupplierMarketing:
                 organization = new SupplierMarketingOrganization();
                 break;
-
             case RetailStore:
                 organization = new RetailStoreOrganization();
                 break;
-                
             case SupplierDataAnalytics:
-                organization = new SupplierDataAnalyticsOrganization();
+                 organization = new SupplierDataAnalyticsOrganization();
+                 break;
+                
+           case RetailDataAnalytics:
+                organization = new RetailDataAnalyticsOrganization();
                 break;
-
             case ManufacturingPricing:
                 organization = new ManufacturingPricingOrganization();
                 break;
-            case RetailDataAnalytics:
-                organization = new RetailDataAnalyticsOrganization();
-                break;
-
             case ManufacturingOperations:
                 organization = new ManufacturingOperationsOrganization();
                 break;
-
             case ShippingFacility:
                 organization = new ShippingFacilityOrganization();
                 break;
-
             default:
                 break;
         }
-
         if (organization != null) {
             organizationList.add(organization);
         }
-
         return organization;
     }
 }

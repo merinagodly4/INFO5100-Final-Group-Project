@@ -42,6 +42,11 @@ public class RetailStoreOrganization extends Organization{
         return "[Store #" + storeID + "] " + getName();
     }
     
+   
+    public Organization.Type getType() {
+    return Organization.Type.RetailStore;
+}
+    
     
 }
  

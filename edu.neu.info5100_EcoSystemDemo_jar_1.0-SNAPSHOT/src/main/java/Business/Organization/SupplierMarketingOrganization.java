@@ -14,12 +14,16 @@ import java.util.ArrayList;
 public class SupplierMarketingOrganization extends Organization {
 
     public SupplierMarketingOrganization() {
-        super(Type.SupplierMarketing.getValue());
+        super(Organization.Type.SupplierMarketing.getValue());
     }
 
     @Override
     public ArrayList<Role> getSupportedRole() {
-        return new ArrayList<Role>(); // you can add roles later
+        return new ArrayList<Role>(); 
     }
+    
+    public Organization.Type getType() {
+    return Organization.Type.SupplierMarketing;
+}
 }
  

@@ -26,4 +26,8 @@ public class ManufacturingPricingOrganization extends Organization {
         roles.add(new ManufacturingPricingAnalystRole());
         return roles;
     }
+    
+    public Organization.Type getType() {
+    return Organization.Type.ManufacturingPricing;
+}
 }

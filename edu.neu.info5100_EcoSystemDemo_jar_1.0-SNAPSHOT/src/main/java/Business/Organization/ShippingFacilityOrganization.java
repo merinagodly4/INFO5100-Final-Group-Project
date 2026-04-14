@@ -25,6 +25,10 @@ public class ShippingFacilityOrganization extends Organization{
         roles.add(new SupplierPricingAnalyst());
         return roles;
     }
+    
+    public Organization.Type getType() {
+    return Organization.Type.ShippingFacility;
+}
      
    
     

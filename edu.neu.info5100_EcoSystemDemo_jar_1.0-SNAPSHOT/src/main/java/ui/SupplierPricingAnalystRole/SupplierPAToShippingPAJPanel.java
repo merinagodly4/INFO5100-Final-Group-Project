@@ -54,7 +54,7 @@ public class SupplierPAToShippingPAJPanel extends javax.swing.JPanel {
         m.setRowCount(0);
         for (WorkRequest wr : organization.getWorkQueue().getWorkRequestList())
         { if (wr instanceof ShippingQuotesRequest) {
-            m.addRow(new Object[]{ wr, wr.getSender() == null ? null : wr.getSender().getEmployee().getName(), wr.getReceiver() == null ? null : wr.getReceiver().getEmployee().getName(), wr.getStatus() }); 
+            m.addRow(new Object[]{ wr, wr.getSender() == null ? null : wr.getStatus() }); 
         } 
         }
     }
@@ -96,40 +96,40 @@ public class SupplierPAToShippingPAJPanel extends javax.swing.JPanel {
 
         workRequestJTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Message", "Sender", "Receiver", "Status"
+                "Message", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Object.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, true, false
+                false, false
             };
 
             public Class getColumnClass(int columnIndex) {

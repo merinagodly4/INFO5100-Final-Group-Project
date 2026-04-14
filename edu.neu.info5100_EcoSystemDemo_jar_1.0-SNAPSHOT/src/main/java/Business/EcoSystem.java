@@ -8,54 +8,57 @@ package Business;
 import Business.Network.Network;
 import Business.OrderModel.RetailerProductCatalog;
 import Business.OrderModel.RetailMasterOrderList;
+import Business.OrderModel.ShipmentDirectory;
 import Business.OrderModel.SupplierProductCatalog;
 import Business.OrderModel.WholesaleMasterOrderList;
 import Business.Organization.Organization;
 import Business.Role.Role;
 import Business.Role.SystemAdminRole;
 import java.util.ArrayList;
-import Business.OrderModel.ShipmentDirectory;
 
 /**
  *
  * @author MyPC1
  */
-public class EcoSystem extends Organization{
-    
+public class EcoSystem extends Organization {
+
     private static EcoSystem business;
-    private ShipmentDirectory shipmentDirectory;
     private ArrayList<Network> networkList;
     WholesaleMasterOrderList wholesaleMasterOrderList;
     RetailMasterOrderList retailMasterOrderList;
-    RetailerProductCatalog retailerProductCatalog;  
+    RetailerProductCatalog retailerProductCatalog;
     SupplierProductCatalog supplierProductCatalog;
-    
-    public static EcoSystem getInstance(){
-        if(business==null){
-            business=new EcoSystem();
+    private ShipmentDirectory shipmentDirectory;
+
+    public static EcoSystem getInstance() {
+        if (business == null) {
+            business = new EcoSystem();
         }
         return business;
     }
-    
-    public Network createAndAddNetwork(){
-        Network network=new Network();
+
+    public Network createAndAddNetwork() {
+        Network network = new Network();
         networkList.add(network);
         return network;
     }
+
     @Override
     public ArrayList<Role> getSupportedRole() {
-        ArrayList<Role> roleList=new ArrayList<Role>();
+        ArrayList<Role> roleList = new ArrayList<Role>();
         roleList.add(new SystemAdminRole());
         return roleList;
     }
-    private EcoSystem(){
+
+    private EcoSystem() {
         super(null);
-        networkList=new ArrayList<Network>();
+        networkList = new ArrayList<Network>();
         wholesaleMasterOrderList = new WholesaleMasterOrderList();
         retailMasterOrderList = new RetailMasterOrderList();
         retailerProductCatalog = new RetailerProductCatalog();
         supplierProductCatalog = new SupplierProductCatalog();
         shipmentDirectory = new ShipmentDirectory();
+
     }
 
     public ArrayList<Network> getNetworkList() {
@@ -65,13 +68,13 @@ public class EcoSystem extends Organization{
     public void setNetworkList(ArrayList<Network> networkList) {
         this.networkList = networkList;
     }
-    
-    public boolean checkIfUserIsUnique(String userName){
-        if(!this.getUserAccountDirectory().checkIfUsernameIsUnique(userName)){
+
+    public boolean checkIfUserIsUnique(String userName) {
+        if (!this.getUserAccountDirectory().checkIfUsernameIsUnique(userName)) {
             return false;
         }
-        for(Network network:networkList){
-            
+        for (Network network : networkList) {
+
         }
         return true;
     }
@@ -111,11 +114,17 @@ public class EcoSystem extends Organization{
     public void setSupplierProductCatalog(SupplierProductCatalog supplierProductCatalog) {
         this.supplierProductCatalog = supplierProductCatalog;
     }
-    
+
     public ShipmentDirectory getShipmentDirectory() {
-    return shipmentDirectory;
+        return shipmentDirectory;
     }
+
     public void setShipmentDirectory(ShipmentDirectory shipmentDirectory) {
-    this.shipmentDirectory = shipmentDirectory;
+        this.shipmentDirectory = shipmentDirectory;
+    }
+
+    @Override
+    public Organization.Type getType() {
+        return null; // EcoSystem is not a typed organization
     }
 }

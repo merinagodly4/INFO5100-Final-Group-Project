@@ -27,7 +27,9 @@ public class ManufacturingOperationsOrganization extends Organization{
         return roles;
     }
      
-   
+   public Organization.Type getType() {
+    return Organization.Type.ManufacturingOperations;
+}
     
     
 }

@@ -32,6 +32,11 @@ public class SupplierDataAnalyticsOrganization extends Organization{
     public String toString() {
         return getName();
     }
+
+    @Override
+    public Type getType() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
     
 }

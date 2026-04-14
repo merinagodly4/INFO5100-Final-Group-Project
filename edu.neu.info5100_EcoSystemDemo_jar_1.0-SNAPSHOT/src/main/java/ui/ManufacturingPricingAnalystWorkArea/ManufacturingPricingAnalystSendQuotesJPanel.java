@@ -72,40 +72,40 @@ public class ManufacturingPricingAnalystSendQuotesJPanel extends javax.swing.JPa
 
         workRequestJTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Message", "Sender", "Receiver", "Status"
+                "Message", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Object.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, true, false
+                false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -215,11 +215,9 @@ public class ManufacturingPricingAnalystSendQuotesJPanel extends javax.swing.JPa
         for (WorkRequest wr : organization.getWorkQueue().getWorkRequestList()) {
             if (wr instanceof ItemsRequest) {
                 ItemsRequest ir = (ItemsRequest) wr;
-                Object[] row = new Object[4];
+                Object[] row = new Object[2];
                 row[0] = ir; // toString() = needItems
-                row[1] = ir.getSender() == null ? null : ir.getSender().getEmployee().getName();
-                row[2] = ir.getReceiver() == null ? null : ir.getReceiver().getEmployee().getName();
-                row[3] = ir.getStatus();
+                row[1] = ir.getStatus();
                 model.addRow(row);
             }
         }

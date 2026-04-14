@@ -13,7 +13,7 @@ import java.util.ArrayList;
  *
  * @author raunak
  */
-public class SupplierPricingOrganization extends Organization{
+public class SupplierPricingOrganization extends Organization {
 
     public SupplierPricingOrganization() {
         super(Organization.Type.SupplierPricing.getValue());
@@ -25,8 +25,9 @@ public class SupplierPricingOrganization extends Organization{
         roles.add(new SupplierPricingAnalyst());
         return roles;
     }
-     
-   
-    
-    
+
+    public Organization.Type getType() {
+        return Organization.Type.SupplierPricing;
+    }
+
 }

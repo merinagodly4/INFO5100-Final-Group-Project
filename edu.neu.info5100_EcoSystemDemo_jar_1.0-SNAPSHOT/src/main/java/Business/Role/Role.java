@@ -20,6 +20,12 @@ public abstract class Role {
         Admin("Admin"),
         Doctor("Doctor"),
         
+         // ── Enterprise admins ────────────────────────────────────
+        SupplierEnterpriseAdmin("Supplier Enterprise Admin"),
+        RetailerEnterpriseAdmin("Retailer Enterprise Admin"),
+        ShippingEnterpriseAdmin("Shipping Enterprise Admin"),
+        ManufacturerEnterpriseAdmin("Manufacturer Enterprise Admin"),
+        
         SupplierPricingAnalyst("Supplier Pricing Analyst"),
         SupplierDataAnalyst("Supplier Data Analyst"),
         SupplierMarketingSpecialist("Supplier Marketing Specialist"),

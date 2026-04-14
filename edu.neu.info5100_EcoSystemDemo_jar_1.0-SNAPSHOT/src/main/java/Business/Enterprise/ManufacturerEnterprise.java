@@ -5,6 +5,7 @@
  */
 package Business.Enterprise;
 
+import Business.Organization.Organization;
 import Business.Role.Role;
 import java.util.ArrayList;
 
@@ -21,5 +22,9 @@ public class ManufacturerEnterprise extends Enterprise {
     public ArrayList<Role> getSupportedRole() {
         return null;
     }
+    
+    public Organization.Type getType() {
+    return null; // EcoSystem is not a typed organization
+}
     
 }

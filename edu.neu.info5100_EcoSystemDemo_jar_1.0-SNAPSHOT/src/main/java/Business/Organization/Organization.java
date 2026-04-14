@@ -21,15 +21,17 @@ public abstract class Organization {
     private EmployeeDirectory employeeDirectory;
     private UserAccountDirectory userAccountDirectory;
     private int organizationID;
-    private static int counter=0;
-    
-    public enum Type{
-        Admin("Admin Organization"),SupplierPricing("Supplier Pricing Organization"), ManufacturingPricing("Manufacturing Pricing Organization"), ManufacturingOperations("Manufacturing Operations Organization"),
-        SupplierMarketing("Supplier Marketing Organization"), RetailStore("Retail Store Organization"),ShippingFacility("Shipping Facility Organization"), SupplierDataAnalytics("Supplier Data Analytics"), RetailDataAnalytics("Retail Data Analytics");
+    private static int counter = 0;
+
+    public enum Type {
+        Admin("Admin Organization"), Doctor("Doctor"), Lab("Lab"), SupplierPricing("Supplier Pricing Organization"), ManufacturingPricing("Manufacturing Pricing Organization"), ManufacturingOperations("Manufacturing Operations Organization"),
+        SupplierMarketing("Supplier Marketing Organization"), RetailStore("Retail Store Organization"), ShippingFacility("Shipping Facility Organization"), RetailDataAnalytics("Retail Data Analytics Organization"), SupplierDataAnalytics ("Supplier Data Analytics Organization");
         private String value;
+
         private Type(String value) {
             this.value = value;
         }
+
         public String getValue() {
             return value;
         }
@@ -46,6 +48,9 @@ public abstract class Organization {
 
     public abstract ArrayList<Role> getSupportedRole();
     
+    public abstract Type getType();
+
+
     public UserAccountDirectory getUserAccountDirectory() {
         return userAccountDirectory;
     }
@@ -57,7 +62,7 @@ public abstract class Organization {
     public EmployeeDirectory getEmployeeDirectory() {
         return employeeDirectory;
     }
-    
+
     public String getName() {
         return name;
     }
@@ -78,6 +83,7 @@ public abstract class Organization {
     public String toString() {
         return name;
     }
-    
-    
+
+
+
 }
